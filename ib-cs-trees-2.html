@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IB CS HL - Trees Lesson 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .slide {
+            min-height: 100vh;
+            scroll-snap-align: start;
+        }
+        .tree-node {
+            transition: all 0.3s ease-in-out;
+        }
+        .visited {
+            transform: scale(1.1);
+            background-color: #f59e0b !important; /* Amber-500 */
+        }
+        .traversal-output {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Main Container -->
+    <div class="container mx-auto p-4 md:p-8">
+
+        <!-- Slide 1: Title -->
+        <section id="title" class="slide flex flex-col items-center justify-center text-center">
+            <div class="bg-white p-12 rounded-2xl shadow-lg border border-slate-200">
+                <h1 class="text-5xl md:text-7xl font-bold text-blue-600">Trees</h1>
+                <p class="mt-4 text-2xl md:text-3xl text-slate-600">IB Computer Science HL</p>
+                <p class="mt-2 text-lg text-slate-500">Lesson 2: Walking and Changing Trees</p>
+            </div>
+            <a href="#objectives" class="mt-16 text-blue-500 animate-bounce">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </a>
+        </section>
+
+        <!-- Slide 2: Objectives -->
+        <section id="objectives" class="slide flex flex-col items-center justify-center">
+            <div class="w-full max-w-4xl bg-white p-10 rounded-2xl shadow-lg border border-slate-200">
+                <h2 class="text-3xl font-bold text-center text-blue-600 mb-8">Lesson Objectives</h2>
+                <ul class="space-y-4 text-lg text-slate-700">
+                    <li class="flex items-start">
+                        <svg class="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span>State the correct output for <span class="font-semibold">preorder, inorder,</span> and <span class="font-semibold">postorder</span> traversals.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span>Sketch the resulting binary tree after <span class="font-semibold">adding</span> a new node.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="h-6 w-6 text-green-500 mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span>Sketch the resulting binary tree after <span class="font-semibold">removing</span> various types of nodes.</span>
+                    </li>
+                </ul>
+            </div>
+            <a href="#activity1" class="mt-16 text-blue-500">↓ Next Activity</a>
+        </section>
+
+        <!-- Slide 3: Traversal Introduction -->
+        <section id="activity1" class="slide flex flex-col items-center justify-center">
+            <div class="w-full max-w-5xl bg-white p-10 rounded-2xl shadow-lg border border-slate-200">
+                <h2 class="text-3xl font-bold text-center text-blue-600 mb-2">What is Tree Traversal?</h2>
+                <p class="text-center text-slate-500 mb-8">(15 minutes)</p>
+                <p class="text-center text-lg mb-8 max-w-3xl mx-auto">Traversal is a process for visiting every node in a tree exactly once in a specific, predictable order. The name tells you <span class="font-bold">when</span> you "visit" the node relative to its children.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-slate-100 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold text-blue-700">PREorder</h3>
+                        <p class="font-mono text-xl mt-2">(NLR)</p>
+                        <p class="mt-2">1. Visit <span class="font-semibold">N</span>ode<br>2. Go <span class="font-semibold">L</span>eft<br>3. Go <span class="font-semibold">R</span>ight</p>
+                    </div>
+                    <div class="bg-slate-100 p-6 rounded-lg border-4 border-blue-500 shadow-xl">
+                        <h3 class="text-2xl font-bold text-blue-700">INorder</h3>
+                        <p class="font-mono text-xl mt-2">(LNR)</p>
+                        <p class="mt-2">1. Go <span class="font-semibold">L</span>eft<br>2. Visit <span class="font-semibold">N</span>ode<br>3. Go <span class="font-semibold">R</span>ight</p>
+                    </div>
+                    <div class="bg-slate-100 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold text-blue-700">POSTorder</h3>
+                        <p class="font-mono text-xl mt-2">(LRN)</p>
+                        <p class="mt-2">1. Go <span class="font-semibold">L</span>eft<br>2. Go <span class="font-semibold">R</span>ight<br>3. Visit <span class="font-semibold">N</span>ode</p>
+                    </div>
+                </div>
+            </div>
+            <a href="#activity2" class="mt-8 text-blue-500">↓ Next Activity</a>
+        </section>
+        
+        <!-- Slide 4: Interactive Traversal -->
+        <section id="activity2" class="slide flex flex-col items-center justify-center">
+            <div class="w-full max-w-6xl bg-white p-10 rounded-2xl shadow-lg border border-slate-200">
+                <h2 class="text-3xl font-bold text-center text-blue-600 mb-2">Interactive Traversal Walk</h2>
+                <p class="text-center text-slate-500 mb-8">(20 minutes)</p>
+                
+                <div class="flex justify-center space-x-4 mb-6">
+                    <button id="preorder-btn" class="traversal-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">Preorder</button>
+                    <button id="inorder-btn" class="traversal-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">Inorder</button>
+                    <button id="postorder-btn" class="traversal-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">Postorder</button>
+                    <button id="reset-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg">Reset</button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <!-- The Tree -->
+                    <div class="relative w-full max-w-md mx-auto h-80">
+                        <div id="node-50" data-value="50" class="absolute w-20 h-20 flex items-center justify-center rounded-full bg-slate-700 text-white font-bold text-2xl tree-node" style="left: 50%; top: 0; transform: translateX(-50%);">50</div>
+                        <div id="node-30" data-value="30" class="absolute w-20 h-20 flex items-center justify-center rounded-full bg-slate-600 text-white font-bold text-2xl tree-node" style="left: calc(50% - 80px); top: 100px; transform: translateX(-50%);">30</div>
+                        <div id="node-70" data-value="70" class="absolute w-20 h-20 flex items-center justify-center rounded-full bg-slate-600 text-white font-bold text-2xl tree-node" style="left: calc(50% + 80px); top: 100px; transform: translateX(-50%);">70</div>
+                        <div id="node-20" data-value="20" class="absolute w-20 h-20 flex items-center justify-center rounded-full bg-slate-500 text-white font-bold text-2xl tree-node" style="left: calc(50% - 140px); top: 200px; transform: translateX(-50%);">20</div>
+                        <div id="node-40" data-value="40" class="absolute w-20 h-20 flex items-center justify-center rounded-full bg-slate-500 text-white font-bold text-2xl tree-node" style="left: calc(50% - 20px); top: 200px; transform: translateX(-50%);">40</div>
+                        <div id="node-80" data-value="80" class="absolute w-20 h-20 flex items-center justify-center rounded-full bg-slate-500 text-white font-bold text-2xl tree-node" style="left: calc(50% + 140px); top: 200px; transform: translateX(-50%);">80</div>
+                        <svg class="absolute top-0 left-0 w-full h-full" style="z-index: -1;">
+                            <line x1="50%" y1="40" x2="calc(50% - 80px)" y2="140" stroke="#9ca3af" stroke-width="2"/>
+                            <line x1="50%" y1="40" x2="calc(50% + 80px)" y2="140" stroke="#9ca3af" stroke-width="2"/>
+                            <line x1="calc(50% - 80px)" y1="140" x2="calc(50% - 140px)" y2="240" stroke="#9ca3af" stroke-width="2"/>
+                            <line x1="calc(50% - 80px)" y1="140" x2="calc(50% - 20px)" y2="240" stroke="#9ca3af" stroke-width="2"/>
+                            <line x1="calc(50% + 80px)" y1="140" x2="calc(50% + 140px)" y2="240" stroke="#9ca3af" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <!-- The Output -->
+                    <div class="bg-gray-100 p-6 rounded-lg min-h-[120px]">
+                        <h3 class="font-bold text-xl mb-2 text-center" id="output-title">Result</h3>
+                        <div id="traversal-output" class="text-center traversal-output text-slate-700"></div>
+                    </div>
+                </div>
+            </div>
+            <a href="#activity3" class="mt-8 text-blue-500">↓ Next Activity</a>
+        </section>
+
+        <!-- Slide 5: Whiteboard Sketching -->
+        <section id="activity3" class="slide flex flex-col items-center justify-center">
+            <div class="w-full max-w-7xl bg-white p-10 rounded-2xl shadow-lg border border-slate-200">
+                <h2 class="text-3xl font-bold text-center text-blue-600 mb-2">Whiteboard Sketching</h2>
+                <p class="text-center text-slate-500 mb-8">(30 minutes)</p>
+                <p class="text-center text-lg mb-8 max-w-3xl mx-auto">Let's practice modifying the tree. For each prompt, sketch the resulting tree, then click the button to check your answer.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Add Node -->
+                    <div class="bg-slate-50 p-4 rounded-lg border flex flex-col justify-between min-h-[300px]">
+                        <div>
+                            <h3 class="font-bold text-lg text-blue-700">1. Add a Node</h3>
+                            <p class="my-2">Add `60` to the original tree.</p>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button data-target="result-1" class="show-result-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg w-full">Show Result</button>
+                            <div id="result-1" class="hidden mt-4">
+                                <svg viewBox="0 0 200 150"><line x1="100" y1="20" x2="50" y2="50" stroke="#9ca3af" stroke-width="1"/><line x1="100" y1="20" x2="150" y2="50" stroke="#9ca3af" stroke-width="1"/><line x1="50" y1="50" x2="25" y2="80" stroke="#9ca3af" stroke-width="1"/><line x1="50" y1="50" x2="75" y2="80" stroke="#9ca3af" stroke-width="1"/><line x1="150" y1="50" x2="175" y2="80" stroke="#9ca3af" stroke-width="1"/><line x1="150" y1="50" x2="125" y2="80" stroke="#9ca3af" stroke-width="1" stroke-dasharray="2,2"/><circle cx="100" cy="20" r="10" fill="#60a5fa"/><text x="100" y="23" font-size="8" fill="white" text-anchor="middle">50</text><circle cx="50" cy="50" r="10" fill="#60a5fa"/><text x="50" y="53" font-size="8" fill="white" text-anchor="middle">30</text><circle cx="150" cy="50" r="10" fill="#60a5fa"/><text x="150" y="53" font-size="8" fill="white" text-anchor="middle">70</text><circle cx="25" cy="80" r="10" fill="#60a5fa"/><text x="25" y="83" font-size="8" fill="white" text-anchor="middle">20</text><circle cx="75" cy="80" r="10" fill="#60a5fa"/><text x="75" y="83" font-size="8" fill="white" text-anchor="middle">40</text><circle cx="125" cy="80" r="10" fill="#f59e0b"/><text x="125" y="83" font-size="8" fill="white" text-anchor="middle">60</text><circle cx="175" cy="80" r="10" fill="#60a5fa"/><text x="175" y="83" font-size="8" fill="white" text-anchor="middle">80</text></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Remove Leaf -->
+                    <div class="bg-slate-50 p-4 rounded-lg border flex flex-col justify-between min-h-[300px]">
+                        <div>
+                            <h3 class="font-bold text-lg text-blue-700">2. Remove a Leaf</h3>
+                            <p class="my-2">From the original tree, remove `20`.</p>
+                        </div>
+                         <div class="text-center mt-4">
+                            <button data-target="result-2" class="show-result-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg w-full">Show Result</button>
+                            <div id="result-2" class="hidden mt-4">
+                                <svg viewBox="0 0 200 150"><line x1="100" y1="20" x2="50" y2="50" stroke="#9ca3af" stroke-width="1"/><line x1="100" y1="20" x2="150" y2="50" stroke="#9ca3af" stroke-width="1"/><line x1="50" y1="50" x2="75" y2="80" stroke="#9ca3af" stroke-width="1"/><line x1="150" y1="50" x2="175" y2="80" stroke="#9ca3af" stroke-width="1"/><circle cx="100" cy="20" r="10" fill="#60a5fa"/><text x="100" y="23" font-size="8" fill="white" text-anchor="middle">50</text><circle cx="50" cy="50" r="10" fill="#60a5fa"/><text x="50" y="53" font-size="8" fill="white" text-anchor="middle">30</text><circle cx="150" cy="50" r="10" fill="#60a5fa"/><text x="150" y="53" font-size="8" fill="white" text-anchor="middle">70</text><circle cx="75" cy="80" r="10" fill="#60a5fa"/><text x="75" y="83" font-size="8" fill="white" text-anchor="middle">40</text><circle cx="175" cy="80" r="10" fill="#60a5fa"/><text x="175" y="83" font-size="8" fill="white" text-anchor="middle">80</text><line x1="50" y1="50" x2="25" y2="80" stroke="#ef4444" stroke-width="1" stroke-dasharray="2,2"/><circle cx="25" cy="80" r="10" fill="none" stroke="#ef4444" stroke-width="1" /><text x="25" y="83" font-size="8" fill="#ef4444" text-anchor="middle">20</text></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Remove Node w/ 1 Child -->
+                     <div class="bg-slate-50 p-4 rounded-lg border flex flex-col justify-between min-h-[300px]">
+                        <div>
+                            <h3 class="font-bold text-lg text-blue-700">3. Remove Node (1 Child)</h3>
+                            <p class="my-2">First, add `10`. Then, remove `20`.</p>
+                            <p class="text-sm text-amber-700">Rule: Parent adopts the grandchild.</p>
+                        </div>
+                          <div class="text-center mt-4">
+                            <button data-target="result-3" class="show-result-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg w-full">Show Result</button>
+                            <div id="result-3" class="hidden mt-4">
+                                <svg viewBox="0 0 200 150"><line x1="100" y1="20" x2="50" y2="50" stroke="#9ca3af" stroke-width="1"/><line x1="100" y1="20" x2="150" y2="50" stroke="#9ca3af" stroke-width="1"/><line x1="50" y1="50" x2="25" y2="80" stroke="#9ca3af" stroke-width="1" stroke-dasharray="2,2"/><line x1="50" y1="50" x2="75" y2="80" stroke="#9ca3af" stroke-width="1"/><line x1="150" y1="50" x2="175" y2="80" stroke="#9ca3af" stroke-width="1"/><circle cx="100" cy="20" r="10" fill="#60a5fa"/><text x="100" y="23" font-size="8" fill="white" text-anchor="middle">50</text><circle cx="50" cy="50" r="10" fill="#60a5fa"/><text x="50" y="53" font-size="8" fill="white" text-anchor="middle">30</text><circle cx="150" cy="50" r="10" fill="#60a5fa"/><text x="150" y="53" font-size="8" fill="white" text-anchor="middle">70</text><circle cx="25" cy="80" r="10" fill="#f59e0b"/><text x="25" y="83" font-size="8" fill="white" text-anchor="middle">10</text><circle cx="75" cy="80" r="10" fill="#60a5fa"/><text x="75" y="83" font-size="8" fill="white" text-anchor="middle">40</text><circle cx="175" cy="80" r="10" fill="#60a5fa"/><text x="175" y="83" font-size="8" fill="white" text-anchor="middle">80</text></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Remove Node w/ 2 Children -->
+                    <div class="bg-slate-50 p-4 rounded-lg border flex flex-col justify-between min-h-[300px]">
+                        <div>
+                            <h3 class="font-bold text-lg text-blue-700">4. Remove Node (2 Children)</h3>
+                            <p class="my-2">From the original tree, remove `30`.</p>
+                            <p class="text-sm text-amber-700">Rule: Replace with smallest node from right subtree (the inorder successor).</p>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button data-target="result-4" class="show-result-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg w-full">Show Result</button>
+                            <div id="result-4" class="hidden mt-4">
+                                <svg viewBox="0 0 200 150"><line x1="100" y1="20" x2="50" y2="50" stroke="#9ca3af" stroke-width="1"/><line x1="100" y1="20" x2="150" y2="50" stroke="#9ca3af" stroke-width="1"/><line x1="50" y1="50" x2="25" y2="80" stroke="#9ca3af" stroke-width="1"/><line x1="150" y1="50" x2="175" y2="80" stroke="#9ca3af" stroke-width="1"/><circle cx="100" cy="20" r="10" fill="#60a5fa"/><text x="100" y="23" font-size="8" fill="white" text-anchor="middle">50</text><circle cx="50" cy="50" r="10" fill="#f59e0b"/><text x="50" y="53" font-size="8" fill="white" text-anchor="middle">40</text><circle cx="150" cy="50" r="10" fill="#60a5fa"/><text x="150" y="53" font-size="8" fill="white" text-anchor="middle">70</text><circle cx="25" cy="80" r="10" fill="#60a5fa"/><text x="25" y="83" font-size="8" fill="white" text-anchor="middle">20</text><circle cx="175" cy="80" r="10" fill="#60a5fa"/><text x="175" y="83" font-size="8" fill="white" text-anchor="middle">80</text></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#activity4" class="mt-8 text-blue-500">↓ Next Activity</a>
+        </section>
+
+        <!-- Slide 6: Exit Ticket -->
+        <section id="activity4" class="slide flex flex-col items-center justify-center">
+            <div class="w-full max-w-4xl bg-white p-10 rounded-2xl shadow-lg border border-slate-200">
+                <h2 class="text-3xl font-bold text-center text-blue-600 mb-2">Exit Ticket: Practice</h2>
+                <p class="text-center text-slate-500 mb-8">(5-10 minutes)</p>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="flex items-center justify-center">
+                         <svg viewBox="0 0 200 150">
+                            <line x1="100" y1="20" x2="50" y2="70" stroke="#9ca3af" stroke-width="2"/><line x1="100" y1="20" x2="150" y2="70" stroke="#9ca3af" stroke-width="2"/><line x1="50" y1="70" x2="75" y2="120" stroke="#9ca3af" stroke-width="2"/>
+                            <circle cx="100" cy="20" r="15" fill="#60a5fa"/><text x="100" y="24" font-family="Inter" font-size="10" fill="white" text-anchor="middle">25</text>
+                            <circle cx="50" cy="70" r="15" fill="#60a5fa"/><text x="50" y="74" font-family="Inter" font-size="10" fill="white" text-anchor="middle">15</text>
+                            <circle cx="150" cy="70" r="15" fill="#60a5fa"/><text x="150" y="74" font-family="Inter" font-size="10" fill="white" text-anchor="middle">50</text>
+                            <circle cx="75" cy="120" r="15" fill="#60a5fa"/><text x="75" y="124" font-family="Inter" font-size="10" fill="white" text-anchor="middle">20</text>
+                        </svg>
+                     </div>
+                     <div class="text-center md:text-left">
+                        <p class="text-lg mb-4">Using the tree diagram, answer the following:</p>
+                        <ol class="list-decimal list-inside space-y-3">
+                           <li>State the <strong>preorder</strong> traversal.</li>
+                           <li>State the <strong>inorder</strong> traversal.</li>
+                           <li>Sketch the tree after <strong>adding</strong> `10`.</li>
+                           <li>Sketch the tree after <strong>removing</strong> `25` (from original).</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+             <a href="#title" class="mt-16 text-blue-500">↑ Back to Top</a>
+        </section>
+
+    </div>
+
+    <script>
+        // ... existing traversal script ...
+        const tree = {
+            value: 50,
+            left: {
+                value: 30,
+                left: { value: 20, left: null, right: null },
+                right: { value: 40, left: null, right: null }
+            },
+            right: {
+                value: 70,
+                left: null,
+                right: { value: 80, left: null, right: null }
+            }
+        };
+
+        const outputDiv = document.getElementById('traversal-output');
+        const outputTitle = document.getElementById('output-title');
+        let animationTimeout;
+        
+        function preorder(node, visits) {
+            if (node === null) return;
+            visits.push(node.value);
+            preorder(node.left, visits);
+            preorder(node.right, visits);
+        }
+
+        function inorder(node, visits) {
+            if (node === null) return;
+            inorder(node.left, visits);
+            visits.push(node.value);
+            inorder(node.right, visits);
+        }
+
+        function postorder(node, visits) {
+            if (node === null) return;
+            postorder(node.left, visits);
+            postorder(node.right, visits);
+            visits.push(node.value);
+        }
+
+        function animateTraversal(order) {
+            clearTimeout(animationTimeout);
+            resetTree();
+            outputDiv.innerHTML = '';
+            
+            let visitOrder = [];
+            if (order === 'preorder') {
+                preorder(tree, visitOrder);
+                outputTitle.textContent = 'Preorder Result (NLR)';
+            } else if (order === 'inorder') {
+                inorder(tree, visitOrder);
+                outputTitle.textContent = 'Inorder Result (LNR)';
+            } else {
+                postorder(tree, visitOrder);
+                outputTitle.textContent = 'Postorder Result (LRN)';
+            }
+
+            visitOrder.forEach((value, index) => {
+                animationTimeout = setTimeout(() => {
+                    document.getElementById(`node-${value}`).classList.add('visited');
+                    outputDiv.innerHTML += `${value} `;
+                }, index * 800);
+            });
+        }
+
+        function resetTree() {
+            clearTimeout(animationTimeout);
+            document.querySelectorAll('.tree-node').forEach(node => {
+                node.classList.remove('visited');
+            });
+            outputDiv.innerHTML = '';
+            outputTitle.textContent = 'Result';
+        }
+
+        document.getElementById('preorder-btn').addEventListener('click', () => animateTraversal('preorder'));
+        document.getElementById('inorder-btn').addEventListener('click', () => animateTraversal('inorder'));
+        document.getElementById('postorder-btn').addEventListener('click', () => animateTraversal('postorder'));
+        document.getElementById('reset-btn').addEventListener('click', resetTree);
+
+        // --- New script for Whiteboard Sketching activity ---
+        const showResultButtons = document.querySelectorAll('.show-result-btn');
+        showResultButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.target;
+                const resultDiv = document.getElementById(targetId);
+                if (resultDiv) {
+                    resultDiv.classList.remove('hidden');
+                    button.classList.add('hidden');
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
+
