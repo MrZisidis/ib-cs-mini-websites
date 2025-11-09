@@ -8,8 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <!-- Style intent: Keep a clean, modern UI consistent with your other pages (Tailwind, soft neutrals, accent colors). -->
-  <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
   <style>
     body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
   </style>
@@ -55,7 +53,8 @@
   <main id="projects" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <h3 class="text-3xl font-bold text-slate-900 mb-8 text-center">Projects</h3>
 
-    <div class="grid md:grid-cols-2 gap-8">
+    <!-- Updated grid to support 3 cards -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       <!-- Card 1: IB Trees Lesson 1 -->
       <article class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col">
         <h4 class="text-xl font-bold text-slate-900">IB CS HL: Trees — Lesson 1</h4>
@@ -91,13 +90,31 @@
           </a>
         </div>
       </article>
+
+      <!-- Card 3: Case Study 2026 Guide -->
+      <article class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col">
+        <h4 class="text-xl font-bold text-slate-900">IB CS Case Study 2026 Guide</h4>
+        <p class="mt-2 text-slate-600">
+          Structured study guide for the 2026 IB Computer Science case study: concepts, terminology, and applied analysis.
+        </p>
+        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <li>Key scenario domains & vocabulary</li>
+          <li>Applied stakeholder/system perspectives</li>
+          <li>Practice prompts for exam-style responses</li>
+        </ul>
+        <div class="mt-6">
+          <a href="./IB_CS_CaseStudy_2026_StudyGuide.html" class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-md transition">
+            Open Case Study Guide
+          </a>
+        </div>
+      </article>
     </div>
 
     <!-- Tips -->
     <section class="mt-12 bg-sky-50 border-l-4 border-sky-500 p-6 rounded-r-lg">
       <h5 class="text-lg font-bold mb-2">Tips</h5>
       <p class="text-slate-700">
-        Start with Lesson 1 to establish terminology and structure, then move to Lesson 2 for practice and depth.
+        Start with Lesson 1 to establish terminology and structure, then move to Lesson 2 for practice and depth. Use the Case Study Guide to connect syllabus knowledge with applied contexts.
       </p>
     </section>
   </main>
