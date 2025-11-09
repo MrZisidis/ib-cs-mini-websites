@@ -8,10 +8,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!--
     Chosen Palette: Slate (Tailwind CSS) with Sky Blue accents for a professional, clean, and modern feel.
-    Application Structure Plan: A single-page, vertically-scrolling layout is used for simplicity and ease of navigation. A sticky header provides quick access to key sections. The core content is organized using a tabbed interface for the 7 PTES phases, allowing students to focus on one phase at a time without being overwhelmed. This is followed by a clear breakdown of challenges and an interactive quiz for self-assessment. This structure breaks down the dense PDF into a more digestible, web-native experience.
+    Application Structure Plan: A single-page, vertically-scrolling layout is used for simplicity and ease of navigation. A sticky header provides quick access to key sections. The core content is organized into thematic sections with interactive elements for engagement.
     Visualization & Content Choices:
-    - Pentesting Types Comparison: A horizontal bar chart is used to visually compare Black, White, and Grey Box testing across key metrics (Knowledge, Time/Cost, Realism). This makes the abstract concepts more concrete and easier to remember.
-    - PTES Framework: A vertical tabbed interface is used to present the 7 phases. This organizes a large amount of information neatly, allowing users to navigate between stages without excessive scrolling. Each tab contains a clear explanation of the phase's purpose and key activities.
+    - Pentesting Types Comparison: A horizontal bar chart is used to visually compare Black, White, and Grey Box testing across key metrics (Knowledge, Time/Cost, Realism). This makes the abstract concepts more concrete for learners.
+    - PTES Framework: A vertical tabbed interface is used to present the 7 phases. This organizes a large amount of information neatly, allowing users to navigate between stages without excessive scrolling.
     - Key Challenges: Presented as a clear, bulleted list for easy memorization and review.
     - Interactive Quiz: A simple multiple-choice quiz provides active recall practice, reinforcing learning and giving students instant feedback on their comprehension.
     - All visualizations and interactive elements are implemented using Chart.js and custom JavaScript, avoiding external images or complex libraries.
@@ -44,6 +44,7 @@
                 <a href="#ptes" class="text-gray-600 hover:text-sky-500">PTES Framework</a>
                 <a href="#challenges" class="text-gray-600 hover:text-sky-500">Challenges</a>
                 <a href="#quiz" class="text-gray-600 hover:text-sky-500">Self-Quiz</a>
+                <a href="medtechpro.html" class="text-gray-600 hover:text-sky-500">MedTechPro</a>
             </div>
         </nav>
     </header>
@@ -54,7 +55,7 @@
         <section id="introduction" class="py-12 pt-20 -mt-8">
             <h1 class="text-4xl font-bold text-center mb-4 text-slate-800">An Ethical Approach to Hacking</h1>
             <p class="text-center text-lg text-slate-600 max-w-3xl mx-auto">
-                This guide explores the 2026 IB Computer Science Case Study, focusing on CyberHealth Security's ethical hacking engagement with MedTechPro Hospital (MTPH). We'll break down the core concepts, methodologies, and challenges involved in conducting a thorough penetration test in a critical healthcare environment.
+                This guide explores the 2026 IB Computer Science Case Study, focusing on CyberHealth Security's ethical hacking engagement with MedTechPro Hospital (MTPH). We'll break down the core concepts, methodologies, and challenges involved in conducting a responsible penetration test in a critical healthcare environment.
             </p>
         </section>
 
@@ -62,7 +63,7 @@
         <section id="testing-types" class="bg-white p-8 rounded-lg shadow-lg py-12 pt-20 -mt-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-700">Penetration Testing Approaches</h2>
             <p class="mb-6 text-slate-600">
-                A key decision for any penetration test is choosing the right approach. The amount of information given to the testing team determines the type of test. Each approach simulates a different kind of attacker and has its own advantages and disadvantages, especially in a sensitive environment like a hospital.
+                A key decision for any penetration test is choosing the right approach. The amount of information given to the testing team determines the type of test. Each approach simulates a different level of attacker knowledge and affects realism, efficiency, and cost.
             </p>
             <div class="chart-container" style="position: relative; height:40vh; max-width:800px; margin: auto;">
                 <canvas id="penTestChart"></canvas>
@@ -89,31 +90,31 @@
                 <div class="w-full md:w-3/4 bg-white p-6 rounded-lg shadow-lg">
                     <div id="pre-engagement" class="ptes-content">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 1: Pre-engagement Interactions</h3>
-                        <p class="text-slate-600">This initial phase is crucial for setting the stage. It involves discussions between CyberHealth Security and MTPH to define the scope, objectives, and rules of the engagement. Key activities include clarifying the systems to be tested, identifying sensitive data like Electronic Health Records (EHRs), and establishing communication protocols. This ensures the test is both effective and minimally disruptive to hospital operations.</p>
+                        <p class="text-slate-600">This initial phase is crucial for setting the stage. It involves discussions between CyberHealth Security and MTPH to define the scope, objectives, and rules of engagement. Clear expectations help prevent disruption to hospital operations.</p>
                     </div>
                     <div id="intelligence-gathering" class="ptes-content content-hidden">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 2: Intelligence Gathering (OSINT)</h3>
-                        <p class="text-slate-600">Here, the ethical hackers gather as much publicly available information as possible about MTPH. This is known as Open-Source Intelligence (OSINT). They might use search engines ("Google Dorking"), social media, and public records to find details about employees, technologies used (e.g., specific software versions), and network infrastructure. The goal is to build a map of the target's digital footprint to identify potential entry points without actively probing the network.</p>
+                        <p class="text-slate-600">Here, the ethical hackers gather as much publicly available information as possible about MTPH. This is known as Open-Source Intelligence (OSINT). The goal is to build a profile of systems, technologies, and potential weak points.</p>
                     </div>
                     <div id="threat-modeling" class="ptes-content content-hidden">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 3: Threat Modeling</h3>
-                        <p class="text-slate-600">In this phase, the team analyzes the information gathered to identify potential threats and vulnerabilities. They create a model of the hospital's systems, highlighting critical assets like patient data and life-support systems. The team then hypothesizes how different attackers (e.g., disgruntled employees, cybercriminals) might try to compromise these assets. This helps prioritize which areas to focus on during the active testing phase.</p>
+                        <p class="text-slate-600">In this phase, the team analyzes the information gathered to identify potential threats and vulnerabilities. They create a model of the hospital's systems and prioritize targets based on risk and impact.</p>
                     </div>
                     <div id="vulnerability-analysis" class="ptes-content content-hidden">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 4: Vulnerability Analysis</h3>
-                        <p class="text-slate-600">This involves actively scanning the hospital's network and applications to find security weaknesses. Testers use automated tools to quickly identify common issues and then perform manual analysis to confirm the findings and uncover more complex vulnerabilities. The goal is to create a comprehensive list of all potential security holes, such as unpatched software, weak configurations, or flaws in custom-built applications.</p>
+                        <p class="text-slate-600">This involves actively scanning the hospital's network and applications to find security weaknesses. Testers use automated tools to quickly identify common issues and then manually validate and probe deeper.</p>
                     </div>
                     <div id="exploitation" class="ptes-content content-hidden">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 5: Exploitation</h3>
-                        <p class="text-slate-600">This is the "hacking" phase. The team attempts to gain access to systems by exploiting the vulnerabilities found in the previous phase. This could involve techniques like SQL injection to manipulate databases, cross-site scripting (XSS) to attack users, or using password cracking tools. The goal is to demonstrate that the vulnerabilities are real and can be used by an attacker to gain a foothold in the network. This phase is conducted with extreme care to avoid disrupting hospital operations.</p>
+                        <p class="text-slate-600">This is the "hacking" phase. The team attempts to gain access to systems by exploiting the vulnerabilities found in the previous phase. This could involve privilege escalation, lateral movement, or data access.</p>
                     </div>
                     <div id="post-exploitation" class="ptes-content content-hidden">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 6: Post-Exploitation</h3>
-                        <p class="text-slate-600">Once a system is compromised, the work isn't over. In this phase, testers determine the value of the compromised machine and what further access it provides. They might try to escalate their privileges to gain more control, move laterally to other systems on the network, or extract sensitive data to show the potential impact of a real attack. This helps the organization understand the full risk associated with a particular vulnerability.</p>
+                        <p class="text-slate-600">Once a system is compromised, the work isn't over. In this phase, testers determine the value of the compromised machine and what further access it provides, while ensuring no harm to patient care systems.</p>
                     </div>
                     <div id="reporting" class="ptes-content content-hidden">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 7: Reporting</h3>
-                        <p class="text-slate-600">This is the most critical phase for the client. The security team compiles a detailed report that includes all findings, from high-level summaries for executives to technical details for IT staff. It outlines the vulnerabilities discovered, the methods used to exploit them, and the potential business impact. Most importantly, the report provides clear, actionable recommendations for fixing the issues and improving the overall security posture of the organization.</p>
+                        <p class="text-slate-600">This is the most critical phase for the client. The security team compiles a detailed report that includes all findings, from high-level summaries for executives to technical remediation recommendations.</p>
                     </div>
                 </div>
             </div>
@@ -122,13 +123,13 @@
         <!-- Challenges Section -->
         <section id="challenges" class="bg-white p-8 rounded-lg shadow-lg py-12 pt-20 -mt-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-700">Key Challenges for CyberHealth Security</h2>
-            <p class="mb-6 text-slate-600">The MTPH engagement presents several unique challenges that the security team must navigate carefully. These challenges highlight the complexities of ethical hacking in a live, critical environment.</p>
+            <p class="mb-6 text-slate-600">The MTPH engagement presents several unique challenges that the security team must navigate carefully. These challenges highlight the complexities of ethical penetration testing in healthcare.</p>
             <ul class="space-y-4 list-disc list-inside">
-                <li class="text-lg"><strong>Choosing the Right Approach:</strong> Balancing the realism of a black-box test with the thoroughness of a white-box test, all while considering the potential risks to a functioning hospital.</li>
-                <li class="text-lg"><strong>Ensuring Business Continuity:</strong> The highest priority is avoiding any disruption to patient care. All testing activities must be carefully planned and executed to prevent any impact on critical hospital systems.</li>
-                <li class="text-lg"><strong>Effective Information Gathering:</strong> Legally and ethically using tools like network scanners and OSINT to map the hospital's digital infrastructure without causing alarms or violating privacy.</li>
-                <li class="text-lg"><strong>Developing a Robust Response Plan:</strong> Creating a practical and effective incident response plan that MTPH staff can follow in the event of a real security breach.</li>
-                <li class="text-lg"><strong>Navigating Ethical Dilemmas:</strong> Constantly weighing the need to find vulnerabilities against the ethical responsibility to protect patient data and ensure safety, requiring clear communication and trust with the hospital.</li>
+                <li class="text-lg"><strong>Choosing the Right Approach:</strong> Balancing the realism of a black-box test with the thoroughness of a white-box test, all while considering the potential impact on critical systems.</li>
+                <li class="text-lg"><strong>Ensuring Business Continuity:</strong> The highest priority is avoiding any disruption to patient care. All testing activities must be carefully planned and monitored.</li>
+                <li class="text-lg"><strong>Effective Information Gathering:</strong> Legally and ethically using tools like network scanners and OSINT to map the hospital's digital infrastructure without crossing privacy boundaries.</li>
+                <li class="text-lg"><strong>Developing a Robust Response Plan:</strong> Creating a practical and effective incident response plan that MTPH staff can follow in the event of a real security incident.</li>
+                <li class="text-lg"><strong>Navigating Ethical Dilemmas:</strong> Constantly weighing the need to find vulnerabilities against the ethical responsibility to protect patient data and ensure safety.</li>
             </ul>
         </section>
 
@@ -324,7 +325,6 @@
                 feedbackEl.textContent = `Incorrect. The correct answer is ${correct}.`;
                 feedbackEl.className = 'mt-4 text-center font-semibold text-red-600';
             }
-            // Disable all buttons after an answer is selected
             Array.from(optionsEl.children).forEach(btn => btn.disabled = true);
 
             setTimeout(() => {
