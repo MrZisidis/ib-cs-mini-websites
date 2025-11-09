@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
     body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+    .badge-new { @apply ml-2 inline-block text-xs font-bold px-2 py-1 rounded-full bg-amber-500 text-white; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -53,60 +54,58 @@
   <main id="projects" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <h3 class="text-3xl font-bold text-slate-900 mb-8 text-center">Projects</h3>
 
-    <!-- Updated grid to support 3 cards -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Card 1: IB Trees Lesson 1 -->
-      <article class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col">
-        <h4 class="text-xl font-bold text-slate-900">IB CS HL: Trees — Lesson 1</h4>
+    <!-- Grid now with 2 consolidated cards -->
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Card 1: Case Study 2026 Guide (accent color changed, badge added) -->
+      <article class="relative bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col">
+        <h4 class="text-xl font-bold text-slate-900 flex items-center">IB CS Case Study 2026 Guide <span class="badge-new" aria-label="New resource">New</span></h4>
         <p class="mt-2 text-slate-600">
-          Introduction to trees: logic, terminology, and hands-on activities to build intuition for tree structures.
-        </p>
-        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
-          <li>Root, parent/child, leaves, and subtrees</li>
-          <li>Human tree activity and interactive terminology</li>
-          <li>BST insertion with a cup-stacking challenge</li>
-        </ul>
-        <div class="mt-6">
-          <a href="./ib-cs-trees_1.html" class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-md transition">
-            Open Trees Lesson 1
-          </a>
-        </div>
-      </article>
-
-      <!-- Card 2: IB Trees Lesson 2 -->
-      <article class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col">
-        <h4 class="text-xl font-bold text-slate-900">IB CS HL: Trees — Lesson 2</h4>
-        <p class="mt-2 text-slate-600">
-          Dive deeper into binary search trees with practice-focused slides and interactive checks for understanding.
-        </p>
-        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
-          <li>BST properties and walkthroughs</li>
-          <li>Constructing and visualising examples</li>
-          <li>Applied reasoning tasks</li>
-        </ul>
-        <div class="mt-6">
-          <a href="./ib-cs-trees_2.html" class="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white font-bold px-5 py-2.5 rounded-md transition">
-            Open Trees Lesson 2
-          </a>
-        </div>
-      </article>
-
-      <!-- Card 3: Case Study 2026 Guide -->
-      <article class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col">
-        <h4 class="text-xl font-bold text-slate-900">IB CS Case Study 2026 Guide</h4>
-        <p class="mt-2 text-slate-600">
-          Structured study guide for the 2026 IB Computer Science case study: concepts, terminology, and applied analysis.
+          Structured study guide for the 2026 IB Computer Science case study: concepts, terminology, applied analysis & exam-style practice.
         </p>
         <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
           <li>Key scenario domains & vocabulary</li>
-          <li>Applied stakeholder/system perspectives</li>
-          <li>Practice prompts for exam-style responses</li>
+          <li>Stakeholder / system perspectives</li>
+          <li>Practice prompts with guided scaffolds</li>
         </ul>
         <div class="mt-6">
-          <a href="./IB_CS_CaseStudy_2026_StudyGuide.html" class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-md transition">
+          <a href="./IB_CS_CaseStudy_2026_StudyGuide.html" class="inline-flex items-center bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-700 hover:to-purple-700 text-white font-bold px-5 py-2.5 rounded-md transition">
             Open Case Study Guide
           </a>
         </div>
+      </article>
+
+      <!-- Card 2: Consolidated Trees Lessons 1 & 2 -->
+      <article class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col">
+        <h4 class="text-xl font-bold text-slate-900">IB CS HL: Trees — Lessons 1 & 2</h4>
+        <p class="mt-2 text-slate-600">
+          Build foundational and advanced understanding of tree and BST concepts, then apply them through activities and reasoning tasks.
+        </p>
+        <details class="mt-4 group">
+          <summary class="cursor-pointer select-none text-slate-800 font-semibold flex items-center gap-2">
+            <span class="group-open:rotate-90 transition-transform inline-block">▶</span> Lesson 1 Overview
+          </summary>
+          <ul class="mt-2 text-sm text-slate-600 list-disc pl-5 space-y-1">
+            <li>Terminology: root, parent/child, leaves, subtrees</li>
+            <li>Human tree activity & interactive labeling</li>
+            <li>BST insertion intuition (cup-stacking challenge)</li>
+          </ul>
+          <div class="mt-3">
+            <a href="./ib-cs-trees_1.html" class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-semibold text-sm px-4 py-2 rounded-md transition" aria-label="Open Lesson 1">Open Lesson 1</a>
+          </div>
+        </details>
+        <details class="mt-4 group">
+          <summary class="cursor-pointer select-none text-slate-800 font-semibold flex items-center gap-2">
+            <span class="group-open:rotate-90 transition-transform inline-block">▶</span> Lesson 2 Overview
+          </summary>
+          <ul class="mt-2 text-sm text-slate-600 list-disc pl-5 space-y-1">
+            <li>BST properties and invariants</li>
+            <li>Construction & visual walkthroughs</li>
+            <li>Applied reasoning / exam-style tasks</li>
+          </ul>
+          <div class="mt-3">
+            <a href="./ib-cs-trees_2.html" class="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white font-semibold text-sm px-4 py-2 rounded-md transition" aria-label="Open Lesson 2">Open Lesson 2</a>
+          </div>
+        </details>
       </article>
     </div>
 
@@ -114,7 +113,7 @@
     <section class="mt-12 bg-sky-50 border-l-4 border-sky-500 p-6 rounded-r-lg">
       <h5 class="text-lg font-bold mb-2">Tips</h5>
       <p class="text-slate-700">
-        Start with Lesson 1 to establish terminology and structure, then move to Lesson 2 for practice and depth. Use the Case Study Guide to connect syllabus knowledge with applied contexts.
+        Use the Case Study Guide early for contextual framing, then deepen abstract data structure knowledge with the Trees lessons. Expand each lesson section to access targeted content when needed.
       </p>
     </section>
   </main>
