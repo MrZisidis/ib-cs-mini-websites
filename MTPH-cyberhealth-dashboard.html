@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberHealth Security | MTPH Engagement Dashboard</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Application Structure Plan: 
+         - Layout: Sidebar navigation (Phases 1-7 + Overview) | Main Content Area.
+         - Theme: Medical/Cyber clean aesthetic (Slate/Teal).
+         - Logic: 'appState' object tracks current view. 'render()' function updates main content dynamically.
+         - Key Interaction: Users step through the PTES lifecycle, performing a 'micro-task' at each stage to understand the workflow.
+    -->
+
+    <!-- Visualization & Content Choices:
+         - Overview: Radar Chart (Chart.js) to show the 'Security Posture' gaps in CIA triad + Privacy.
+         - Phase 1: Interactive Checklist for Scope (In/Out) -> User learns boundaries.
+         - Phase 2: Dynamic List for OSINT findings -> Simulates data gathering.
+         - Phase 3: Threat Cards -> Visually separates Insider vs Outsider threats.
+         - Phase 4: Bar Chart (Chart.js) for Vulnerability Severity (CVSS) -> Visualizing scan data.
+         - Phase 7: Toggle Button for Executive vs Tech Report -> Demonstrates audience adaptation.
+         - Justification: Canvas charts used for rigorous data display; HTML/Tailwind for layout. NO SVG/Mermaid.
+    -->
+    
+    <!-- Chosen Palette: Slate (Neutral), Teal (Accent/Medical), Red (Alerts) -->
+    
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Custom Chart Container Styling as per requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Constraint width for readability */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height */
+            max-height: 400px; /* Prevent vertical overflow */
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Scrollbar for panels */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 3px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 h-screen flex flex-col md:flex-row overflow-hidden">
+
+    <!-- Mobile Header -->
+    <div class="md:hidden bg-slate-900 text-white p-4 flex justify-between items-center shadow-md z-20">
+        <h1 class="font-bold text-lg">CyberHealth Security</h1>
+        <button id="mobile-menu-btn" class="text-teal-400 font-bold focus:outline-none">☰ MENU</button>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="bg-slate-900 text-slate-300 w-full md:w-64 flex-shrink-0 hidden md:flex flex-col transition-all duration-300 h-full absolute md:relative z-10">
+        <div class="p-6 border-b border-slate-700">
+            <h1 class="text-2xl font-bold text-white tracking-tight">CyberHealth<span class="text-teal-400">.Sec</span></h1>
+            <p class="text-xs text-slate-400 mt-1">MTPH Engagement Portal</p>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto custom-scroll p-4 space-y-1">
+            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 mt-2">Project Brief</div>
+            <button onclick="router('overview')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3 bg-slate-800 text-white" data-target="overview">
+                <span>📊</span> Mission Overview
+            </button>
+            <button onclick="router('challenges')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="challenges">
+                <span>⚠️</span> Challenges & Ethics
+            </button>
+
+            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 mt-6">PTES Lifecycle</div>
+            
+            <button onclick="router('phase1')" class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="phase1">
+                <span class="bg-slate-700 text-xs py-0.5 px-1.5 rounded">P1</span> Pre-engagement
+            </button>
+            <button onclick="router('phase2')" class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="phase2">
+                <span class="bg-slate-700 text-xs py-0.5 px-1.5 rounded">P2</span> Intel Gathering
+            </button>
+            <button onclick="router('phase3')" class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="phase3">
+                <span class="bg-slate-700 text-xs py-0.5 px-1.5 rounded">P3</span> Threat Modeling
+            </button>
+            <button onclick="router('phase4')" class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="phase4">
+                <span class="bg-slate-700 text-xs py-0.5 px-1.5 rounded">P4</span> Vuln Analysis
+            </button>
+            <button onclick="router('phase56')" class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="phase56">
+                <span class="bg-slate-700 text-xs py-0.5 px-1.5 rounded">P5/6</span> Exploitation
+            </button>
+            <button onclick="router('phase7')" class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="phase7">
+                <span class="bg-slate-700 text-xs py-0.5 px-1.5 rounded">P7</span> Reporting
+            </button>
+        </nav>
+
+        <div class="p-4 border-t border-slate-700 text-xs text-center text-slate-500">
+            IB CS Case Study 2026<br>
+            MedTechPro Hospital
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 h-full overflow-y-auto custom-scroll relative bg-white">
+        <!-- Content gets injected here -->
+        <div id="app-container" class="p-6 md:p-10 max-w-7xl mx-auto"></div>
+    </main>
+
+    <!-- Application Logic -->
+    <script>
+        // --- DATA STORE ---
+        const appData = {
+            currentView: 'overview',
+            mtphInfo: {
+                name: "MedTechPro Hospital (MTPH)",
+                keyAssets: ["CareFlow EHR (Electronic Health Records)", "VitalsWatch IoT Devices", "Zim-Comm Internal Comms"],
+                keyStaff: ["Dr. Evelyn Reed (CEO)", "David Chen (IT Director)", "Sarah Jenkins (CFO)"],
+                securityScore: 58
+            },
+            vulnerabilities: [
+                { id: "VULN-01", system: "SafeNet VPN", issue: "Buffer Overflow", score: 9.8, severity: "Critical" },
+                { id: "VULN-02", system: "VitalsWatch IoT", issue: "Default Creds", score: 9.0, severity: "Critical" },
+                { id: "VULN-03", system: "Patient Portal", issue: "Reflected XSS", score: 6.1, severity: "Medium" },
+                { id: "VULN-04", system: "Reception PC", issue: "SMB Signing Disabled", score: 5.3, severity: "Medium" },
+                { id: "VULN-05", system: "Internal DNS", issue: "SSL Expired", score: 4.0, severity: "Medium" }
+            ],
+            threats: {
+                insider: { actor: "Disgruntled IT Tech", target: "EHR DB", method: "Privileged Access Abuse" },
+                outsider: { actor: "Ransomware Gang", target: "IoT & EHR", method: "Vishing -> VPN Exploit" }
+            },
+            scope: {
+                inScope: ["Guest Wi-Fi", "CareFlow Patient Portal", "VitalsWatch (Test Lab)"],
+                outScope: ["Active Surgery Tools", "ICU Networks", "Physical Access"]
+            }
+        };
+
+        // --- CORE NAVIGATION ---
+        function router(viewName) {
+            appData.currentView = viewName;
+            
+            // Update Sidebar UI
+            document.querySelectorAll('.nav-item').forEach(el => {
+                el.classList.remove('bg-slate-800', 'text-white');
+                if(el.dataset.target === viewName) {
+                    el.classList.add('bg-slate-800', 'text-white');
+                }
+            });
+
+            // Mobile menu logic
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').classList.add('hidden');
+            }
+
+            render();
+        }
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.toggle('hidden');
+        });
+
+        // --- RENDER FUNCTIONS ---
+        function render() {
+            const container = document.getElementById('app-container');
+            container.innerHTML = ''; // Clear current content
+            container.classList.remove('fade-in');
+            void container.offsetWidth; // Trigger reflow
+            container.classList.add('fade-in');
+
+            switch(appData.currentView) {
+                case 'overview': renderOverview(container); break;
+                case 'challenges': renderChallenges(container); break;
+                case 'phase1': renderPhase1(container); break;
+                case 'phase2': renderPhase2(container); break;
+                case 'phase3': renderPhase3(container); break;
+                case 'phase4': renderPhase4(container); break;
+                case 'phase56': renderPhase56(container); break;
+                case 'phase7': renderPhase7(container); break;
+            }
+        }
+
+        // --- VIEW 1: OVERVIEW ---
+        function renderOverview(container) {
+            container.innerHTML = `
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Mission Overview</h2>
+                    <p class="text-slate-600">Client: <span class="font-semibold text-teal-600">${appData.mtphInfo.name}</span></p>
+                    <p class="text-slate-600 max-w-3xl mt-4">
+                        CyberHealth Security has been hired to review MTPH's cybersecurity systems. The hospital relies heavily on 
+                        Electronic Health Records (EHRs) and IoT medical devices. Your goal is to conduct a Grey Box penetration test 
+                        following the PTES framework without disrupting patient care.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Scorecard -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-slate-700 mb-4 border-b pb-2">Current Security Posture Baseline</h3>
+                        <div class="flex items-center gap-6 mb-6">
+                            <div class="w-24 h-24 rounded-full bg-orange-100 flex items-center justify-center border-4 border-orange-200 text-2xl font-bold text-orange-600">
+                                ${appData.mtphInfo.securityScore}
+                            </div>
+                            <div>
+                                <div class="text-sm text-slate-500 uppercase font-semibold">Overall Rating</div>
+                                <div class="text-xl font-bold text-orange-600">Needs Improvement</div>
+                                <p class="text-sm text-slate-500 mt-1">High risk in Network Segmentation & Patching.</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex justify-between text-sm"><span class="text-slate-600">Asset Management</span> <span class="text-teal-600 font-bold">Good (85)</span></li>
+                            <li class="flex justify-between text-sm"><span class="text-slate-600">Network Defense</span> <span class="text-red-600 font-bold">Critical (45)</span></li>
+                            <li class="flex justify-between text-sm"><span class="text-slate-600">Access Control</span> <span class="text-orange-500 font-bold">Warning (60)</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Radar Chart -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col items-center">
+                        <h3 class="text-lg font-bold text-slate-700 mb-4 w-full border-b pb-2">CIA Triad Gap Analysis</h3>
+                        <div class="chart-container">
+                            <canvas id="overviewChart"></canvas>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-4 text-center">Visualizing gaps in Confidentiality, Integrity, and Availability.</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-blue-50 border-l-4 border-blue-500 p-4">
+                    <h4 class="font-bold text-blue-800">Critical Mission Constraint</h4>
+                    <p class="text-sm text-blue-700">
+                        "The hospital must maintain operational continuity." Do not perform aggressive scanning on active medical devices. 
+                        Patient safety is the #1 priority.
+                    </p>
+                </div>
+            `;
+
+            // Chart Logic
+            const ctx = document.getElementById('overviewChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Confidentiality (Patient Data)', 'Integrity (Records)', 'Availability (Uptime)', 'IoT Security', 'Remote Access'],
+                    datasets: [{
+                        label: 'MTPH Current State',
+                        data: [80, 75, 40, 30, 50],
+                        fill: true,
+                        backgroundColor: 'rgba(20, 184, 166, 0.2)',
+                        borderColor: 'rgb(20, 184, 166)',
+                        pointBackgroundColor: 'rgb(20, 184, 166)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(20, 184, 166)'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { display: false },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- VIEW: CHALLENGES ---
+        function renderChallenges(container) {
+            container.innerHTML = `
+                <div class="mb-6">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Challenges & Ethical Dilemmas</h2>
+                    <p class="text-slate-600">
+                        Penetration testing in a hospital is uniquely difficult. You must balance the need to find bugs with the absolute requirement to "Do No Harm."
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Challenge 1 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="bg-slate-100 p-4 border-b border-slate-200 flex justify-between items-center">
+                            <h3 class="font-bold text-slate-800">1. Operational Continuity vs. Testing Depth</h3>
+                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full font-bold">High Risk</span>
+                        </div>
+                        <div class="p-6 grid md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-slate-600 mb-4">
+                                    <strong>The Conflict:</strong> Aggressive network scanning (like Nmap) creates traffic. 
+                                    Legacy IoT devices (heart monitors) often have weak network stacks. Too much traffic can crash them.
+                                </p>
+                                <p class="text-sm text-slate-600">
+                                    <strong>Real World Risk:</strong> If a scanner crashes a VitalsWatch monitor during surgery, a patient could die.
+                                </p>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                <h4 class="font-bold text-teal-700 text-sm mb-2">Mitigation Strategy</h4>
+                                <ul class="text-sm space-y-2 text-slate-700 list-disc list-inside">
+                                    <li>Use <strong>Passive Scanning</strong> (listening only).</li>
+                                    <li>Test only during <strong>Maintenance Windows</strong> (off-peak).</li>
+                                    <li>Use a <strong>Test Bed</strong> (spare devices) instead of live production units.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Challenge 2 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="bg-slate-100 p-4 border-b border-slate-200 flex justify-between items-center">
+                            <h3 class="font-bold text-slate-800">2. Data Privacy (HIPAA/GDPR)</h3>
+                            <span class="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full font-bold">Legal Risk</span>
+                        </div>
+                        <div class="p-6 grid md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-slate-600 mb-4">
+                                    <strong>The Conflict:</strong> To prove a database is vulnerable, you usually extract data ("Looting"). 
+                                    However, extracting real patient names violates privacy laws.
+                                </p>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                <h4 class="font-bold text-teal-700 text-sm mb-2">Mitigation Strategy</h4>
+                                <ul class="text-sm space-y-2 text-slate-700 list-disc list-inside">
+                                    <li>Use <strong>Dummy Data</strong> (fake records) in a test environment.</li>
+                                    <li>Use <strong>"Flag" Files</strong> (e.g., place a text file on the server) to prove access without opening database tables.</li>
+                                    <li>Strict NDAs and immediate data destruction protocols.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Terminology -->
+                    <div class="bg-slate-800 text-slate-300 p-6 rounded-xl mt-8">
+                        <h3 class="text-white font-bold mb-4">Key Terminology (From Case Study)</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                            <div><span class="text-teal-400 font-bold">Buffer Overflow:</span> Overwriting memory to execute code.</div>
+                            <div><span class="text-teal-400 font-bold">OSINT:</span> Gathering info from public sources.</div>
+                            <div><span class="text-teal-400 font-bold">Grey Box:</span> Testing with partial internal knowledge.</div>
+                            <div><span class="text-teal-400 font-bold">Vishing:</span> Voice phishing (phone calls).</div>
+                            <div><span class="text-teal-400 font-bold">SQL Injection:</span> Attacking database inputs.</div>
+                            <div><span class="text-teal-400 font-bold">Pretexting:</span> Creating a fake scenario to trick staff.</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- VIEW: PHASE 1 ---
+        function renderPhase1(container) {
+            container.innerHTML = `
+                <div class="mb-6">
+                    <span class="text-xs font-bold text-teal-600 uppercase tracking-widest">Phase 1</span>
+                    <h2 class="text-3xl font-bold text-slate-800">Pre-engagement Interactions</h2>
+                    <p class="text-slate-600 mt-2">
+                        Defining the "Rules of Engagement." The most critical step to prevent lawsuits and operational failure.
+                        You must negotiate what is <strong>In Scope</strong> (Allowed) and <strong>Out of Scope</strong> (Forbidden).
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-lg mb-4">Scope Negotiation Tool</h3>
+                    <p class="text-sm text-slate-500 mb-6">Select the items you believe should be IN SCOPE for a safe hospital test.</p>
+
+                    <div class="grid md:grid-cols-2 gap-4" id="scope-list">
+                        <!-- Generated via JS below -->
+                    </div>
+                    
+                    <div id="scope-feedback" class="mt-6 p-4 rounded-lg hidden text-sm font-bold"></div>
+                </div>
+            `;
+
+            const scopeItems = [
+                { name: "Active Surgical Robots", safe: false, reason: "Too dangerous. Risk of patient injury." },
+                { name: "Backup/Test IoT Network", safe: true, reason: "Safe. Allows testing without patient risk." },
+                { name: "Physical Security (Breaking Windows)", safe: false, reason: "Usually out of scope for digital pen tests. Liability risk." },
+                { name: "CareFlow Patient Portal (Web)", safe: true, reason: "Standard target. High value, low physical risk." },
+                { name: "Staff Wi-Fi Network", safe: true, reason: "Standard target. Simulates insider threat." },
+                { name: "Social Engineering (Clinical Staff)", safe: false, reason: "High risk of disrupting patient care workflows." }
+            ];
+
+            const listContainer = document.getElementById('scope-list');
+            scopeItems.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = "border border-slate-200 rounded p-3 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-colors";
+                div.innerHTML = `<span class="font-medium">${item.name}</span> <button class="text-xs bg-slate-200 px-2 py-1 rounded text-slate-700">Add to Scope</button>`;
+                div.onclick = function() {
+                    const feedback = document.getElementById('scope-feedback');
+                    feedback.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
+                    if(item.safe) {
+                        feedback.classList.add('bg-green-100', 'text-green-700');
+                        feedback.innerHTML = `✅ CORRECT: ${item.reason}`;
+                        this.classList.add('border-green-500', 'bg-green-50');
+                    } else {
+                        feedback.classList.add('bg-red-100', 'text-red-700');
+                        feedback.innerHTML = `❌ WARNING: ${item.reason}`;
+                        this.classList.add('border-red-500', 'bg-red-50');
+                    }
+                };
+                listContainer.appendChild(div);
+            });
+        }
+
+        // --- VIEW: PHASE 2 ---
+        function renderPhase2(container) {
+            container.innerHTML = `
+                <div class="mb-6">
+                    <span class="text-xs font-bold text-teal-600 uppercase tracking-widest">Phase 2</span>
+                    <h2 class="text-3xl font-bold text-slate-800">Intelligence Gathering (OSINT)</h2>
+                    <p class="text-slate-600 mt-2">
+                        Using "Open Source Intelligence" to map the hospital without touching it. 
+                        We look for employees, technologies, and leaked documents.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 text-green-400 p-6 rounded-xl shadow-lg font-mono text-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-2 opacity-50">TERMINAL_V2.4</div>
+                    <div class="mb-4 border-b border-green-800 pb-2">
+                        root@cyberhealth:~# ./run_osint_scan.sh -target mtph.org
+                    </div>
+                    <div id="osint-output" class="space-y-1 h-64 overflow-y-auto">
+                        <span class="animate-pulse">_ Awaiting Command... <button onclick="runOsint()" class="bg-green-700 text-white px-2 py-1 rounded text-xs ml-2 hover:bg-green-600">EXECUTE SCAN</button></span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Mock OSINT logic
+        window.runOsint = function() {
+            const output = document.getElementById('osint-output');
+            output.innerHTML = '';
+            
+            const findings = [
+                { type: "info", text: "[*] Initiating scan against mtph.org..." },
+                { type: "success", text: "[+] Domain found: medtechpro-hospital.com" },
+                { type: "warning", text: "[!] Job Posting Found: 'IT Helpdesk - Must know SafeNet VPN'" },
+                { type: "success", text: "[+] Technology Identified: CareFlow EHR System v4.1" },
+                { type: "success", text: "[+] Employee Found: David Chen (IT Director) - LinkedIN" },
+                { type: "success", text: "[+] Employee Found: Dr. Evelyn Reed (CEO)" },
+                { type: "warning", text: "[!] Exposed Document: 'Vendor_Security_Policy.pdf'" },
+                { type: "danger", text: "[CRITICAL] Default login page found at /staff-login" },
+                { type: "info", text: "[*] Scan Complete. 8 Assets Identified." }
+            ];
+
+            let delay = 0;
+            findings.forEach(line => {
+                setTimeout(() => {
+                    const p = document.createElement('div');
+                    p.innerText = line.text;
+                    if(line.type === 'warning') p.className = "text-yellow-400";
+                    if(line.type === 'danger') p.className = "text-red-500 font-bold";
+                    if(line.type === 'success') p.className = "text-green-400";
+                    output.appendChild(p);
+                    output.scrollTop = output.scrollHeight;
+                }, delay);
+                delay += 600;
+            });
+        };
+
+        // --- VIEW: PHASE 3 ---
+        function renderPhase3(container) {
+            container.innerHTML = `
+                <div class="mb-6">
+                    <span class="text-xs font-bold text-teal-600 uppercase tracking-widest">Phase 3</span>
+                    <h2 class="text-3xl font-bold text-slate-800">Threat Modeling</h2>
+                    <p class="text-slate-600 mt-2">
+                        Using the Intel from Phase 2 to determine WHO will attack and HOW. 
+                        We map the <strong>Adversary</strong> to the <strong>Asset</strong> via a <strong>Vulnerability</strong>.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Insider Card -->
+                    <div class="bg-white border-l-4 border-purple-500 shadow-sm rounded-r-xl p-6">
+                        <h3 class="font-bold text-xl text-slate-800 mb-2">Threat Model A: The Insider</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between border-b pb-1">
+                                <span class="text-slate-500">Adversary</span>
+                                <span class="font-semibold text-purple-700">Disgruntled Helpdesk Tech</span>
+                            </div>
+                            <div class="flex justify-between border-b pb-1">
+                                <span class="text-slate-500">Motivation</span>
+                                <span class="font-semibold">Revenge / Financial</span>
+                            </div>
+                            <div class="flex justify-between border-b pb-1">
+                                <span class="text-slate-500">Vulnerability</span>
+                                <span class="font-semibold">Over-privileged Accounts</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">Target Asset</span>
+                                <span class="font-semibold">EHR Database (Patient Records)</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-purple-50 p-3 rounded text-xs text-purple-800">
+                            <strong>Attack Path:</strong> Uses valid admin credentials to bypass security and export patient data to a USB drive.
+                        </div>
+                    </div>
+
+                    <!-- Outsider Card -->
+                    <div class="bg-white border-l-4 border-red-500 shadow-sm rounded-r-xl p-6">
+                        <h3 class="font-bold text-xl text-slate-800 mb-2">Threat Model B: The Outsider</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between border-b pb-1">
+                                <span class="text-slate-500">Adversary</span>
+                                <span class="font-semibold text-red-700">Ransomware Gang</span>
+                            </div>
+                            <div class="flex justify-between border-b pb-1">
+                                <span class="text-slate-500">Motivation</span>
+                                <span class="font-semibold">Extortion (Money)</span>
+                            </div>
+                            <div class="flex justify-between border-b pb-1">
+                                <span class="text-slate-500">Vulnerability</span>
+                                <span class="font-semibold">Unpatched SafeNet VPN</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">Target Asset</span>
+                                <span class="font-semibold">IoT Network (Disruption)</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-red-50 p-3 rounded text-xs text-red-800">
+                            <strong>Attack Path:</strong> Exploits VPN buffer overflow to gain access, then pivots to IoT subnet to encrypt devices.
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- VIEW: PHASE 4 ---
+        function renderPhase4(container) {
+            container.innerHTML = `
+                <div class="mb-6">
+                    <span class="text-xs font-bold text-teal-600 uppercase tracking-widest">Phase 4</span>
+                    <h2 class="text-3xl font-bold text-slate-800">Vulnerability Analysis</h2>
+                    <p class="text-slate-600 mt-2">
+                        The "Scanner" phase. We validate if the doors are unlocked. 
+                        We focus on <strong>CVSS Scores</strong> to prioritize what to fix.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Table -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-slate-50 text-slate-500 font-bold border-b border-slate-200">
+                                <tr>
+                                    <th class="p-4">ID</th>
+                                    <th class="p-4">System</th>
+                                    <th class="p-4">Vulnerability</th>
+                                    <th class="p-4">CVSS</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                ${appData.vulnerabilities.map(v => `
+                                    <tr class="hover:bg-slate-50 cursor-pointer group">
+                                        <td class="p-4 font-mono text-xs text-slate-400">${v.id}</td>
+                                        <td class="p-4 font-medium text-slate-700">${v.system}</td>
+                                        <td class="p-4 text-slate-600">${v.issue}</td>
+                                        <td class="p-4">
+                                            <span class="px-2 py-1 rounded text-xs font-bold 
+                                                ${v.score >= 9 ? 'bg-red-100 text-red-700' : 
+                                                  v.score >= 7 ? 'bg-orange-100 text-orange-700' : 
+                                                  'bg-yellow-100 text-yellow-700'}">
+                                                ${v.score}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Chart -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col items-center">
+                        <h3 class="text-lg font-bold text-slate-700 mb-4 w-full border-b pb-2">Vulnerability Severity Distribution</h3>
+                        <div class="chart-container">
+                            <canvas id="vulnChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Chart Logic
+            const ctx = document.getElementById('vulnChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Critical (9-10)', 'High (7-8.9)', 'Medium (4-6.9)', 'Low (0-3.9)'],
+                    datasets: [{
+                        label: 'Found Vulnerabilities',
+                        data: [2, 0, 3, 0], // Matches appData.vulnerabilities
+                        backgroundColor: [
+                            'rgba(220, 38, 38, 0.7)',
+                            'rgba(234, 88, 12, 0.7)',
+                            'rgba(202, 138, 4, 0.7)',
+                            'rgba(22, 163, 74, 0.7)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, ticks: { stepSize: 1 } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // --- VIEW: PHASE 5 & 6 ---
+        function renderPhase56(container) {
+            container.innerHTML = `
+                <div class="mb-6">
+                    <span class="text-xs font-bold text-teal-600 uppercase tracking-widest">Phases 5 & 6</span>
+                    <h2 class="text-3xl font-bold text-slate-800">Exploitation & Post-Exploitation</h2>
+                    <p class="text-slate-600 mt-2">
+                        <strong>Phase 5:</strong> Breaking In. <strong>Phase 6:</strong> Staying In (The Breach).
+                        This timeline visualizes a successful attack path from the "Outsider" threat model.
+                    </p>
+                </div>
+
+                <div class="relative pl-8 border-l-2 border-slate-300 space-y-8">
+                    <!-- Step 1 -->
+                    <div class="relative">
+                        <div class="absolute -left-10 bg-teal-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">1</div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                            <h4 class="font-bold text-slate-800">Initial Access (Phase 5)</h4>
+                            <p class="text-sm text-slate-600">Attacker executes buffer overflow script against <strong>SafeNet VPN</strong>.</p>
+                            <div class="mt-2 text-xs font-mono bg-slate-100 p-2 rounded text-red-600">> EXPLOIT SUCCESSFUL. SHELL OPEN.</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative">
+                        <div class="absolute -left-10 bg-indigo-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">2</div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                            <h4 class="font-bold text-slate-800">Privilege Escalation (Phase 6)</h4>
+                            <p class="text-sm text-slate-600">Attacker is 'User'. Finds unpatched Windows Service.</p>
+                            <div class="mt-2 text-xs font-mono bg-slate-100 p-2 rounded text-indigo-600">> WHOAMI: NT AUTHORITY/SYSTEM</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative">
+                        <div class="absolute -left-10 bg-indigo-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">3</div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                            <h4 class="font-bold text-slate-800">Lateral Movement (Phase 6)</h4>
+                            <p class="text-sm text-slate-600">Pivoting from VPN Server to IoT VLAN (192.168.10.x).</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="relative">
+                        <div class="absolute -left-10 bg-indigo-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">4</div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+                            <h4 class="font-bold text-slate-800">Looting / Action on Objectives (Phase 6)</h4>
+                            <p class="text-sm text-slate-600">Target Reached: <strong>VitalsWatch Master Controller</strong>.</p>
+                            <div class="mt-2 p-3 bg-yellow-50 border border-yellow-200 rounded text-xs text-yellow-800">
+                                <strong>Ethical Stop:</strong> In a real attack, they would deploy ransomware. 
+                                As Pentesters, we take a screenshot as proof and <strong>STOP</strong>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- VIEW: PHASE 7 ---
+        function renderPhase7(container) {
+            container.innerHTML = `
+                <div class="mb-6">
+                    <span class="text-xs font-bold text-teal-600 uppercase tracking-widest">Phase 7</span>
+                    <h2 class="text-3xl font-bold text-slate-800">Reporting</h2>
+                    <p class="text-slate-600 mt-2">
+                        The final deliverable. You must translate technical findings into business risks.
+                        Toggle below to see how the language changes for different audiences.
+                    </p>
+                </div>
+
+                <div class="flex gap-4 mb-6">
+                    <button onclick="toggleReport('exec')" id="btn-exec" class="flex-1 py-3 px-4 rounded-lg bg-slate-800 text-white font-bold shadow-md transition-all">
+                        Executive Summary<br><span class="text-xs font-normal text-slate-400">For CEO / Board</span>
+                    </button>
+                    <button onclick="toggleReport('tech')" id="btn-tech" class="flex-1 py-3 px-4 rounded-lg bg-white text-slate-600 border border-slate-200 font-bold shadow-sm hover:bg-slate-50 transition-all">
+                        Technical Report<br><span class="text-xs font-normal text-slate-400">For IT Director</span>
+                    </button>
+                </div>
+
+                <div id="report-content" class="bg-white p-8 rounded-xl shadow-lg border border-slate-200 min-h-[300px]">
+                    <!-- Content injected via JS -->
+                </div>
+            `;
+            // Default load
+            toggleReport('exec');
+        }
+
+        window.toggleReport = function(type) {
+            const content = document.getElementById('report-content');
+            const btnExec = document.getElementById('btn-exec');
+            const btnTech = document.getElementById('btn-tech');
+
+            if (type === 'exec') {
+                btnExec.className = "flex-1 py-3 px-4 rounded-lg bg-slate-800 text-white font-bold shadow-md transition-all";
+                btnTech.className = "flex-1 py-3 px-4 rounded-lg bg-white text-slate-600 border border-slate-200 font-bold shadow-sm hover:bg-slate-50 transition-all";
+                content.innerHTML = `
+                    <h3 class="text-2xl font-serif text-slate-800 mb-4 border-b pb-2">Executive Summary</h3>
+                    <p class="mb-4 text-slate-700 leading-relaxed">
+                        <strong>Risk Assessment:</strong> Our assessment of MedTechPro Hospital has identified <span class="text-red-600 font-bold">CRITICAL</span> risks to patient safety and operational continuity.
+                    </p>
+                    <p class="mb-4 text-slate-700 leading-relaxed">
+                        <strong>Key Findings:</strong> An attacker can remotely access the hospital network from the internet without a password. This provides direct control over <strong>VitalsWatch</strong> patient monitoring systems. This creates an immediate liability risk and potential for catastrophic loss of life.
+                    </p>
+                    <p class="text-slate-700 leading-relaxed">
+                        <strong>Recommendation:</strong> We recommend an immediate emergency maintenance window to apply security patches and isolate medical devices from the main network.
+                    </p>
+                `;
+            } else {
+                btnTech.className = "flex-1 py-3 px-4 rounded-lg bg-white text-slate-600 border border-slate-200 font-bold shadow-sm hover:bg-slate-50 transition-all";
+                btnExec.className = "flex-1 py-3 px-4 rounded-lg bg-slate-800 text-white font-bold shadow-md transition-all";
+                content.innerHTML = `
+                    <h3 class="text-2xl font-mono text-slate-800 mb-4 border-b pb-2">Technical Findings</h3>
+                    <div class="font-mono text-sm text-slate-700 space-y-4">
+                        <div class="bg-slate-50 p-4 rounded border border-slate-200">
+                            <strong>VULN-01:</strong> SafeNet VPN Buffer Overflow<br>
+                            <strong>CVSS:</strong> 9.8 (Critical)<br>
+                            <strong>Port:</strong> 443 (UDP)<br>
+                            <strong>Exploit:</strong> Remote Code Execution (RCE) via malformed packet.
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded border border-slate-200">
+                            <strong>Remediation Steps:</strong><br>
+                            1. Update Firmware to v2.4.1 immediately.<br>
+                            2. Implement VLAN ACLs to deny traffic from VPN subnet to 192.168.10.0/24 (IoT VLAN).<br>
+                            3. Enforce MFA on all VPN accounts.
+                        </div>
+                    </div>
+                `;
+            }
+        };
+
+        // Initialize App
+        render();
+
+    </script>
+</body>
+</html>
