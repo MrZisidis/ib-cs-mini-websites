@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IB CS Mini Websites</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
   </style>
 </head>
+
 <body class="bg-slate-50 text-slate-800">
 
   <!-- Header / Nav (updated to match GCSE style) -->
@@ -28,17 +33,14 @@
       <nav class="hidden md:block">
         <ul class="flex items-center gap-6">
           <li><a href="#projects" class="text-slate-600 hover:text-sky-600 font-semibold">Projects</a></li>
+          <li><a href="python_playground.html" class="text-slate-600 hover:text-sky-600 font-semibold">Python
+              Playground</a></li>
           <li>
-            <a
-              href="https://github.com/MrZisidis/ib-cs-mini-websites"
+            <a href="https://github.com/MrZisidis/ib-cs-mini-websites"
               class="inline-flex items-center text-slate-600 hover:text-sky-600 font-semibold"
-              aria-label="View repository on GitHub"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
+              aria-label="View repository on GitHub" rel="noopener noreferrer" target="_blank">
               <svg class="w-4 h-4 mr-2 fill-current" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-                <path fill-rule="evenodd"
-                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
                   0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
                   -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64
                   -.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82.64-.18
@@ -62,10 +64,12 @@
         Explore classroom-ready activities and interactive resources. Choose a project to begin.
       </p>
       <div class="mt-8 flex justify-center gap-4">
-        <a href="#projects" class="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white font-bold px-6 py-3 rounded-lg transition">
+        <a href="#projects"
+          class="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white font-bold px-6 py-3 rounded-lg transition">
           View Projects
         </a>
-        <a href="https://mrzisidis.github.io/ib-cs-mini-websites/" class="inline-flex items-center bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-lg transition">
+        <a href="https://mrzisidis.github.io/ib-cs-mini-websites/"
+          class="inline-flex items-center bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-3 rounded-lg transition">
           Refresh Site
         </a>
       </div>
@@ -78,11 +82,36 @@
 
     <!-- Grid now with 3 cards -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Card: Python Playground -->
+      <article class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col">
+        <h4 class="text-xl font-bold text-slate-900 flex items-center">
+          Python Playground 🐍
+          <span class="ml-2 inline-block text-xs font-bold px-2 py-1 rounded-full bg-emerald-500 text-white"
+            aria-hidden="true">NEW</span>
+        </h4>
+        <p class="mt-2 text-slate-600">
+          Interactive Python environment directly in your browser. Write code or load examples from the repo.
+        </p>
+        <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <li>In-browser Python execution (Pyodide)</li>
+          <li>Load files from GitHub repo</li>
+          <li>Export and copy functionality</li>
+        </ul>
+        <div class="mt-6 mt-auto">
+          <a href="python_playground.html"
+            class="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-md transition">
+            Open Playground
+          </a>
+        </div>
+      </article>
       <!-- Card 1: Case Study 2026 Guide (accent color changed, badge added) -->
       <article class="relative bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col">
-        <h4 class="text-xl font-bold text-slate-900 flex items-center">IB CS Case Study 2026 Guide <span class="ml-2 inline-block text-xs font-bold px-2 py-1 rounded-full bg-amber-500 text-white" aria-hidden="true">NEW</span></h4>
+        <h4 class="text-xl font-bold text-slate-900 flex items-center">IB CS Case Study 2026 Guide <span
+            class="ml-2 inline-block text-xs font-bold px-2 py-1 rounded-full bg-amber-500 text-white"
+            aria-hidden="true">NEW</span></h4>
         <p class="mt-2 text-slate-600">
-          Structured study guide for the 2026 IB Computer Science case study: concepts, terminology, applied analysis & exam-style practice.
+          Structured study guide for the 2026 IB Computer Science case study: concepts, terminology, applied analysis &
+          exam-style practice.
         </p>
         <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
           <li>Key scenario domains & vocabulary</li>
@@ -90,7 +119,8 @@
           <li>Practice prompts with guided scaffolds</li>
         </ul>
         <div class="mt-6">
-          <a href="./IB_CS_CaseStudy_2026_StudyGuide.html" class="inline-flex items-center bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-700 hover:to-purple-700 text-white font-bold px-5 py-2.5 rounded-md transition">
+          <a href="./IB_CS_CaseStudy_2026_StudyGuide.html"
+            class="inline-flex items-center bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-700 hover:to-purple-700 text-white font-bold px-5 py-2.5 rounded-md transition">
             Open Case Study Guide
           </a>
         </div>
@@ -100,7 +130,8 @@
       <article class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col">
         <h4 class="text-xl font-bold text-slate-900">IB CS HL: Trees — Lessons 1 & 2</h4>
         <p class="mt-2 text-slate-600">
-          Build foundational and advanced understanding of tree and BST concepts, then apply them through activities and reasoning tasks.
+          Build foundational and advanced understanding of tree and BST concepts, then apply them through activities and
+          reasoning tasks.
         </p>
         <details class="mt-4 group">
           <summary class="cursor-pointer select-none text-slate-800 font-semibold flex items-center gap-2">
@@ -112,7 +143,9 @@
             <li>BST insertion intuition (cup-stacking challenge)</li>
           </ul>
           <div class="mt-3">
-            <a href="./ib-cs-trees_1.html" class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-semibold text-sm px-4 py-2 rounded-md transition" aria-label="Open Lesson 1">Open Lesson 1</a>
+            <a href="./ib-cs-trees_1.html"
+              class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-semibold text-sm px-4 py-2 rounded-md transition"
+              aria-label="Open Lesson 1">Open Lesson 1</a>
           </div>
         </details>
         <details class="mt-4 group">
@@ -125,7 +158,9 @@
             <li>Applied reasoning / exam-style tasks</li>
           </ul>
           <div class="mt-3">
-            <a href="./ib-cs-trees_2.html" class="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white font-semibold text-sm px-4 py-2 rounded-md transition" aria-label="Open Lesson 2">Open Lesson 2</a>
+            <a href="./ib-cs-trees_2.html"
+              class="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white font-semibold text-sm px-4 py-2 rounded-md transition"
+              aria-label="Open Lesson 2">Open Lesson 2</a>
           </div>
         </details>
       </article>
@@ -134,7 +169,8 @@
       <article class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col">
         <h4 class="text-xl font-bold text-slate-900">MedTechPro Hospital &mdash; Case Study</h4>
         <p class="mt-2 text-slate-600">
-          Explore a realistic hospital website and security engagement dashboard for hands-on cybersecurity and OSINT practice.
+          Explore a realistic hospital website and security engagement dashboard for hands-on cybersecurity and OSINT
+          practice.
         </p>
         <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
           <li>Realistic hospital website with security clues</li>
@@ -142,10 +178,14 @@
           <li>Interactive threat modeling & reporting</li>
         </ul>
         <div class="mt-6 flex flex-col gap-2">
-          <a href="./medtechpro.html" class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-4 py-2 rounded-md transition" aria-label="Open MedTechPro Hospital">
+          <a href="./medtechpro.html"
+            class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-4 py-2 rounded-md transition"
+            aria-label="Open MedTechPro Hospital">
             MedTechPro Hospital
           </a>
-          <a href="./MTPH-cyberhealth-dashboard.html" class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-semibold text-sm px-4 py-2 rounded-md transition" aria-label="Open CyberHealth Dashboard">
+          <a href="./MTPH-cyberhealth-dashboard.html"
+            class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-semibold text-sm px-4 py-2 rounded-md transition"
+            aria-label="Open CyberHealth Dashboard">
             CyberHealth Dashboard
           </a>
         </div>
@@ -156,7 +196,8 @@
     <section class="mt-12 bg-sky-50 border-l-4 border-sky-500 p-6 rounded-r-lg">
       <h5 class="text-lg font-bold mb-2">Tips</h5>
       <p class="text-slate-700">
-        Use the Case Study Guide early for contextual framing, then deepen abstract data structure knowledge with the Trees lessons. Expand each lesson section to access targeted content when needed.
+        Use the Case Study Guide early for contextual framing, then deepen abstract data structure knowledge with the
+        Trees lessons. Expand each lesson section to access targeted content when needed.
       </p>
     </section>
   </main>
@@ -166,4 +207,5 @@
     <p>&copy; 2025 Mr Zisidis • Computer Science</p>
   </footer>
 </body>
+
 </html>
