@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" style="scroll-behavior: smooth;">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,34 +20,40 @@
     -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8fafc;
         }
+
         .active-tab {
             background-color: #0ea5e9;
             color: white;
         }
+
         .content-hidden {
             display: none;
         }
     </style>
 </head>
+
 <body class="bg-slate-50 text-slate-800">
 
     <!-- Header & Navigation -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
             <div class="text-xl font-bold text-slate-700">IB CS Case Study: Ethical Hacking</div>
-<div class="hidden md:flex space-x-6">
-    <a href="#introduction" class="text-gray-600 hover:text-sky-500">Introduction</a>
-    <a href="#testing-types" class="text-gray-600 hover:text-sky-500">Testing Types</a>
-    <a href="#ptes" class="text-gray-600 hover:text-sky-500">PTES Framework</a>
-    <a href="#challenges" class="text-gray-600 hover:text-sky-500">Challenges</a>
-    <a href="#quiz" class="text-gray-600 hover:text-sky-500">Self-Quiz</a>
-    <a href="medtechpro.html" class="text-gray-600 hover:text-sky-500">MedTechPro</a>
-    <a href="MTPH-cyberhealth-dashboard.html" class="text-gray-600 hover:text-sky-500">CyberHealth Dashboard</a>
-</div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#introduction" class="text-gray-600 hover:text-sky-500">Introduction</a>
+                <a href="#testing-types" class="text-gray-600 hover:text-sky-500">Testing Types</a>
+                <a href="#ptes" class="text-gray-600 hover:text-sky-500">PTES Framework</a>
+                <a href="#challenges" class="text-gray-600 hover:text-sky-500">Challenges</a>
+                <a href="#quiz" class="text-gray-600 hover:text-sky-500">Self-Quiz</a>
+                <a href="ib-cs-hl-case-study-revision.html" class="text-gray-600 hover:text-sky-500">Revision</a>
+                <a href="medtechpro.html" class="text-gray-600 hover:text-sky-500">MedTechPro</a>
+                <a href="MTPH-cyberhealth-dashboard.html" class="text-gray-600 hover:text-sky-500">CyberHealth
+                    Dashboard</a>
+            </div>
         </nav>
     </header>
 
@@ -56,7 +63,10 @@
         <section id="introduction" class="py-12 pt-20 -mt-8">
             <h1 class="text-4xl font-bold text-center mb-4 text-slate-800">An Ethical Approach to Hacking</h1>
             <p class="text-center text-lg text-slate-600 max-w-3xl mx-auto">
-                This guide explores the 2026 IB Computer Science Case Study, focusing on CyberHealth Security's ethical hacking engagement with MedTechPro Hospital (MTPH). We'll break down the core concepts, methodologies, and challenges involved in conducting a responsible penetration test in a critical healthcare environment.
+                This guide explores the 2026 IB Computer Science Case Study, focusing on CyberHealth Security's ethical
+                hacking engagement with MedTechPro Hospital (MTPH). We'll break down the core concepts, methodologies,
+                and challenges involved in conducting a responsible penetration test in a critical healthcare
+                environment.
             </p>
         </section>
 
@@ -64,7 +74,9 @@
         <section id="testing-types" class="bg-white p-8 rounded-lg shadow-lg py-12 pt-20 -mt-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-700">Penetration Testing Approaches</h2>
             <p class="mb-6 text-slate-600">
-                A key decision for any penetration test is choosing the right approach. The amount of information given to the testing team determines the type of test. Each approach simulates a different level of attacker knowledge and affects realism, efficiency, and cost.
+                A key decision for any penetration test is choosing the right approach. The amount of information given
+                to the testing team determines the type of test. Each approach simulates a different level of attacker
+                knowledge and affects realism, efficiency, and cost.
             </p>
             <div class="chart-container" style="position: relative; height:40vh; max-width:800px; margin: auto;">
                 <canvas id="penTestChart"></canvas>
@@ -73,49 +85,78 @@
 
         <!-- PTES Framework Section -->
         <section id="ptes" class="py-12 pt-20 -mt-8">
-            <h2 class="text-3xl font-bold text-center mb-8 text-slate-700">The Penetration Testing Execution Standard (PTES)</h2>
+            <h2 class="text-3xl font-bold text-center mb-8 text-slate-700">The Penetration Testing Execution Standard
+                (PTES)</h2>
             <div class="flex flex-col md:flex-row gap-8">
                 <!-- Vertical Tabs -->
                 <div class="w-full md:w-1/4">
                     <ul id="ptes-tabs" class="space-y-2">
-                        <li><button data-target="pre-engagement" class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300 active-tab">1. Pre-engagement</button></li>
-                        <li><button data-target="intelligence-gathering" class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300">2. Intelligence Gathering</button></li>
-                        <li><button data-target="threat-modeling" class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300">3. Threat Modeling</button></li>
-                        <li><button data-target="vulnerability-analysis" class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300">4. Vulnerability Analysis</button></li>
-                        <li><button data-target="exploitation" class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300">5. Exploitation</button></li>
-                        <li><button data-target="post-exploitation" class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300">6. Post-Exploitation</button></li>
-                        <li><button data-target="reporting" class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300">7. Reporting</button></li>
+                        <li><button data-target="pre-engagement"
+                                class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300 active-tab">1.
+                                Pre-engagement</button></li>
+                        <li><button data-target="intelligence-gathering"
+                                class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300">2.
+                                Intelligence Gathering</button></li>
+                        <li><button data-target="threat-modeling"
+                                class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300">3.
+                                Threat Modeling</button></li>
+                        <li><button data-target="vulnerability-analysis"
+                                class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300">4.
+                                Vulnerability Analysis</button></li>
+                        <li><button data-target="exploitation"
+                                class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300">5.
+                                Exploitation</button></li>
+                        <li><button data-target="post-exploitation"
+                                class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300">6.
+                                Post-Exploitation</button></li>
+                        <li><button data-target="reporting"
+                                class="w-full text-left p-4 rounded-lg font-semibold transition-colors duration-300">7.
+                                Reporting</button></li>
                     </ul>
                 </div>
                 <!-- Content Panes -->
                 <div class="w-full md:w-3/4 bg-white p-6 rounded-lg shadow-lg">
                     <div id="pre-engagement" class="ptes-content">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 1: Pre-engagement Interactions</h3>
-                        <p class="text-slate-600">This initial phase is crucial for setting the stage. It involves discussions between CyberHealth Security and MTPH to define the scope, objectives, and rules of engagement. Clear expectations help prevent disruption to hospital operations.</p>
+                        <p class="text-slate-600">This initial phase is crucial for setting the stage. It involves
+                            discussions between CyberHealth Security and MTPH to define the scope, objectives, and rules
+                            of engagement. Clear expectations help prevent disruption to hospital operations.</p>
                     </div>
                     <div id="intelligence-gathering" class="ptes-content content-hidden">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 2: Intelligence Gathering (OSINT)</h3>
-                        <p class="text-slate-600">Here, the ethical hackers gather as much publicly available information as possible about MTPH. This is known as Open-Source Intelligence (OSINT). The goal is to build a profile of systems, technologies, and potential weak points.</p>
+                        <p class="text-slate-600">Here, the ethical hackers gather as much publicly available
+                            information as possible about MTPH. This is known as Open-Source Intelligence (OSINT). The
+                            goal is to build a profile of systems, technologies, and potential weak points.</p>
                     </div>
                     <div id="threat-modeling" class="ptes-content content-hidden">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 3: Threat Modeling</h3>
-                        <p class="text-slate-600">In this phase, the team analyzes the information gathered to identify potential threats and vulnerabilities. They create a model of the hospital's systems and prioritize targets based on risk and impact.</p>
+                        <p class="text-slate-600">In this phase, the team analyzes the information gathered to identify
+                            potential threats and vulnerabilities. They create a model of the hospital's systems and
+                            prioritize targets based on risk and impact.</p>
                     </div>
                     <div id="vulnerability-analysis" class="ptes-content content-hidden">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 4: Vulnerability Analysis</h3>
-                        <p class="text-slate-600">This involves actively scanning the hospital's network and applications to find security weaknesses. Testers use automated tools to quickly identify common issues and then manually validate and probe deeper.</p>
+                        <p class="text-slate-600">This involves actively scanning the hospital's network and
+                            applications to find security weaknesses. Testers use automated tools to quickly identify
+                            common issues and then manually validate and probe deeper.</p>
                     </div>
                     <div id="exploitation" class="ptes-content content-hidden">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 5: Exploitation</h3>
-                        <p class="text-slate-600">This is the "hacking" phase. The team attempts to gain access to systems by exploiting the vulnerabilities found in the previous phase. This could involve privilege escalation, lateral movement, or data access.</p>
+                        <p class="text-slate-600">This is the "hacking" phase. The team attempts to gain access to
+                            systems by exploiting the vulnerabilities found in the previous phase. This could involve
+                            privilege escalation, lateral movement, or data access.</p>
                     </div>
                     <div id="post-exploitation" class="ptes-content content-hidden">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 6: Post-Exploitation</h3>
-                        <p class="text-slate-600">Once a system is compromised, the work isn't over. In this phase, testers determine the value of the compromised machine and what further access it provides, while ensuring no harm to patient care systems.</p>
+                        <p class="text-slate-600">Once a system is compromised, the work isn't over. In this phase,
+                            testers determine the value of the compromised machine and what further access it provides,
+                            while ensuring no harm to patient care systems.</p>
                     </div>
                     <div id="reporting" class="ptes-content content-hidden">
                         <h3 class="text-2xl font-bold mb-3 text-sky-600">Phase 7: Reporting</h3>
-                        <p class="text-slate-600">This is the most critical phase for the client. The security team compiles a detailed report that includes all findings, from high-level summaries for executives to technical remediation recommendations.</p>
+                        <p class="text-slate-600">This is the most critical phase for the client. The security team
+                            compiles a detailed report that includes all findings, from high-level summaries for
+                            executives to technical remediation recommendations.</p>
                     </div>
                 </div>
             </div>
@@ -124,13 +165,23 @@
         <!-- Challenges Section -->
         <section id="challenges" class="bg-white p-8 rounded-lg shadow-lg py-12 pt-20 -mt-8">
             <h2 class="text-3xl font-bold mb-4 text-slate-700">Key Challenges for CyberHealth Security</h2>
-            <p class="mb-6 text-slate-600">The MTPH engagement presents several unique challenges that the security team must navigate carefully. These challenges highlight the complexities of ethical penetration testing in healthcare.</p>
+            <p class="mb-6 text-slate-600">The MTPH engagement presents several unique challenges that the security team
+                must navigate carefully. These challenges highlight the complexities of ethical penetration testing in
+                healthcare.</p>
             <ul class="space-y-4 list-disc list-inside">
-                <li class="text-lg"><strong>Choosing the Right Approach:</strong> Balancing the realism of a black-box test with the thoroughness of a white-box test, all while considering the potential impact on critical systems.</li>
-                <li class="text-lg"><strong>Ensuring Business Continuity:</strong> The highest priority is avoiding any disruption to patient care. All testing activities must be carefully planned and monitored.</li>
-                <li class="text-lg"><strong>Effective Information Gathering:</strong> Legally and ethically using tools like network scanners and OSINT to map the hospital's digital infrastructure without crossing privacy boundaries.</li>
-                <li class="text-lg"><strong>Developing a Robust Response Plan:</strong> Creating a practical and effective incident response plan that MTPH staff can follow in the event of a real security incident.</li>
-                <li class="text-lg"><strong>Navigating Ethical Dilemmas:</strong> Constantly weighing the need to find vulnerabilities against the ethical responsibility to protect patient data and ensure safety.</li>
+                <li class="text-lg"><strong>Choosing the Right Approach:</strong> Balancing the realism of a black-box
+                    test with the thoroughness of a white-box test, all while considering the potential impact on
+                    critical systems.</li>
+                <li class="text-lg"><strong>Ensuring Business Continuity:</strong> The highest priority is avoiding any
+                    disruption to patient care. All testing activities must be carefully planned and monitored.</li>
+                <li class="text-lg"><strong>Effective Information Gathering:</strong> Legally and ethically using tools
+                    like network scanners and OSINT to map the hospital's digital infrastructure without crossing
+                    privacy boundaries.</li>
+                <li class="text-lg"><strong>Developing a Robust Response Plan:</strong> Creating a practical and
+                    effective incident response plan that MTPH staff can follow in the event of a real security
+                    incident.</li>
+                <li class="text-lg"><strong>Navigating Ethical Dilemmas:</strong> Constantly weighing the need to find
+                    vulnerabilities against the ethical responsibility to protect patient data and ensure safety.</li>
             </ul>
         </section>
 
@@ -143,218 +194,232 @@
                 <div id="feedback" class="mt-4 text-center font-semibold"></div>
                 <div id="score-container" class="hidden mt-4 text-center">
                     <p id="score-text" class="text-2xl font-bold"></p>
-                    <button id="restart-quiz-btn" class="mt-4 px-6 py-2 bg-sky-500 text-white rounded hover:bg-sky-600 transition-colors">Restart Quiz</button>
+                    <button id="restart-quiz-btn"
+                        class="mt-4 px-6 py-2 bg-sky-500 text-white rounded hover:bg-sky-600 transition-colors">Restart
+                        Quiz</button>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-slate-800 text-white text-center p-4 mt-8">
-        <p>&copy; 2024 IB CS Case Study Helper. Created for educational purposes.</p>
+    <footer class="bg-slate-50 border-t border-slate-200 py-8 flex justify-center">
+        <div class="text-xs text-slate-500 flex flex-col md:flex-row items-center gap-2">
+            <span>Copyright (c) 2025 Stefanos Zisidis. Licensed under <a
+                    href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+                    class="underline hover:text-sky-600">CC BY 4.0</a>.</span>
+            <a href="https://github.com/MrZisidis/gcse-cs-mini-websites" target="_blank"
+                class="inline-block text-slate-400 hover:text-slate-800 transition-colors" aria-label="GitHub">
+                <svg viewBox="0 0 16 16" class="w-4 h-4 fill-current">
+                    <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52 -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64 -.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55 .38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+            </a>
+        </div>
     </footer>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
 
-        // Chart.js - Penetration Testing Types
-        const ctx = document.getElementById('penTestChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Knowledge Given to Tester', 'Time & Cost', 'Realism of Attack'],
-                datasets: [
-                    {
-                        label: 'Black Box',
-                        data: [1, 9, 9],
-                        backgroundColor: 'rgba(239, 68, 68, 0.7)',
-                        borderColor: 'rgba(239, 68, 68, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Grey Box',
-                        data: [5, 6, 6],
-                        backgroundColor: 'rgba(234, 179, 8, 0.7)',
-                        borderColor: 'rgba(234, 179, 8, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'White Box',
-                        data: [10, 3, 2],
-                        backgroundColor: 'rgba(34, 197, 94, 0.7)',
-                        borderColor: 'rgba(34, 197, 94, 1)',
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                indexAxis: 'y',
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        max: 10,
-                        ticks: {
-                            color: '#475569'
+            // Chart.js - Penetration Testing Types
+            const ctx = document.getElementById('penTestChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Knowledge Given to Tester', 'Time & Cost', 'Realism of Attack'],
+                    datasets: [
+                        {
+                            label: 'Black Box',
+                            data: [1, 9, 9],
+                            backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                            borderColor: 'rgba(239, 68, 68, 1)',
+                            borderWidth: 1
                         },
-                        grid: {
-                          color: '#e2e8f0'
-                        }
-                    },
-                    y: {
-                        ticks: {
-                            color: '#475569'
+                        {
+                            label: 'Grey Box',
+                            data: [5, 6, 6],
+                            backgroundColor: 'rgba(234, 179, 8, 0.7)',
+                            borderColor: 'rgba(234, 179, 8, 1)',
+                            borderWidth: 1
                         },
-                        grid: {
-                          display: false
+                        {
+                            label: 'White Box',
+                            data: [10, 3, 2],
+                            backgroundColor: 'rgba(34, 197, 94, 0.7)',
+                            borderColor: 'rgba(34, 197, 94, 1)',
+                            borderWidth: 1
                         }
-                    }
+                    ]
                 },
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                            color: '#475569',
-                            font: {
-                                size: 14
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 10,
+                            ticks: {
+                                color: '#475569'
+                            },
+                            grid: {
+                                color: '#e2e8f0'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#475569'
+                            },
+                            grid: {
+                                display: false
                             }
                         }
                     },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#475569',
+                                font: {
+                                    size: 14
                                 }
-                                if (context.parsed.x !== null) {
-                                    label += context.parsed.x + ' / 10';
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.x !== null) {
+                                        label += context.parsed.x + ' / 10';
+                                    }
+                                    return label;
                                 }
-                                return label;
                             }
                         }
                     }
                 }
-            }
-        });
+            });
 
-        // PTES Tabs Functionality
-        const tabs = document.querySelectorAll('#ptes-tabs button');
-        const contents = document.querySelectorAll('.ptes-content');
+            // PTES Tabs Functionality
+            const tabs = document.querySelectorAll('#ptes-tabs button');
+            const contents = document.querySelectorAll('.ptes-content');
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(item => item.classList.remove('active-tab', 'bg-sky-500', 'text-white'));
-                tab.classList.add('active-tab', 'bg-sky-500', 'text-white');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(item => item.classList.remove('active-tab', 'bg-sky-500', 'text-white'));
+                    tab.classList.add('active-tab', 'bg-sky-500', 'text-white');
 
-                const target = document.getElementById(tab.dataset.target);
-                contents.forEach(content => content.classList.add('content-hidden'));
-                if (target) {
-                    target.classList.remove('content-hidden');
+                    const target = document.getElementById(tab.dataset.target);
+                    contents.forEach(content => content.classList.add('content-hidden'));
+                    if (target) {
+                        target.classList.remove('content-hidden');
+                    }
+                });
+            });
+
+            // Quiz Functionality
+            const quizData = [
+                {
+                    question: "Which testing methodology provides the pentesters with no prior knowledge of the system?",
+                    options: ["White Box", "Grey Box", "Black Box", "Red Team"],
+                    answer: "Black Box"
+                },
+                {
+                    question: "What does OSINT stand for in the context of penetration testing?",
+                    options: ["Open-Source Intelligence", "Operating System Integration", "Official Security Intelligence Network", "On-Site Internet"],
+                    answer: "Open-Source Intelligence"
+                },
+                {
+                    question: "In which phase of the PTES is a detailed report of findings and recommendations provided?",
+                    options: ["Exploitation", "Post-Exploitation", "Reporting", "Threat Modeling"],
+                    answer: "Reporting"
+                },
+                {
+                    question: "Which of the following is an example of a social engineering attack mentioned in the case study?",
+                    options: ["SQL Injection", "Vishing", "Buffer Overflow", "Port Scanning"],
+                    answer: "Vishing"
+                },
+                {
+                    question: "What is the primary goal of the 'Exploitation' phase in a penetration test?",
+                    options: ["To gather information about the target", "To prove that a vulnerability can be used to gain access", "To clean up all traces of the test", "To write the final report"],
+                    answer: "To prove that a vulnerability can be used to gain access"
                 }
-            });
-        });
+            ];
 
-        // Quiz Functionality
-        const quizData = [
-            {
-                question: "Which testing methodology provides the pentesters with no prior knowledge of the system?",
-                options: ["White Box", "Grey Box", "Black Box", "Red Team"],
-                answer: "Black Box"
-            },
-            {
-                question: "What does OSINT stand for in the context of penetration testing?",
-                options: ["Open-Source Intelligence", "Operating System Integration", "Official Security Intelligence Network", "On-Site Internet"],
-                answer: "Open-Source Intelligence"
-            },
-            {
-                question: "In which phase of the PTES is a detailed report of findings and recommendations provided?",
-                options: ["Exploitation", "Post-Exploitation", "Reporting", "Threat Modeling"],
-                answer: "Reporting"
-            },
-            {
-                question: "Which of the following is an example of a social engineering attack mentioned in the case study?",
-                options: ["SQL Injection", "Vishing", "Buffer Overflow", "Port Scanning"],
-                answer: "Vishing"
-            },
-            {
-                question: "What is the primary goal of the 'Exploitation' phase in a penetration test?",
-                options: ["To gather information about the target", "To prove that a vulnerability can be used to gain access", "To clean up all traces of the test", "To write the final report"],
-                answer: "To prove that a vulnerability can be used to gain access"
-            }
-        ];
+            let currentQuestionIndex = 0;
+            let score = 0;
 
-        let currentQuestionIndex = 0;
-        let score = 0;
+            const questionEl = document.getElementById('question');
+            const optionsEl = document.getElementById('options');
+            const feedbackEl = document.getElementById('feedback');
+            const scoreContainer = document.getElementById('score-container');
+            const scoreText = document.getElementById('score-text');
+            const restartBtn = document.getElementById('restart-quiz-btn');
 
-        const questionEl = document.getElementById('question');
-        const optionsEl = document.getElementById('options');
-        const feedbackEl = document.getElementById('feedback');
-        const scoreContainer = document.getElementById('score-container');
-        const scoreText = document.getElementById('score-text');
-        const restartBtn = document.getElementById('restart-quiz-btn');
+            function loadQuestion() {
+                if (currentQuestionIndex >= quizData.length) {
+                    showResults();
+                    return;
+                }
 
-        function loadQuestion() {
-            if (currentQuestionIndex >= quizData.length) {
-                showResults();
-                return;
+                const currentQuestion = quizData[currentQuestionIndex];
+                questionEl.textContent = currentQuestion.question;
+                optionsEl.innerHTML = '';
+                feedbackEl.textContent = '';
+
+                currentQuestion.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = 'w-full p-3 bg-slate-100 rounded-lg hover:bg-sky-100 transition-colors text-left';
+                    button.onclick = () => selectAnswer(option, currentQuestion.answer, button);
+                    optionsEl.appendChild(button);
+                });
             }
 
-            const currentQuestion = quizData[currentQuestionIndex];
-            questionEl.textContent = currentQuestion.question;
-            optionsEl.innerHTML = '';
-            feedbackEl.textContent = '';
+            function selectAnswer(selected, correct, button) {
+                if (selected === correct) {
+                    score++;
+                    button.classList.remove('bg-slate-100', 'hover:bg-sky-100');
+                    button.classList.add('bg-green-500', 'text-white');
+                    feedbackEl.textContent = "Correct!";
+                    feedbackEl.className = 'mt-4 text-center font-semibold text-green-600';
+                } else {
+                    button.classList.remove('bg-slate-100', 'hover:bg-sky-100');
+                    button.classList.add('bg-red-500', 'text-white');
+                    feedbackEl.textContent = `Incorrect. The correct answer is ${correct}.`;
+                    feedbackEl.className = 'mt-4 text-center font-semibold text-red-600';
+                }
+                Array.from(optionsEl.children).forEach(btn => btn.disabled = true);
 
-            currentQuestion.options.forEach(option => {
-                const button = document.createElement('button');
-                button.textContent = option;
-                button.className = 'w-full p-3 bg-slate-100 rounded-lg hover:bg-sky-100 transition-colors text-left';
-                button.onclick = () => selectAnswer(option, currentQuestion.answer, button);
-                optionsEl.appendChild(button);
-            });
-        }
-
-        function selectAnswer(selected, correct, button) {
-            if (selected === correct) {
-                score++;
-                button.classList.remove('bg-slate-100', 'hover:bg-sky-100');
-                button.classList.add('bg-green-500', 'text-white');
-                feedbackEl.textContent = "Correct!";
-                feedbackEl.className = 'mt-4 text-center font-semibold text-green-600';
-            } else {
-                button.classList.remove('bg-slate-100', 'hover:bg-sky-100');
-                button.classList.add('bg-red-500', 'text-white');
-                feedbackEl.textContent = `Incorrect. The correct answer is ${correct}.`;
-                feedbackEl.className = 'mt-4 text-center font-semibold text-red-600';
+                setTimeout(() => {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }, 1500);
             }
-            Array.from(optionsEl.children).forEach(btn => btn.disabled = true);
 
-            setTimeout(() => {
-                currentQuestionIndex++;
+            function showResults() {
+                questionEl.style.display = 'none';
+                optionsEl.style.display = 'none';
+                feedbackEl.style.display = 'none';
+                scoreContainer.style.display = 'block';
+                scoreText.textContent = `You scored ${score} out of ${quizData.length}!`;
+            }
+
+            restartBtn.addEventListener('click', () => {
+                currentQuestionIndex = 0;
+                score = 0;
+                questionEl.style.display = 'block';
+                optionsEl.style.display = 'grid';
+                feedbackEl.style.display = 'block';
+                scoreContainer.style.display = 'none';
                 loadQuestion();
-            }, 1500);
-        }
+            });
 
-        function showResults() {
-            questionEl.style.display = 'none';
-            optionsEl.style.display = 'none';
-            feedbackEl.style.display = 'none';
-            scoreContainer.style.display = 'block';
-            scoreText.textContent = `You scored ${score} out of ${quizData.length}!`;
-        }
-
-        restartBtn.addEventListener('click', () => {
-            currentQuestionIndex = 0;
-            score = 0;
-            questionEl.style.display = 'block';
-            optionsEl.style.display = 'grid';
-            feedbackEl.style.display = 'block';
-            scoreContainer.style.display = 'none';
             loadQuestion();
         });
-
-        loadQuestion();
-    });
-</script>
+    </script>
 </body>
-</html>
 
+</html>
