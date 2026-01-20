@@ -1,294 +1,423 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IB Python Coding Playground - Repository Files</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>IB CS Mini Websites</title>
+    <meta name="description" content="Mini websites for revision and homeworks for my IB CS Students" />
+    <link rel="icon" href="/favicon.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Poppins font to match the provided style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #0d1117;
-            color: #c9d1d9;
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: #161b22;
-            border-radius: 6px;
-            border: 1px solid #30363d;
-            overflow: hidden;
-        }
-
-        header {
-            background-color: #21262d;
-            padding: 16px 24px;
-            border-bottom: 1px solid #30363d;
-        }
-
-        h1 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #58a6ff;
-        }
-
-        .breadcrumb {
-            padding: 16px 24px;
-            background-color: #0d1117;
-            border-bottom: 1px solid #30363d;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .breadcrumb-item {
-            color: #58a6ff;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .breadcrumb-item:hover {
-            text-decoration: underline;
-        }
-
-        .breadcrumb-separator {
-            color: #8b949e;
-        }
-
-        .file-list {
-            padding: 0;
-            min-height: 200px; /* Min height for loading state */
-        }
-
-        .file-item {
-            padding: 12px 24px;
-            border-bottom: 1px solid #21262d;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: background-color 0.2s;
-        }
-
-        .file-item:hover {
-            background-color: #1c2128;
-        }
-
-        .file-icon {
-            width: 16px;
-            height: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .file-icon svg {
-            fill: #8b949e;
-        }
-
-        .folder-icon svg {
-            fill: #58a6ff;
-        }
-
-        .file-name {
-            color: #58a6ff;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .folder-name {
-            color: #58a6ff;
-            font-weight: 600;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .back-button {
-            margin: 16px 24px;
-            padding: 8px 16px;
-            background-color: #21262d;
-            color: #58a6ff;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .back-button:hover {
-            background-color: #30363d;
-        }
-
-        footer {
-            padding: 16px 24px;
-            text-align: center;
-            color: #8b949e;
-            font-size: 12px;
-            border-top: 1px solid #30363d;
-        }
-        
-        /* New helper class for loading/error messages */
-        .message-item {
-            padding: 24px;
-            text-align: center;
-            color: #8b949e;
-            font-style: italic;
+            font-family: 'Poppins', sans-serif;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>📁 IB Python Coding Playground - Repository Files</h1>
-        </header>
 
-        <div class="breadcrumb">
-            <span class="breadcrumb-item" onclick="loadPath('')">Repository</span>
-            <span class="breadcrumb-separator hidden" id="separator">/</span>
-            <span class="breadcrumb-item hidden" id="folderBreadcrumb"></span>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Header / Nav -->
+    <header class="sticky top-0 z-50 bg-slate-50/80 backdrop-blur-lg border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+            <h1 class="text-xl md:text-2xl font-bold">
+                <a href="./" class="inline-flex items-center gap-2 text-slate-900 hover:text-sky-700" aria-label="Home">
+                    <span aria-hidden="true">🏠</span>
+                    <span>IB CS Mini Websites</span>
+                </a>
+            </h1>
+
+            <!-- Right-side nav -->
+            <nav class="hidden md:block">
+                <ul class="flex items-center gap-6">
+                    <li><a href="index.html#projects"
+                            class="text-slate-600 hover:text-sky-600 font-semibold">Projects</a></li>
+                    <li><a href="python_playground.html"
+                            class="text-sky-600 hover:text-sky-800 font-bold border-b-2 border-sky-600">Python
+                            Playground</a></li>
+                    <li>
+                        <a href="https://github.com/MrZisidis/ib-cs-mini-websites"
+                            class="inline-flex items-center text-slate-600 hover:text-sky-600 font-semibold"
+                            aria-label="View repository on GitHub" rel="noopener noreferrer" target="_blank">
+                            <svg class="w-4 h-4 mr-2 fill-current" viewBox="0 0 16 16" aria-hidden="true"
+                                focusable="false">
+                                <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                  0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+                  -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64
+                  -.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82.64-.18
+                  1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82
+                  1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55
+                  .38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                            </svg>
+                            <span>Repository</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CodeMirror & Pyodide CSS/JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 h-full flex-grow flex flex-col">
+
+        <div class="text-center mb-8">
+            <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Python Playground 🐍</h2>
+            <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+                Write and run Python code directly in your browser! Select a starter file from the repository below or
+                write
+                your own from scratch.
+            </p>
         </div>
 
-        <button class="back-button hidden" id="backButton" onclick="loadPath('')">
-            <span>←</span>
-            <span>Back to root</span>
-        </button>
+        <!-- Playground Grid -->
+        <div class="grid lg:grid-cols-12 gap-6 items-start">
 
-        <div class="file-list" id="fileContainer">
+            <!-- Sidebar: Repo Browser -->
+            <div
+                class="lg:col-span-3 bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden flex flex-col h-[600px]">
+                <div class="bg-slate-100 p-4 border-b border-slate-200">
+                    <h3 class="font-bold text-slate-700 flex items-center gap-2">
+                        <span>📂</span> Repository Files
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-1 truncate" title="MrZisidis/IB-python-coding-playground">
+                        Source: IB-python-coding-playground
+                    </p>
+                </div>
+
+                <div id="file-list" class="flex-grow overflow-y-auto p-2 space-y-1">
+                    <div class="flex items-center justify-center h-full text-slate-400 text-sm animate-pulse">
+                        Loading files...
+                    </div>
+                </div>
+
+                <div class="p-3 border-t border-slate-200 bg-slate-50 text-center">
+                    <button id="refresh-repo-btn"
+                        class="text-xs text-sky-600 hover:text-sky-800 font-semibold flex items-center justify-center gap-1 w-full">
+                        <span>🔄</span> Refresh List
+                    </button>
+                </div>
             </div>
 
-        <footer>
-            <p>IB Python Coding Playground © 2026 | GitHub Repository Browser</p>
-        </footer>
-    </div>
+            <!-- Main Editor Area -->
+            <div class="lg:col-span-9 flex flex-col gap-4 h-full">
+
+                <!-- Editor Toolbar -->
+                <div
+                    class="flex flex-wrap items-center justify-between bg-slate-800 text-slate-300 px-4 py-2 rounded-t-lg gap-2">
+                    <div class="text-sm font-mono flex items-center gap-2">
+                        <span id="current-filename" class="font-bold text-white">main.py</span>
+                        <span class="text-xs text-slate-500 hidden sm:inline">(Python 3.10 via Pyodide)</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button id="new-file-btn"
+                            class="hover:text-white transition-colors text-xs uppercase font-bold tracking-wider px-3 py-1 rounded bg-sky-600 hover:bg-sky-700 text-white shadow-sm flex items-center gap-1">
+                            <span>📄</span> New
+                        </button>
+                        <button id="export-btn"
+                            class="hover:text-white transition-colors text-xs uppercase font-bold tracking-wider px-2 py-1 rounded hover:bg-slate-700 border border-slate-600"
+                            title="Download .py file">
+                            💾
+                        </button>
+                        <button id="copy-btn"
+                            class="hover:text-white transition-colors text-xs uppercase font-bold tracking-wider px-2 py-1 rounded hover:bg-slate-700 border border-slate-600">
+                            Copy Code
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CodeMirror Editor Container (Resizable) -->
+                <div class="border-x border-slate-200 resize-y overflow-hidden"
+                    style="height: 450px; min-height: 200px;">
+                    <textarea id="code-editor"># Welcome to the Python Playground!
+# Select a file from the left to load it, or type here.
+
+print("Hello, World!")
+for i in range(3):
+    print(f"Counting: {i}")
+
+# Click 'Run Code' below to execute!
+</textarea>
+                </div>
+
+                <!-- Run Toolbar -->
+                <div
+                    class="bg-slate-100 p-2 border border-slate-200 shadow-sm flex items-center justify-between rounded-b-lg mb-2">
+                    <span class="text-xs text-slate-500 pl-2">Press Run to execute script ⬇️</span>
+                    <button id="run-btn"
+                        class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-6 rounded flex items-center gap-2 shadow-sm transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span>▶️</span> Run Code
+                    </button>
+                </div>
+
+                <!-- Output Console -->
+                <div class="flex flex-col gap-0 rounded-lg overflow-hidden shadow-md border border-slate-200 mt-2">
+                    <div class="bg-slate-800 px-4 py-2 flex justify-between items-center border-b border-slate-700">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Output Terminal</span>
+                        <button id="clear-btn"
+                            class="text-slate-400 hover:text-white transition-colors text-xs uppercase font-bold tracking-wider px-2 py-1 rounded hover:bg-slate-700">
+                            Clear Output
+                        </button>
+                    </div>
+                    <div class="bg-slate-900 p-4 font-mono text-sm h-[200px] overflow-y-auto w-full custom-scrollbar">
+                        <pre id="output-console" class="text-emerald-400 whitespace-pre-wrap">Ready to run.</pre>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <style>
+        /* Custom Scrollbar for dark console */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 5px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
 
     <script>
-        // --- CONFIGURATION ---
-        const USER = 'MrZisidis';
-        const REPO = 'IB-python-coding-playground';
-        
-        // --- ICONS (SVG Strings from your original code) ---
-        const FILE_ICON_SVG = `
-            <div class="file-icon">
-                <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 1.75C4 .784 4.784 0 5.75 0h5.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0113.25 16h-9.5A1.75 1.75 0 012 14.25V1.75zm1.75-.25a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 00.25-.25V4.664a.25.25 0 00-.073-.177l-2.914-2.914a.25.25 0 00-.177-.073H5.75z"/>
-                </svg>
-            </div>`;
+        // --- Configuration ---
+        const GITHUB_REPO = "MrZisidis/IB-python-coding-playground";
+        const API_URL = `https://api.github.com/repos/${GITHUB_REPO}/contents/`;
 
-        const FOLDER_ICON_SVG = `
-            <div class="file-icon folder-icon">
-                <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.75 1A1.75 1.75 0 000 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0016 13.25v-8.5A1.75 1.75 0 0014.25 3H7.5a.25.25 0 01-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75z"/>
-                </svg>
-            </div>`;
-
-        // Initialize: Load the root path
-        document.addEventListener('DOMContentLoaded', () => {
-            loadPath('');
+        // --- Editor Setup (CodeMirror) ---
+        const editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+            mode: "python",
+            theme: "dracula",
+            lineNumbers: true,
+            indentUnit: 4,
+            matchBrackets: true
         });
+        // Ensure CodeMirror fills the resizable container
+        editor.setSize("100%", "100%");
 
-        // --- MAIN FUNCTION: Fetch and Render ---
-        async function loadPath(path) {
-            const container = document.getElementById('fileContainer');
-            
-            // 1. Show Loading State
-            container.innerHTML = '<div class="message-item">Loading contents...</div>';
-            updateUIForPath(path);
+        // --- Pyodide Setup ---
+        let pyodide = null;
+        const outputConsole = document.getElementById("output-console");
+        const runBtn = document.getElementById("run-btn");
+
+        async function loadPyodideEngine() {
+            runBtn.disabled = true;
+            runBtn.innerHTML = '<span>⏳</span> Loading Python...';
+            try {
+                pyodide = await loadPyodide();
+                // Redirect stdout/stderr
+                pyodide.setStdout({ batched: (msg) => addToConsole(msg) });
+                pyodide.setStderr({ batched: (msg) => addToConsole(msg, true) });
+
+                runBtn.disabled = false;
+                runBtn.innerHTML = '<span>▶️</span> Run Code';
+                addToConsole("Pyodide loaded. Python is ready!", false, true);
+            } catch (err) {
+                addToConsole(`Failed to load Pyodide: ${err}`, true);
+            }
+        }
+
+        // --- Console Utilities ---
+        function addToConsole(msg, isError = false, isSystem = false) {
+            if (outputConsole.textContent.trim() === "Ready to run.") {
+                outputConsole.textContent = "";
+            }
+
+            const span = document.createElement("div");
+            span.textContent = msg;
+            if (isError) span.className = "text-red-400 font-bold border-l-2 border-red-500 pl-2";
+            else if (isSystem) span.className = "text-slate-500 italic";
+            else span.className = "text-emerald-400";
+
+            outputConsole.appendChild(span);
+            outputConsole.scrollTop = outputConsole.scrollHeight;
+        }
+
+        // --- Run Logic ---
+        runBtn.addEventListener("click", async () => {
+            if (!pyodide) return;
+
+            const code = editor.getValue();
+            // Force a small delay to allow UI to update if needed, though not strictly async
+            outputConsole.innerHTML = "";
+            addToConsole("--- Running ---", false, true);
 
             try {
-                // 2. Fetch data from GitHub API
-                const url = `https://api.github.com/repos/${USER}/${REPO}/contents/${path}`;
-                const response = await fetch(url);
-                
+                await pyodide.loadPackagesFromImports(code);
+                await pyodide.runPythonAsync(code);
+            } catch (err) {
+                addToConsole(err, true);
+            }
+        });
+
+        // --- Button Actions ---
+        document.getElementById("clear-btn").addEventListener("click", () => {
+            outputConsole.textContent = "Ready to run.";
+        });
+
+        document.getElementById("export-btn").addEventListener("click", () => {
+            const code = editor.getValue();
+            const filename = document.getElementById("current-filename").textContent.trim() || "untitled.py";
+
+            const blob = new Blob([code], { type: "text/x-python" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        document.getElementById("copy-btn").addEventListener("click", () => {
+            navigator.clipboard.writeText(editor.getValue()).then(() => {
+                const btn = document.getElementById("copy-btn");
+                const originalText = btn.innerHTML;
+                btn.textContent = "Copied!";
+                setTimeout(() => btn.innerHTML = originalText, 2000);
+            });
+        });
+
+        document.getElementById("new-file-btn").addEventListener("click", () => {
+            const fileName = prompt("Enter a name for your new file (e.g., my_script.py):", "untitled.py");
+            if (fileName) {
+                editor.setValue("# New file: " + fileName + "\n\nprint('Hello from " + fileName + "!')");
+                document.getElementById("current-filename").textContent = fileName;
+                // Optionally clear output
+                outputConsole.textContent = "Ready to run.";
+            }
+        });
+
+        // --- GitHub Repo Browser ---
+        const fileListEl = document.getElementById("file-list");
+
+        async function fetchRepoFiles() {
+            fileListEl.innerHTML = '<div class="text-center text-slate-400 text-sm mt-4">Fetching file list...</div>';
+
+            const fallbackFiles = [
+                { name: "01_hello.py", download_url: null, content: "print('Hello, Python World!')\nname = 'Alice'\nprint(f'Welcome, {name}')" },
+                { name: "02_math.py", download_url: null, content: "x = 10\ny = 5\nprint(f'{x} + {y} = {x+y}')\nprint(f'{x} * {y} = {x*y}')" },
+                { name: "03_loops.py", download_url: null, content: "print('Countdown!')\nfor i in range(5, 0, -1):\n    print(i)\nprint('Blastoff! 🚀')" }
+            ];
+
+            try {
+                const response = await fetch(API_URL);
+
                 if (!response.ok) {
-                    throw new Error(`GitHub API Error: ${response.status}`);
+                    console.warn("GitHub API failed or repo not found. Using fallback files.");
+                    renderFiles(fallbackFiles);
+                    return;
                 }
-                
+
                 const data = await response.json();
+                const pyFiles = data.filter(item => item.name.endsWith(".py") && item.type === "file");
 
-                // 3. Render Data
-                renderFiles(data);
-
-            } catch (error) {
-                console.error(error);
-                container.innerHTML = `<div class="message-item" style="color: #ff7b72;">
-                    Error loading files. Please check your connection or try again later.<br>
-                    <small>(${error.message})</small>
-                </div>`;
-            }
-        }
-
-        // --- RENDER LOGIC ---
-        function renderFiles(items) {
-            const container = document.getElementById('fileContainer');
-            container.innerHTML = '';
-
-            // Sort items: Folders first, then Files alphabetically
-            items.sort((a, b) => {
-                if (a.type === b.type) {
-                    return a.name.localeCompare(b.name);
-                }
-                return a.type === 'dir' ? -1 : 1;
-            });
-
-            // Generate HTML for each item
-            items.forEach(item => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'file-item';
-
-                if (item.type === 'dir') {
-                    // It's a Folder
-                    itemDiv.innerHTML = `${FOLDER_ICON_SVG} <span class="file-name folder-name">${item.name}</span>`;
-                    // On click: load the internal path of this folder
-                    itemDiv.onclick = () => loadPath(item.path);
-                } else {
-                    // It's a File
-                    itemDiv.innerHTML = `${FILE_ICON_SVG} <span class="file-name">${item.name}</span>`;
-                    // On click: open the file in GitHub
-                    itemDiv.onclick = () => window.open(item.html_url, '_blank');
+                if (pyFiles.length === 0) {
+                    renderFiles(fallbackFiles);
+                    return;
                 }
 
-                container.appendChild(itemDiv);
+                renderFiles(pyFiles);
+
+            } catch (err) {
+                console.warn("Network error or Fetch failed. Using fallback files.", err);
+                renderFiles(fallbackFiles);
+            }
+        }
+
+        function renderFiles(files) {
+            fileListEl.innerHTML = "";
+            files.forEach(file => {
+                const item = document.createElement("div");
+                item.className = "group flex items-center justify-between p-2 rounded cursor-pointer hover:bg-sky-50 border border-transparent hover:border-sky-100 transition-colors";
+                item.innerHTML = `
+                <div class="flex items-center gap-2 overflow-hidden">
+                    <span class="text-lg opacity-70 group-hover:opacity-100">🐍</span>
+                    <span class="text-sm font-medium text-slate-700 group-hover:text-sky-700 truncate">${file.name}</span>
+                </div>
+            `;
+                item.onclick = () => loadFileContent(file);
+                fileListEl.appendChild(item);
             });
-            
-            if (items.length === 0) {
-                container.innerHTML = '<div class="message-item">This folder is empty.</div>';
+        }
+
+        async function loadFileContent(fileObj) {
+            try {
+                document.getElementById("current-filename").textContent = "Loading...";
+
+                let text = "";
+                if (fileObj.content) {
+                    text = fileObj.content;
+                } else if (fileObj.download_url) {
+                    const res = await fetch(fileObj.download_url);
+                    if (!res.ok) throw new Error("Failed to fetch file content");
+                    text = await res.text();
+                }
+
+                editor.setValue(text);
+                document.getElementById("current-filename").textContent = fileObj.name;
+            } catch (err) {
+                addToConsole(`Error loading file: ${err.message}`, true);
             }
         }
 
-        // --- UI HELPERS ---
-        function updateUIForPath(path) {
-            const backButton = document.getElementById('backButton');
-            const separator = document.getElementById('separator');
-            const folderBreadcrumb = document.getElementById('folderBreadcrumb');
+        document.getElementById("refresh-repo-btn").addEventListener("click", fetchRepoFiles);
 
-            if (path === '') {
-                // Root View
-                backButton.classList.add('hidden');
-                separator.classList.add('hidden');
-                folderBreadcrumb.classList.add('hidden');
-                folderBreadcrumb.textContent = '';
-            } else {
-                // Subfolder View
-                backButton.classList.remove('hidden');
-                separator.classList.remove('hidden');
-                folderBreadcrumb.classList.remove('hidden');
-                // Display just the current folder name (or full path if you prefer)
-                folderBreadcrumb.textContent = path;
-            }
-        }
+        // --- Initialization ---
+        // Start Pyodide loading immediately
+        loadPyodideEngine();
+        // Fetch files
+        fetchRepoFiles();
+
+    </script>
+
+    <!-- Footer -->
+    <footer class="mt-12 py-8 border-t border-slate-200">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-slate-600 flex flex-col items-center gap-3">
+            <div>
+                © <span id="year"></span> IB CS Mini Websites — Built with ❤️
+            </div>
+            <div class="text-xs text-slate-500 flex flex-col md:flex-row items-center gap-2">
+                <span>Copyright (c) 2025 Stefanos Zisidis. Licensed under <a
+                        href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+                        class="underline hover:text-sky-600">CC BY 4.0</a>.</span>
+                <a href="https://github.com/MrZisidis/ib-cs-mini-websites" target="_blank"
+                    class="inline-block text-slate-400 hover:text-slate-800 transition-colors" aria-label="GitHub">
+                    <svg viewBox="0 0 16 16" class="w-4 h-4 fill-current">
+                        <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52 -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64 -.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55 .38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // small script to set the year
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
+
 </html>
