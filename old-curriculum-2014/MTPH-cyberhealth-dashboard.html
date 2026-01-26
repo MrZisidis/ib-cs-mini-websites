@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CyberHealth Security | MTPH Engagement Dashboard</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -32,25 +33,30 @@
          - Phase 7: Toggle Button for Executive vs Tech Report -> Demonstrates audience adaptation.
          - Justification: Canvas charts used for rigorous data display; HTML/Tailwind for layout. NO SVG/Mermaid.
     -->
-    
+
     <!-- Chosen Palette: Slate (Neutral), Teal (Accent/Medical), Red (Alerts) -->
-    
+
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
         /* Custom Chart Container Styling as per requirements */
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px; /* Constraint width for readability */
+            max-width: 600px;
+            /* Constraint width for readability */
             margin-left: auto;
             margin-right: auto;
-            height: 300px; /* Base height */
-            max-height: 400px; /* Prevent vertical overflow */
+            height: 300px;
+            /* Base height */
+            max-height: 400px;
+            /* Prevent vertical overflow */
         }
-        
+
         @media (min-width: 768px) {
             .chart-container {
                 height: 350px;
@@ -61,26 +67,38 @@
         .custom-scroll::-webkit-scrollbar {
             width: 6px;
         }
+
         .custom-scroll::-webkit-scrollbar-track {
-            background: #f1f5f9; 
+            background: #f1f5f9;
         }
+
         .custom-scroll::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
+            background: #cbd5e1;
             border-radius: 3px;
         }
+
         .custom-scroll::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
+            background: #94a3b8;
         }
 
         .fade-in {
             animation: fadeIn 0.3s ease-in-out;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
+
 <body class="bg-slate-50 text-slate-800 h-screen flex flex-col md:flex-row overflow-hidden">
 
     <!-- Mobile Header -->
@@ -90,46 +108,67 @@
     </div>
 
     <!-- Sidebar Navigation -->
-    <aside id="sidebar" class="bg-slate-900 text-slate-300 w-full md:w-64 flex-shrink-0 hidden md:flex flex-col transition-all duration-300 h-full absolute md:relative z-10">
+    <aside id="sidebar"
+        class="bg-slate-900 text-slate-300 w-full md:w-64 flex-shrink-0 hidden md:flex flex-col transition-all duration-300 h-full absolute md:relative z-10">
         <div class="p-6 border-b border-slate-700">
-            <h1 class="text-2xl font-bold text-white tracking-tight">CyberHealth<span class="text-teal-400">.Sec</span></h1>
+            <h1 class="text-2xl font-bold text-white tracking-tight">CyberHealth<span class="text-teal-400">.Sec</span>
+            </h1>
             <p class="text-xs text-slate-400 mt-1">MTPH Engagement Portal</p>
         </div>
 
         <nav class="flex-1 overflow-y-auto custom-scroll p-4 space-y-1">
             <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 mt-2">Project Brief</div>
-            <button onclick="router('overview')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3 bg-slate-800 text-white" data-target="overview">
+            <button onclick="router('overview')"
+                class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3 bg-slate-800 text-white"
+                data-target="overview">
                 <span>📊</span> Mission Overview
             </button>
-            <button onclick="router('challenges')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="challenges">
+            <button onclick="router('challenges')"
+                class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3"
+                data-target="challenges">
                 <span>⚠️</span> Challenges & Ethics
             </button>
 
             <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2 mt-6">PTES Lifecycle</div>
-            
-            <button onclick="router('phase1')" class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="phase1">
+
+            <button onclick="router('phase1')"
+                class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3"
+                data-target="phase1">
                 <span class="bg-slate-700 text-xs py-0.5 px-1.5 rounded">P1</span> Pre-engagement
             </button>
-            <button onclick="router('phase2')" class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="phase2">
+            <button onclick="router('phase2')"
+                class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3"
+                data-target="phase2">
                 <span class="bg-slate-700 text-xs py-0.5 px-1.5 rounded">P2</span> Intel Gathering
             </button>
-            <button onclick="router('phase3')" class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="phase3">
+            <button onclick="router('phase3')"
+                class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3"
+                data-target="phase3">
                 <span class="bg-slate-700 text-xs py-0.5 px-1.5 rounded">P3</span> Threat Modeling
             </button>
-            <button onclick="router('phase4')" class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="phase4">
+            <button onclick="router('phase4')"
+                class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3"
+                data-target="phase4">
                 <span class="bg-slate-700 text-xs py-0.5 px-1.5 rounded">P4</span> Vuln Analysis
             </button>
-            <button onclick="router('phase56')" class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="phase56">
+            <button onclick="router('phase56')"
+                class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3"
+                data-target="phase56">
                 <span class="bg-slate-700 text-xs py-0.5 px-1.5 rounded">P5/6</span> Exploitation
             </button>
-            <button onclick="router('phase7')" class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3" data-target="phase7">
+            <button onclick="router('phase7')"
+                class="nav-item w-full text-left px-4 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3"
+                data-target="phase7">
                 <span class="bg-slate-700 text-xs py-0.5 px-1.5 rounded">P7</span> Reporting
             </button>
         </nav>
 
         <div class="p-4 border-t border-slate-700 text-xs text-center text-slate-500">
             IB CS Case Study 2026<br>
-            MedTechPro Hospital
+            MedTechPro Hospital<br>
+            <span class="block mt-2 opacity-50">&copy; 2026 Stefanos Zisidis</span>
+            <a href="https://mrzisidis.github.io/"
+                class="block opacity-50 hover:opacity-100 hover:text-teal-400 mt-1 transition-opacity">Main Site</a>
         </div>
     </aside>
 
@@ -170,11 +209,11 @@
         // --- CORE NAVIGATION ---
         function router(viewName) {
             appData.currentView = viewName;
-            
+
             // Update Sidebar UI
             document.querySelectorAll('.nav-item').forEach(el => {
                 el.classList.remove('bg-slate-800', 'text-white');
-                if(el.dataset.target === viewName) {
+                if (el.dataset.target === viewName) {
                     el.classList.add('bg-slate-800', 'text-white');
                 }
             });
@@ -199,7 +238,7 @@
             void container.offsetWidth; // Trigger reflow
             container.classList.add('fade-in');
 
-            switch(appData.currentView) {
+            switch (appData.currentView) {
                 case 'overview': renderOverview(container); break;
                 case 'challenges': renderChallenges(container); break;
                 case 'phase1': renderPhase1(container); break;
@@ -411,10 +450,10 @@
                 const div = document.createElement('div');
                 div.className = "border border-slate-200 rounded p-3 flex items-center justify-between hover:bg-slate-50 cursor-pointer transition-colors";
                 div.innerHTML = `<span class="font-medium">${item.name}</span> <button class="text-xs bg-slate-200 px-2 py-1 rounded text-slate-700">Add to Scope</button>`;
-                div.onclick = function() {
+                div.onclick = function () {
                     const feedback = document.getElementById('scope-feedback');
                     feedback.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
-                    if(item.safe) {
+                    if (item.safe) {
                         feedback.classList.add('bg-green-100', 'text-green-700');
                         feedback.innerHTML = `✅ CORRECT: ${item.reason}`;
                         this.classList.add('border-green-500', 'bg-green-50');
@@ -453,10 +492,10 @@
         }
 
         // Mock OSINT logic
-        window.runOsint = function() {
+        window.runOsint = function () {
             const output = document.getElementById('osint-output');
             output.innerHTML = '';
-            
+
             const findings = [
                 { type: "info", text: "[*] Initiating scan against mtph.org..." },
                 { type: "success", text: "[+] Domain found: medtechpro-hospital.com" },
@@ -474,9 +513,9 @@
                 setTimeout(() => {
                     const p = document.createElement('div');
                     p.innerText = line.text;
-                    if(line.type === 'warning') p.className = "text-yellow-400";
-                    if(line.type === 'danger') p.className = "text-red-500 font-bold";
-                    if(line.type === 'success') p.className = "text-green-400";
+                    if (line.type === 'warning') p.className = "text-yellow-400";
+                    if (line.type === 'danger') p.className = "text-red-500 font-bold";
+                    if (line.type === 'success') p.className = "text-green-400";
                     output.appendChild(p);
                     output.scrollTop = output.scrollHeight;
                 }, delay);
@@ -584,9 +623,9 @@
                                         <td class="p-4 text-slate-600">${v.issue}</td>
                                         <td class="p-4">
                                             <span class="px-2 py-1 rounded text-xs font-bold 
-                                                ${v.score >= 9 ? 'bg-red-100 text-red-700' : 
-                                                  v.score >= 7 ? 'bg-orange-100 text-orange-700' : 
-                                                  'bg-yellow-100 text-yellow-700'}">
+                                                ${v.score >= 9 ? 'bg-red-100 text-red-700' :
+                    v.score >= 7 ? 'bg-orange-100 text-orange-700' :
+                        'bg-yellow-100 text-yellow-700'}">
                                                 ${v.score}
                                             </span>
                                         </td>
@@ -721,7 +760,7 @@
             toggleReport('exec');
         }
 
-        window.toggleReport = function(type) {
+        window.toggleReport = function (type) {
             const content = document.getElementById('report-content');
             const btnExec = document.getElementById('btn-exec');
             const btnTech = document.getElementById('btn-tech');
@@ -769,4 +808,5 @@
 
     </script>
 </body>
+
 </html>
