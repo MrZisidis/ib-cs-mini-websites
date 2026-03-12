@@ -88,7 +88,8 @@
       
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Card: Python Playground -->
-        <article class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col hover:shadow-lg transition-shadow">
+        <article data-href="new-curriculum-2027/python_playground.html" 
+          class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-emerald-300">
           <h4 class="text-xl font-bold text-slate-900 flex items-center">
             Python Playground 🐍
             <span class="ml-2 inline-block text-xs font-bold px-2 py-1 rounded-full bg-emerald-500 text-white"
@@ -123,7 +124,8 @@
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Card 1: Case Study 2026 Guide -->
-        <article class="relative bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col hover:shadow-lg transition-shadow">
+        <article data-href="old-curriculum-2014/IB_CS_CaseStudy_2026_StudyGuide.html"
+          class="relative bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-fuchsia-300">
           <h4 class="text-xl font-bold text-slate-900 flex items-center">IB CS Case Study 2026 Guide</h4>
           <p class="mt-2 text-slate-600">
             Structured study guide for the 2026 IB Computer Science case study: concepts, terminology, applied analysis &
@@ -143,7 +145,8 @@
         </article>
 
         <!-- Card 2: Consolidated Trees Lessons 1 & 2 -->
-        <article class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col hover:shadow-lg transition-shadow">
+        <article data-href="old-curriculum-2014/ib-cs-trees_1.html"
+          class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-teal-300">
           <h4 class="text-xl font-bold text-slate-900">IB CS HL: Trees — Lessons 1 & 2</h4>
           <p class="mt-2 text-slate-600">
             Build foundational and advanced understanding of tree and BST concepts, then apply them through activities and
@@ -163,7 +166,8 @@
         </article>
 
         <!-- Card 3: MedTechPro Hospital & CyberHealth Dashboard -->
-        <article class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col hover:shadow-lg transition-shadow">
+        <article data-href="old-curriculum-2014/medtechpro.html"
+          class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-blue-300">
           <h4 class="text-xl font-bold text-slate-900">MedTechPro Hospital &mdash; Case Study</h4>
           <p class="mt-2 text-slate-600">
             Explore a realistic hospital website and security engagement dashboard for hands-on cybersecurity and OSINT
@@ -204,6 +208,21 @@
     <p>&copy; 2026 IB CS Mini Websites — Built with ❤️</p>
     <p class="text-sm mt-1">Copyright (c) 2026 Stefanos Zisidis. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" class="hover:underline text-slate-600">CC BY 4.0</a>.</p>
   </footer>
+
+  <script>
+    // Handle card clicks
+    document.querySelectorAll('article[data-href]').forEach(card => {
+      card.addEventListener('click', (e) => {
+        // Don't trigger if clicking an anchor or button
+        if (e.target.closest('a') || e.target.closest('button')) return;
+        
+        const url = card.getAttribute('data-href');
+        if (url) {
+          window.location.href = url;
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
