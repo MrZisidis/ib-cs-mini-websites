@@ -631,14 +631,14 @@
     // ════════════════════════════════════════════════════════
     function populateSessionSelect(selectId, data) {
       const select = document.getElementById(selectId);
-      data.forEach(row => {
-        if (row.g !== null && !row.predicted) {
-          const opt = document.createElement('option');
-          opt.value = row.label;
-          opt.textContent = row.label;
-          if (row.label === 'May 2024') opt.selected = true;
-          select.appendChild(opt);
-        }
+      const eligible = data.filter(r => r.g !== null && !r.predicted);
+      const mostRecent = eligible[eligible.length - 1];
+      eligible.forEach(row => {
+        const opt = document.createElement('option');
+        opt.value = row.label;
+        opt.textContent = row.label;
+        if (row.label === mostRecent.label) opt.selected = true;
+        select.appendChild(opt);
       });
     }
 
