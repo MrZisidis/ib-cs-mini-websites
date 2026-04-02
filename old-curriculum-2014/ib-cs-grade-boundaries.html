@@ -51,6 +51,13 @@
 
     /* Highlight selected row */
     tr.highlighted-row td { background-color: #fef08a !important; }
+
+    /* Predicted row */
+    tr.predicted-row td {
+      background-color: #eff6ff !important;
+      font-style: italic;
+      border-top: 2px dashed #93c5fd;
+    }
   </style>
 </head>
 
@@ -86,8 +93,8 @@
       Historical grade boundaries for IB Computer Science (Old Curriculum, 2014–2026). Explore the data, visualise trends, and check what grade your score corresponds to.
     </p>
     <div class="mt-4 flex flex-wrap justify-center gap-3 text-xs text-slate-500">
-      <span class="bg-slate-100 px-3 py-1 rounded-full">Data: May 2014 – May 2021</span>
-      <span class="bg-slate-100 px-3 py-1 rounded-full">Sources: bprzybylski/IB-CS-GeS &amp; IB Statistical Bulletins</span>
+      <span class="bg-slate-100 px-3 py-1 rounded-full">Data: May 2014 – May 2025</span>
+      <span class="bg-slate-100 px-3 py-1 rounded-full">Sources: bprzybylski/IB-CS-GeS, RevisionDojo &amp; IB Statistical Bulletins</span>
       <span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full">Old Curriculum — Last assessment May 2026</span>
     </div>
   </header>
@@ -133,6 +140,8 @@
             <li>May 2021 had <strong>two routes</strong>: Examination and Non-examination. Look at the correct row for your cohort.</li>
             <li>Before May 2016 the IA was worth up to 40 marks (not 34) because the Group 4 Project was included.</li>
             <li>In May 2021, Paper 2 was removed (exam route); SL Paper 1 weight → 70, HL Paper 1 weight → 60.</li>
+            <li>From May 2022 the full exam format resumed (Paper 2 reinstated, standard weightings).</li>
+            <li>May 2026 is the <strong>final session</strong> of the old curriculum. The row marked "Predicted" is an estimate based on the 2022–2025 trend.</li>
           </ul>
         </div>
       </div>
@@ -172,7 +181,7 @@
           <tbody id="sl-tbody" class="divide-y divide-slate-100">
           </tbody>
         </table>
-        <p class="mt-3 text-xs text-slate-500">Minimum score (out of 100) required for each grade. A dash (–) means the session was not held.</p>
+        <p class="mt-3 text-xs text-slate-500">Minimum score (out of 100) required for each grade. A dash (–) means the session was not held. <em class="text-blue-600">Rows in blue italics are predictions based on the 2022–2025 trend.</em></p>
       </div>
 
       <!-- HL Table -->
@@ -193,7 +202,7 @@
           <tbody id="hl-tbody" class="divide-y divide-slate-100">
           </tbody>
         </table>
-        <p class="mt-3 text-xs text-slate-500">Minimum score (out of 100) required for each grade. A dash (–) means the session was not held.</p>
+        <p class="mt-3 text-xs text-slate-500">Minimum score (out of 100) required for each grade. A dash (–) means the session was not held. <em class="text-blue-600">Rows in blue italics are predictions based on the 2022–2025 trend.</em></p>
       </div>
     </section>
 
@@ -399,6 +408,11 @@
       { label: 'May 2020',                          g: null },
       { label: 'May 2021 (Examination)',            g: [0,  6, 11, 27, 37, 49, 62] },
       { label: 'May 2021 (Non-examination)',        g: [0, 15, 32, 44, 54, 62, 72] },
+      { label: 'May 2022',                          g: [0, 14, 30, 42, 52, 62, 72] },
+      { label: 'May 2023',                          g: [0, 14, 30, 43, 53, 63, 73] },
+      { label: 'May 2024',                          g: [0, 14, 29, 41, 52, 62, 72] },
+      { label: 'May 2025',                          g: [0, 14, 30, 42, 52, 63, 73] },
+      { label: 'May 2026 ✦ Predicted',             g: [0, 14, 30, 42, 52, 62, 72], predicted: true },
     ];
 
     const HL_DATA = [
@@ -411,6 +425,11 @@
       { label: 'May 2020',                          g: null },
       { label: 'May 2021 (Examination)',            g: [0, 11, 16, 22, 35, 49, 63] },
       { label: 'May 2021 (Non-examination)',        g: [0, 14, 29, 39, 49, 60, 69] },
+      { label: 'May 2022',                          g: [0, 14, 28, 38, 49, 59, 70] },
+      { label: 'May 2023',                          g: [0, 15, 29, 40, 50, 61, 71] },
+      { label: 'May 2024',                          g: [0, 14, 29, 40, 50, 61, 70] },
+      { label: 'May 2025',                          g: [0, 14, 29, 40, 51, 61, 71] },
+      { label: 'May 2026 ✦ Predicted',             g: [0, 14, 29, 40, 50, 61, 71], predicted: true },
     ];
 
     const GRADE_CLASSES = ['grade-1','grade-2','grade-3','grade-4','grade-5','grade-6','grade-7'];
@@ -424,7 +443,9 @@
       tbody.innerHTML = '';
       data.forEach(row => {
         const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-50 transition-colors';
+        tr.className = row.predicted
+          ? 'predicted-row transition-colors'
+          : 'hover:bg-slate-50 transition-colors';
         const tdLabel = document.createElement('td');
         tdLabel.className = 'px-4 py-3 font-medium text-slate-700 whitespace-nowrap';
         tdLabel.textContent = row.label;
@@ -489,33 +510,50 @@
 
     function getChartData(level, allGrades) {
       const data = level === 'sl' ? SL_DATA : HL_DATA;
-      const labels = data.filter(r => r.g !== null).map(r => r.label);
+      const confirmed = data.filter(r => r.g !== null && !r.predicted);
+      const predicted = data.filter(r => r.g !== null && r.predicted);
+      const labels = [...confirmed, ...predicted].map(r => r.label);
 
       if (!allGrades) {
-        // Grade 7 only
-        const values = data.filter(r => r.g !== null).map(r => r.g[6]);
-        return {
-          labels,
-          datasets: [{
-            label: 'Grade 7 boundary',
-            data: values,
+        // Grade 7 only — solid line for confirmed, dashed for predicted
+        const datasets = [{
+          label: 'Grade 7 boundary',
+          data: confirmed.map(r => ({ x: r.label, y: r.g[6] })),
+          borderColor: '#22c55e',
+          backgroundColor: '#bbf7d0',
+          pointBackgroundColor: '#16a34a',
+          pointRadius: 5,
+          tension: 0.3,
+          fill: false,
+        }];
+        if (predicted.length) {
+          // Connect last confirmed point to first predicted point
+          const lastConfirmed = confirmed[confirmed.length - 1];
+          datasets.push({
+            label: 'Grade 7 (predicted)',
+            data: [
+              { x: lastConfirmed.label, y: lastConfirmed.g[6] },
+              ...predicted.map(r => ({ x: r.label, y: r.g[6] })),
+            ],
             borderColor: '#22c55e',
-            backgroundColor: '#bbf7d0',
+            backgroundColor: '#bbf7d088',
             pointBackgroundColor: '#16a34a',
             pointRadius: 5,
+            borderDash: [6, 4],
             tension: 0.3,
             fill: false,
-          }]
-        };
+          });
+        }
+        return { labels, datasets };
       }
 
-      // All grades
+      // All grades — solid for confirmed, dashed for predicted
       const datasets = [];
       for (let gi = 6; gi >= 1; gi--) {
-        const values = data.filter(r => r.g !== null).map(r => r.g[gi]);
+        const confirmedVals = confirmed.map(r => ({ x: r.label, y: r.g[gi] }));
         datasets.push({
           label: `Grade ${gi + 1} boundary`,
-          data: values,
+          data: confirmedVals,
           borderColor: GRADE_COLORS[gi],
           backgroundColor: GRADE_COLORS[gi] + '33',
           pointBackgroundColor: GRADE_COLORS[gi],
@@ -523,6 +561,23 @@
           tension: 0.3,
           fill: false,
         });
+        if (predicted.length) {
+          const lastConfirmed = confirmed[confirmed.length - 1];
+          datasets.push({
+            label: `Grade ${gi + 1} (predicted)`,
+            data: [
+              { x: lastConfirmed.label, y: lastConfirmed.g[gi] },
+              ...predicted.map(r => ({ x: r.label, y: r.g[gi] })),
+            ],
+            borderColor: GRADE_COLORS[gi],
+            backgroundColor: GRADE_COLORS[gi] + '22',
+            pointBackgroundColor: GRADE_COLORS[gi],
+            pointRadius: 4,
+            borderDash: [6, 4],
+            tension: 0.3,
+            fill: false,
+          });
+        }
       }
       return { labels, datasets };
     }
@@ -559,6 +614,7 @@
               grid: { color: '#e2e8f0' }
             },
             x: {
+              type: 'category',
               ticks: { maxRotation: 45, font: { size: 11 } },
               grid: { display: false }
             }
@@ -576,11 +632,11 @@
     function populateSessionSelect(selectId, data) {
       const select = document.getElementById(selectId);
       data.forEach(row => {
-        if (row.g !== null) {
+        if (row.g !== null && !row.predicted) {
           const opt = document.createElement('option');
           opt.value = row.label;
           opt.textContent = row.label;
-          if (row.label === 'May 2019') opt.selected = true; // sensible default
+          if (row.label === 'May 2024') opt.selected = true;
           select.appendChild(opt);
         }
       });
