@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IB CS Grade Boundaries — Old Curriculum (2014)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .grade-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+    .grade-7 { background-color: #16a34a; color: #fff; }
+    .grade-6 { background-color: #65a30d; color: #fff; }
+    .grade-5 { background-color: #ca8a04; color: #fff; }
+    .grade-4 { background-color: #ea580c; color: #fff; }
+    .grade-3 { background-color: #dc2626; color: #fff; }
+    .grade-2 { background-color: #9333ea; color: #fff; }
+    .grade-1 { background-color: #475569; color: #fff; }
+
+    /* Table cell highlight colours (lighter) */
+    .bg-grade-7 { background-color: #dcfce7; }
+    .bg-grade-6 { background-color: #ecfccb; }
+    .bg-grade-5 { background-color: #fef9c3; }
+    .bg-grade-4 { background-color: #ffedd5; }
+    .bg-grade-3 { background-color: #fee2e2; }
+    .bg-grade-2 { background-color: #f3e8ff; }
+    .bg-grade-1 { background-color: #f1f5f9; }
+
+    .tab-active {
+      border-bottom: 3px solid #0284c7;
+      color: #0284c7;
+      font-weight: 700;
+    }
+    .tab-inactive {
+      border-bottom: 3px solid transparent;
+      color: #475569;
+    }
+
+    /* Highlight selected row */
+    tr.highlighted-row td { background-color: #fef08a !important; }
+
+    /* Predicted row */
+    tr.predicted-row td {
+      background-color: #eff6ff !important;
+      font-style: italic;
+      border-top: 2px dashed #93c5fd;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+  <!-- Navigation -->
+  <header class="sticky top-0 bg-slate-50/80 backdrop-blur-lg z-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2 text-sm text-slate-600">
+        <a href="../index.html" class="inline-flex items-center text-sky-700 hover:text-sky-800 font-semibold" aria-label="Home">
+          <span aria-hidden="true">🏠</span>
+          <span class="ml-2 hidden sm:inline">IB CS Mini Websites</span>
+        </a>
+        <span class="text-slate-300">/</span>
+        <a href="../index.html#old-curriculum" class="hover:text-sky-700">Old Curriculum (2014)</a>
+        <span class="text-slate-300">/</span>
+        <span class="text-slate-800 font-semibold">Grade Boundaries</span>
+      </div>
+      <nav class="hidden lg:flex items-center gap-4 text-xs font-semibold">
+        <a href="#overview" class="text-slate-600 hover:text-sky-600">Overview</a>
+        <a href="#boundaries" class="text-slate-600 hover:text-sky-600">Boundaries Table</a>
+        <a href="#chart" class="text-slate-600 hover:text-sky-600">Trend Chart</a>
+        <a href="#calculator" class="text-slate-600 hover:text-sky-600">Grade Calculator</a>
+        <a href="#formulas" class="text-slate-600 hover:text-sky-600">Formulas</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <header class="max-w-7xl mx-auto px-4 sm:px-6 py-10 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold text-slate-800">IB CS Grade Boundaries 📊</h1>
+    <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">
+      Historical grade boundaries for IB Computer Science (Old Curriculum, 2014–2026). Explore the data, visualise trends, and check what grade your score corresponds to.
+    </p>
+    <div class="mt-4 flex flex-wrap justify-center gap-3 text-xs text-slate-500">
+      <span class="bg-slate-100 px-3 py-1 rounded-full">Data: May 2014 – May 2025</span>
+      <span class="bg-slate-100 px-3 py-1 rounded-full">Sources: bprzybylski/IB-CS-GeS, RevisionDojo &amp; IB Statistical Bulletins</span>
+      <span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full">Old Curriculum — Last assessment May 2026</span>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 pb-16 space-y-14">
+
+    <!-- ── Overview ── -->
+    <section id="overview" class="scroll-mt-24">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4">Overview</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 space-y-3">
+          <h3 class="font-bold text-slate-700">What are grade boundaries?</h3>
+          <p class="text-sm text-slate-600">
+            Grade boundaries define the minimum total score (out of 100) needed to achieve each grade (1–7) in a given exam session. They are recalculated each year by IB examiners after the papers are marked, so they vary slightly from year to year.
+          </p>
+          <p class="text-sm text-slate-600">
+            A grade 7 is the highest achievable; a grade 1 is the lowest (and requires only 0 points to "earn").
+          </p>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 space-y-3">
+          <h3 class="font-bold text-slate-700">How is the total score calculated?</h3>
+          <p class="text-sm text-slate-600">
+            The total score is a <strong>weighted composite</strong> of Paper 1, Paper 2 (HL only: also Paper 3), and the Internal Assessment (IA). Each component is scaled to a maximum of 100.
+          </p>
+          <a href="#formulas" class="text-sky-600 text-sm font-semibold hover:underline">See the exact formulas →</a>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+          <h3 class="font-bold text-slate-700 mb-3">Grade colour guide</h3>
+          <div class="flex flex-wrap gap-3">
+            <div class="flex items-center gap-2"><span class="grade-pill grade-7">7</span><span class="text-sm">Excellent (≥ boundary)</span></div>
+            <div class="flex items-center gap-2"><span class="grade-pill grade-6">6</span><span class="text-sm">Very good</span></div>
+            <div class="flex items-center gap-2"><span class="grade-pill grade-5">5</span><span class="text-sm">Good</span></div>
+            <div class="flex items-center gap-2"><span class="grade-pill grade-4">4</span><span class="text-sm">Satisfactory</span></div>
+            <div class="flex items-center gap-2"><span class="grade-pill grade-3">3</span><span class="text-sm">Mediocre</span></div>
+            <div class="flex items-center gap-2"><span class="grade-pill grade-2">2</span><span class="text-sm">Poor</span></div>
+            <div class="flex items-center gap-2"><span class="grade-pill grade-1">1</span><span class="text-sm">Very poor</span></div>
+          </div>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 space-y-2">
+          <h3 class="font-bold text-amber-800">⚠️ Important notes</h3>
+          <ul class="text-sm text-amber-700 list-disc pl-4 space-y-1">
+            <li>May 2020 was cancelled due to COVID-19 — no boundaries exist.</li>
+            <li>May 2021 had <strong>two routes</strong>: Examination and Non-examination. Look at the correct row for your cohort.</li>
+            <li>Before May 2016 the IA was worth up to 40 marks (not 34) because the Group 4 Project was included.</li>
+            <li>In May 2021, Paper 2 was removed (exam route); SL Paper 1 weight → 70, HL Paper 1 weight → 60.</li>
+            <li>From May 2022 the full exam format resumed (Paper 2 reinstated, standard weightings).</li>
+            <li>May 2026 is the <strong>final session</strong> of the old curriculum. The row marked "Predicted" is an estimate based on the 2022–2025 trend.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SL / HL Tabs ── -->
+    <section id="boundaries" class="scroll-mt-24">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4">Grade Boundaries Table</h2>
+
+      <!-- Tabs -->
+      <div class="flex border-b border-slate-200 mb-6 gap-6">
+        <button id="tab-sl" onclick="switchLevel('sl')"
+          class="pb-3 text-sm tab-active transition-colors">
+          Standard Level (SL)
+        </button>
+        <button id="tab-hl" onclick="switchLevel('hl')"
+          class="pb-3 text-sm tab-inactive transition-colors">
+          Higher Level (HL)
+        </button>
+      </div>
+
+      <!-- SL Table -->
+      <div id="table-sl" class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700">
+              <th class="text-left px-4 py-3 font-semibold rounded-tl-lg min-w-[160px]">Session</th>
+              <th class="px-3 py-3 font-semibold text-center"><span class="grade-pill grade-1">1</span></th>
+              <th class="px-3 py-3 font-semibold text-center"><span class="grade-pill grade-2">2</span></th>
+              <th class="px-3 py-3 font-semibold text-center"><span class="grade-pill grade-3">3</span></th>
+              <th class="px-3 py-3 font-semibold text-center"><span class="grade-pill grade-4">4</span></th>
+              <th class="px-3 py-3 font-semibold text-center"><span class="grade-pill grade-5">5</span></th>
+              <th class="px-3 py-3 font-semibold text-center"><span class="grade-pill grade-6">6</span></th>
+              <th class="px-3 py-3 font-semibold text-center rounded-tr-lg"><span class="grade-pill grade-7">7</span></th>
+            </tr>
+          </thead>
+          <tbody id="sl-tbody" class="divide-y divide-slate-100">
+          </tbody>
+        </table>
+        <p class="mt-3 text-xs text-slate-500">Minimum score (out of 100) required for each grade. A dash (–) means the session was not held. <em class="text-blue-600">Rows in blue italics are predictions based on the 2022–2025 trend.</em></p>
+      </div>
+
+      <!-- HL Table -->
+      <div id="table-hl" class="overflow-x-auto hidden">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700">
+              <th class="text-left px-4 py-3 font-semibold rounded-tl-lg min-w-[160px]">Session</th>
+              <th class="px-3 py-3 font-semibold text-center"><span class="grade-pill grade-1">1</span></th>
+              <th class="px-3 py-3 font-semibold text-center"><span class="grade-pill grade-2">2</span></th>
+              <th class="px-3 py-3 font-semibold text-center"><span class="grade-pill grade-3">3</span></th>
+              <th class="px-3 py-3 font-semibold text-center"><span class="grade-pill grade-4">4</span></th>
+              <th class="px-3 py-3 font-semibold text-center"><span class="grade-pill grade-5">5</span></th>
+              <th class="px-3 py-3 font-semibold text-center"><span class="grade-pill grade-6">6</span></th>
+              <th class="px-3 py-3 font-semibold text-center rounded-tr-lg"><span class="grade-pill grade-7">7</span></th>
+            </tr>
+          </thead>
+          <tbody id="hl-tbody" class="divide-y divide-slate-100">
+          </tbody>
+        </table>
+        <p class="mt-3 text-xs text-slate-500">Minimum score (out of 100) required for each grade. A dash (–) means the session was not held. <em class="text-blue-600">Rows in blue italics are predictions based on the 2022–2025 trend.</em></p>
+      </div>
+    </section>
+
+    <!-- ── Trend Chart ── -->
+    <section id="chart" class="scroll-mt-24">
+      <h2 class="text-2xl font-bold text-slate-800 mb-2">Grade 7 Boundary Trend</h2>
+      <p class="text-sm text-slate-500 mb-6">How the minimum score required for a grade 7 has changed over the years, for both SL and HL.</p>
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+        <div class="flex flex-wrap gap-3 mb-4">
+          <label class="flex items-center gap-2 text-sm cursor-pointer">
+            <input type="checkbox" id="toggle-all-grades" class="accent-sky-600" />
+            <span class="text-slate-700 font-medium">Show all grade boundaries</span>
+          </label>
+          <label class="flex items-center gap-2 text-sm cursor-pointer ml-auto">
+            <span class="text-slate-600">Level:</span>
+            <select id="chart-level-select" class="border border-slate-200 rounded-md px-2 py-1 text-xs" onchange="renderChart()">
+              <option value="sl">Standard Level (SL)</option>
+              <option value="hl">Higher Level (HL)</option>
+            </select>
+          </label>
+        </div>
+        <div class="relative" style="height: 350px;">
+          <canvas id="boundaryChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Grade Calculator ── -->
+    <section id="calculator" class="scroll-mt-24">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4">Grade Calculator</h2>
+      <p class="text-sm text-slate-500 mb-6">Enter your component scores to see your estimated total and predicted grade for any session.</p>
+      <div class="grid md:grid-cols-2 gap-8">
+
+        <!-- SL Calculator -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+          <h3 class="font-bold text-slate-700 mb-4 flex items-center gap-2">
+            <span class="bg-sky-100 text-sky-700 px-2 py-0.5 rounded text-sm font-bold">SL</span>
+            Standard Level Calculator
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-600 mb-1">Paper 1 score <span class="text-slate-400">(out of 70)</span></label>
+              <input id="sl-p1" type="number" min="0" max="70" placeholder="e.g. 55"
+                class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400" oninput="calcSL()" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600 mb-1">Paper 2 score <span class="text-slate-400">(out of 45)</span></label>
+              <input id="sl-p2" type="number" min="0" max="45" placeholder="e.g. 36"
+                class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400" oninput="calcSL()" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600 mb-1">IA score <span class="text-slate-400">(out of 34)</span></label>
+              <input id="sl-ia" type="number" min="0" max="34" placeholder="e.g. 28"
+                class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400" oninput="calcSL()" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600 mb-1">Reference session</label>
+              <select id="sl-session" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400" onchange="calcSL()">
+              </select>
+            </div>
+          </div>
+          <div id="sl-result" class="mt-5 hidden">
+            <div class="bg-slate-50 rounded-lg p-4 space-y-2">
+              <div class="flex justify-between text-sm"><span class="text-slate-600">Total score (scaled to 100):</span><span id="sl-total" class="font-bold text-slate-800"></span></div>
+              <div class="flex justify-between text-sm items-center"><span class="text-slate-600">Predicted grade:</span><span id="sl-grade" class="grade-pill"></span></div>
+              <div id="sl-range-msg" class="text-xs text-slate-500 pt-1"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HL Calculator -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+          <h3 class="font-bold text-slate-700 mb-4 flex items-center gap-2">
+            <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-sm font-bold">HL</span>
+            Higher Level Calculator
+          </h3>
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-600 mb-1">Paper 1 score <span class="text-slate-400">(out of 100)</span></label>
+              <input id="hl-p1" type="number" min="0" max="100" placeholder="e.g. 78"
+                class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400" oninput="calcHL()" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600 mb-1">Paper 2 score <span class="text-slate-400">(out of 65)</span></label>
+              <input id="hl-p2" type="number" min="0" max="65" placeholder="e.g. 50"
+                class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400" oninput="calcHL()" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600 mb-1">Paper 3 score <span class="text-slate-400">(out of 30)</span></label>
+              <input id="hl-p3" type="number" min="0" max="30" placeholder="e.g. 22"
+                class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400" oninput="calcHL()" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600 mb-1">IA score <span class="text-slate-400">(out of 34)</span></label>
+              <input id="hl-ia" type="number" min="0" max="34" placeholder="e.g. 28"
+                class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400" oninput="calcHL()" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-600 mb-1">Reference session</label>
+              <select id="hl-session" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400" onchange="calcHL()">
+              </select>
+            </div>
+          </div>
+          <div id="hl-result" class="mt-5 hidden">
+            <div class="bg-slate-50 rounded-lg p-4 space-y-2">
+              <div class="flex justify-between text-sm"><span class="text-slate-600">Total score (scaled to 100):</span><span id="hl-total" class="font-bold text-slate-800"></span></div>
+              <div class="flex justify-between text-sm items-center"><span class="text-slate-600">Predicted grade:</span><span id="hl-grade" class="grade-pill"></span></div>
+              <div id="hl-range-msg" class="text-xs text-slate-500 pt-1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Formulas ── -->
+    <section id="formulas" class="scroll-mt-24">
+      <h2 class="text-2xl font-bold text-slate-800 mb-4">Assessment Formulas</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 space-y-4">
+          <h3 class="font-bold text-slate-700">Standard Level (SL)</h3>
+          <div class="bg-sky-50 border border-sky-200 rounded-lg p-4 font-mono text-sm text-slate-700">
+            Total = 45 × (P1 / 70) + 25 × (P2 / 45) + 30 × (IA / 34)
+          </div>
+          <ul class="text-sm text-slate-600 space-y-1 list-disc pl-4">
+            <li><strong>P1</strong> — Paper 1: max 70 marks, weight 45%</li>
+            <li><strong>P2</strong> — Paper 2: max 45 marks, weight 25%</li>
+            <li><strong>IA</strong> — Internal Assessment: max 34 marks, weight 30%</li>
+          </ul>
+          <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-700">
+            <strong>May 2021 (exam route):</strong> Paper 2 removed. P1 weight → 70, scaled to max 70 marks.
+          </div>
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-700">
+            <strong>Before May 2016:</strong> IA max was 40 marks (Group 4 Project included 6 extra marks).
+          </div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 space-y-4">
+          <h3 class="font-bold text-slate-700">Higher Level (HL)</h3>
+          <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 font-mono text-sm text-slate-700">
+            Total = 40 × (P1 / 100) + 20 × (P2 / 65) + 20 × (P3 / 30) + 20 × (IA / 34)
+          </div>
+          <ul class="text-sm text-slate-600 space-y-1 list-disc pl-4">
+            <li><strong>P1</strong> — Paper 1: max 100 marks, weight 40%</li>
+            <li><strong>P2</strong> — Paper 2: max 65 marks, weight 20%</li>
+            <li><strong>P3</strong> — Paper 3: max 30 marks, weight 20%</li>
+            <li><strong>IA</strong> — Internal Assessment: max 34 marks, weight 20%</li>
+          </ul>
+          <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-700">
+            <strong>May 2021 (exam route):</strong> Paper 2 removed. P1 weight → 60, scaled to max 100 marks.
+          </div>
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-700">
+            <strong>Before May 2016:</strong> IA max was 40 marks (Group 4 Project included 6 extra marks).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Sources ── -->
+    <section class="bg-sky-50 border-l-4 border-sky-500 p-6 rounded-r-xl">
+      <h3 class="text-base font-bold text-sky-800 mb-2">Data Sources</h3>
+      <ul class="text-sm text-sky-700 list-disc pl-4 space-y-1">
+        <li>
+          <a href="https://bprzybylski.github.io/IB-CS-GeS/general-information/grade-boundaries/" target="_blank" rel="noopener noreferrer"
+            class="underline hover:text-sky-900">bprzybylski/IB-CS-GeS — Grade Boundaries (May 2014–2021)</a>
+        </li>
+        <li>
+          <a href="https://www.revisiondojo.com/grade-boundaries/ib-computer-science" target="_blank" rel="noopener noreferrer"
+            class="underline hover:text-sky-900">RevisionDojo — IB Computer Science Grade Boundaries</a>
+        </li>
+        <li>IB Statistical Bulletins (published by the International Baccalaureate Organization after each exam session)</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-8 text-slate-500 border-t border-slate-200 text-sm">
+    <p>&copy; 2026 IB CS Mini Websites — Built with ❤️</p>
+    <p class="text-xs mt-1">Copyright (c) 2026 Stefanos Zisidis. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" class="hover:underline text-slate-600">CC BY 4.0</a>.</p>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="back-to-top"
+    class="fixed bottom-6 right-6 z-50 bg-sky-600 hover:bg-sky-700 text-white font-bold p-3 rounded-full shadow-lg hidden transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+    aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
+
+  <script>
+    // ════════════════════════════════════════════════════════
+    // DATA
+    // ════════════════════════════════════════════════════════
+    // Each entry: [label, g1, g2, g3, g4, g5, g6, g7]
+    // null means session not held (e.g. May 2020)
+    const SL_DATA = [
+      { label: 'May 2014',                          g: [0, 15, 28, 41, 49, 59, 68] },
+      { label: 'May 2015',                          g: [0, 15, 30, 43, 52, 61, 71] },
+      { label: 'May 2016',                          g: [0, 15, 29, 42, 52, 61, 72] },
+      { label: 'May 2017',                          g: [0, 16, 31, 43, 54, 65, 75] },
+      { label: 'May 2018',                          g: [0, 15, 30, 41, 51, 61, 71] },
+      { label: 'May 2019',                          g: [0, 15, 32, 44, 54, 62, 72] },
+      { label: 'May 2020',                          g: null },
+      { label: 'May 2021 (Examination)',            g: [0,  6, 11, 27, 37, 49, 62] },
+      { label: 'May 2021 (Non-examination)',        g: [0, 15, 32, 44, 54, 62, 72] },
+      { label: 'May 2022',                          g: [0, 14, 30, 42, 52, 62, 72] },
+      { label: 'May 2023',                          g: [0, 14, 30, 43, 53, 63, 73] },
+      { label: 'May 2024',                          g: [0, 14, 29, 41, 52, 62, 72] },
+      { label: 'May 2025',                          g: [0, 14, 30, 42, 52, 63, 73] },
+      { label: 'May 2026 ✦ Predicted',             g: [0, 14, 30, 42, 52, 62, 72], predicted: true },
+    ];
+
+    const HL_DATA = [
+      { label: 'May 2014',                          g: [0, 14, 28, 37, 46, 55, 64] },
+      { label: 'May 2015',                          g: [0, 15, 29, 39, 48, 57, 66] },
+      { label: 'May 2016',                          g: [0, 14, 27, 37, 46, 56, 66] },
+      { label: 'May 2017',                          g: [0, 15, 30, 40, 50, 60, 70] },
+      { label: 'May 2018',                          g: [0, 15, 29, 40, 50, 60, 70] },
+      { label: 'May 2019',                          g: [0, 14, 29, 39, 49, 60, 69] },
+      { label: 'May 2020',                          g: null },
+      { label: 'May 2021 (Examination)',            g: [0, 11, 16, 22, 35, 49, 63] },
+      { label: 'May 2021 (Non-examination)',        g: [0, 14, 29, 39, 49, 60, 69] },
+      { label: 'May 2022',                          g: [0, 14, 28, 38, 49, 59, 70] },
+      { label: 'May 2023',                          g: [0, 15, 29, 40, 50, 61, 71] },
+      { label: 'May 2024',                          g: [0, 14, 29, 40, 50, 61, 70] },
+      { label: 'May 2025',                          g: [0, 14, 29, 40, 51, 61, 71] },
+      { label: 'May 2026 ✦ Predicted',             g: [0, 14, 29, 40, 50, 61, 71], predicted: true },
+    ];
+
+    const GRADE_CLASSES = ['grade-1','grade-2','grade-3','grade-4','grade-5','grade-6','grade-7'];
+    const GRADE_BG      = ['bg-grade-1','bg-grade-2','bg-grade-3','bg-grade-4','bg-grade-5','bg-grade-6','bg-grade-7'];
+
+    // ════════════════════════════════════════════════════════
+    // RENDER TABLES
+    // ════════════════════════════════════════════════════════
+    function buildTable(data, tbodyId) {
+      const tbody = document.getElementById(tbodyId);
+      tbody.innerHTML = '';
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.className = row.predicted
+          ? 'predicted-row transition-colors'
+          : 'hover:bg-slate-50 transition-colors';
+        const tdLabel = document.createElement('td');
+        tdLabel.className = 'px-4 py-3 font-medium text-slate-700 whitespace-nowrap';
+        tdLabel.textContent = row.label;
+        tr.appendChild(tdLabel);
+
+        if (row.g === null) {
+          const td = document.createElement('td');
+          td.colSpan = 7;
+          td.className = 'px-4 py-3 text-center text-slate-400 italic text-xs';
+          td.textContent = 'Session not held (COVID-19 pandemic)';
+          tr.appendChild(td);
+        } else {
+          row.g.forEach((val, i) => {
+            const td = document.createElement('td');
+            td.className = `px-3 py-3 text-center font-semibold ${GRADE_BG[i]}`;
+            td.textContent = val === 0 ? '0' : val;
+            tr.appendChild(td);
+          });
+        }
+        tbody.appendChild(tr);
+      });
+    }
+
+    buildTable(SL_DATA, 'sl-tbody');
+    buildTable(HL_DATA, 'hl-tbody');
+
+    // ════════════════════════════════════════════════════════
+    // TAB SWITCHING
+    // ════════════════════════════════════════════════════════
+    function switchLevel(level) {
+      const slTable = document.getElementById('table-sl');
+      const hlTable = document.getElementById('table-hl');
+      const slTab   = document.getElementById('tab-sl');
+      const hlTab   = document.getElementById('tab-hl');
+      if (level === 'sl') {
+        slTable.classList.remove('hidden');
+        hlTable.classList.add('hidden');
+        slTab.className = 'pb-3 text-sm tab-active transition-colors';
+        hlTab.className = 'pb-3 text-sm tab-inactive transition-colors';
+      } else {
+        hlTable.classList.remove('hidden');
+        slTable.classList.add('hidden');
+        hlTab.className = 'pb-3 text-sm tab-active transition-colors';
+        slTab.className = 'pb-3 text-sm tab-inactive transition-colors';
+      }
+    }
+
+    // ════════════════════════════════════════════════════════
+    // CHART
+    // ════════════════════════════════════════════════════════
+    const GRADE_COLORS = [
+      '#94a3b8', // grade 1 - slate
+      '#a855f7', // grade 2 - purple
+      '#ef4444', // grade 3 - red
+      '#f97316', // grade 4 - orange
+      '#eab308', // grade 5 - yellow
+      '#84cc16', // grade 6 - lime
+      '#22c55e', // grade 7 - green
+    ];
+
+    let chartInstance = null;
+
+    function getChartData(level, allGrades) {
+      const data = level === 'sl' ? SL_DATA : HL_DATA;
+      const confirmed = data.filter(r => r.g !== null && !r.predicted);
+      const predicted = data.filter(r => r.g !== null && r.predicted);
+      const labels = [...confirmed, ...predicted].map(r => r.label);
+
+      if (!allGrades) {
+        // Grade 7 only — solid line for confirmed, dashed for predicted
+        const datasets = [{
+          label: 'Grade 7 boundary',
+          data: confirmed.map(r => ({ x: r.label, y: r.g[6] })),
+          borderColor: '#22c55e',
+          backgroundColor: '#bbf7d0',
+          pointBackgroundColor: '#16a34a',
+          pointRadius: 5,
+          tension: 0.3,
+          fill: false,
+        }];
+        if (predicted.length) {
+          // Connect last confirmed point to first predicted point
+          const lastConfirmed = confirmed[confirmed.length - 1];
+          datasets.push({
+            label: 'Grade 7 (predicted)',
+            data: [
+              { x: lastConfirmed.label, y: lastConfirmed.g[6] },
+              ...predicted.map(r => ({ x: r.label, y: r.g[6] })),
+            ],
+            borderColor: '#22c55e',
+            backgroundColor: '#bbf7d088',
+            pointBackgroundColor: '#16a34a',
+            pointRadius: 5,
+            borderDash: [6, 4],
+            tension: 0.3,
+            fill: false,
+          });
+        }
+        return { labels, datasets };
+      }
+
+      // All grades — solid for confirmed, dashed for predicted
+      const datasets = [];
+      for (let gi = 6; gi >= 1; gi--) {
+        const confirmedVals = confirmed.map(r => ({ x: r.label, y: r.g[gi] }));
+        datasets.push({
+          label: `Grade ${gi + 1} boundary`,
+          data: confirmedVals,
+          borderColor: GRADE_COLORS[gi],
+          backgroundColor: GRADE_COLORS[gi] + '33',
+          pointBackgroundColor: GRADE_COLORS[gi],
+          pointRadius: 4,
+          tension: 0.3,
+          fill: false,
+        });
+        if (predicted.length) {
+          const lastConfirmed = confirmed[confirmed.length - 1];
+          datasets.push({
+            label: `Grade ${gi + 1} (predicted)`,
+            data: [
+              { x: lastConfirmed.label, y: lastConfirmed.g[gi] },
+              ...predicted.map(r => ({ x: r.label, y: r.g[gi] })),
+            ],
+            borderColor: GRADE_COLORS[gi],
+            backgroundColor: GRADE_COLORS[gi] + '22',
+            pointBackgroundColor: GRADE_COLORS[gi],
+            pointRadius: 4,
+            borderDash: [6, 4],
+            tension: 0.3,
+            fill: false,
+          });
+        }
+      }
+      return { labels, datasets };
+    }
+
+    function renderChart() {
+      const level     = document.getElementById('chart-level-select').value;
+      const allGrades = document.getElementById('toggle-all-grades').checked;
+      const chartData = getChartData(level, allGrades);
+
+      if (chartInstance) { chartInstance.destroy(); }
+
+      const ctx = document.getElementById('boundaryChart').getContext('2d');
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: chartData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { position: 'top', labels: { font: { size: 12 }, boxWidth: 14 } },
+            tooltip: {
+              callbacks: {
+                label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y} / 100`
+              }
+            }
+          },
+          scales: {
+            y: {
+              min: 0,
+              max: 100,
+              title: { display: true, text: 'Min. score (out of 100)', font: { size: 12 } },
+              ticks: { stepSize: 10 },
+              grid: { color: '#e2e8f0' }
+            },
+            x: {
+              type: 'category',
+              ticks: { maxRotation: 45, font: { size: 11 } },
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    document.getElementById('toggle-all-grades').addEventListener('change', renderChart);
+    renderChart();
+
+    // ════════════════════════════════════════════════════════
+    // GRADE CALCULATOR — POPULATE SESSION SELECTS
+    // ════════════════════════════════════════════════════════
+    function populateSessionSelect(selectId, data) {
+      const select = document.getElementById(selectId);
+      const eligible = data.filter(r => r.g !== null && !r.predicted);
+      const mostRecent = eligible[eligible.length - 1];
+      eligible.forEach(row => {
+        const opt = document.createElement('option');
+        opt.value = row.label;
+        opt.textContent = row.label;
+        if (row.label === mostRecent.label) opt.selected = true;
+        select.appendChild(opt);
+      });
+    }
+
+    populateSessionSelect('sl-session', SL_DATA);
+    populateSessionSelect('hl-session', HL_DATA);
+
+    // ════════════════════════════════════════════════════════
+    // GRADE CALCULATOR — COMPUTE
+    // ════════════════════════════════════════════════════════
+    function getBoundaries(label, data) {
+      const row = data.find(r => r.label === label);
+      return row ? row.g : null;
+    }
+
+    function scoreToGrade(score, boundaries) {
+      // boundaries[0]=min for grade1, ..., boundaries[6]=min for grade7
+      let grade = 1;
+      for (let i = 6; i >= 0; i--) {
+        if (score >= boundaries[i]) { grade = i + 1; break; }
+      }
+      return grade;
+    }
+
+    function gradeRangeMessage(score, grade, boundaries) {
+      const lower = boundaries[grade - 1];
+      const upper = grade < 7 ? boundaries[grade] - 1 : 100;
+      if (grade === 7) return `Scores from ${lower}–100 earn a grade 7.`;
+      return `Scores from ${lower}–${upper} earn a grade ${grade}. You need ${boundaries[grade] - score} more point(s) for grade ${grade + 1}.`;
+    }
+
+    function setGradePill(el, grade) {
+      el.textContent = grade;
+      GRADE_CLASSES.forEach(c => el.classList.remove(c));
+      el.classList.add(`grade-${grade}`);
+    }
+
+    function calcSL() {
+      const p1 = parseFloat(document.getElementById('sl-p1').value);
+      const p2 = parseFloat(document.getElementById('sl-p2').value);
+      const ia = parseFloat(document.getElementById('sl-ia').value);
+      const session = document.getElementById('sl-session').value;
+      const resultDiv = document.getElementById('sl-result');
+
+      if (isNaN(p1) || isNaN(p2) || isNaN(ia)) { resultDiv.classList.add('hidden'); return; }
+
+      const total = Math.round(45 * (p1 / 70) + 25 * (p2 / 45) + 30 * (ia / 34));
+      const boundaries = getBoundaries(session, SL_DATA);
+      if (!boundaries) { resultDiv.classList.add('hidden'); return; }
+
+      const grade = scoreToGrade(total, boundaries);
+      document.getElementById('sl-total').textContent = `${total} / 100`;
+      setGradePill(document.getElementById('sl-grade'), grade);
+      document.getElementById('sl-range-msg').textContent = gradeRangeMessage(total, grade, boundaries);
+      resultDiv.classList.remove('hidden');
+    }
+
+    function calcHL() {
+      const p1 = parseFloat(document.getElementById('hl-p1').value);
+      const p2 = parseFloat(document.getElementById('hl-p2').value);
+      const p3 = parseFloat(document.getElementById('hl-p3').value);
+      const ia = parseFloat(document.getElementById('hl-ia').value);
+      const session = document.getElementById('hl-session').value;
+      const resultDiv = document.getElementById('hl-result');
+
+      if (isNaN(p1) || isNaN(p2) || isNaN(p3) || isNaN(ia)) { resultDiv.classList.add('hidden'); return; }
+
+      const total = Math.round(40 * (p1 / 100) + 20 * (p2 / 65) + 20 * (p3 / 30) + 20 * (ia / 34));
+      const boundaries = getBoundaries(session, HL_DATA);
+      if (!boundaries) { resultDiv.classList.add('hidden'); return; }
+
+      const grade = scoreToGrade(total, boundaries);
+      document.getElementById('hl-total').textContent = `${total} / 100`;
+      setGradePill(document.getElementById('hl-grade'), grade);
+      document.getElementById('hl-range-msg').textContent = gradeRangeMessage(total, grade, boundaries);
+      resultDiv.classList.remove('hidden');
+    }
+
+    // ════════════════════════════════════════════════════════
+    // BACK TO TOP
+    // ════════════════════════════════════════════════════════
+    (function () {
+      const btn = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        btn.classList.toggle('hidden', window.scrollY <= 300);
+      });
+      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    })();
+  </script>
+</body>
+
+</html>
