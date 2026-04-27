@@ -8,7 +8,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #fafaf9; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
         .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 320px; }
         .nav-active { background-color: #f5f5f4; color: #1c1917; font-weight: 600; border-left: 4px solid #4f46e5; }
         .nav-item { border-left: 4px solid transparent; transition: all 0.15s ease-in-out; }
@@ -28,20 +30,36 @@
         }
     </style>
 </head>
-<body class="text-stone-800 antialiased h-screen flex overflow-hidden">
+<body class="text-stone-800 antialiased h-screen flex flex-col overflow-hidden bg-slate-50">
 
-    <aside class="w-72 bg-white border-r border-stone-200 flex-shrink-0 flex flex-col h-full">
-        <div class="p-8">
-            <h1 class="text-xl font-bold text-stone-900 leading-tight">IB CS Internal Assessment</h1>
-            <p class="text-xs font-bold text-indigo-600 mt-1 uppercase tracking-widest">First Assessment 2027</p>
+    <!-- Navigation Header -->
+    <header class="bg-slate-50/80 backdrop-blur-lg z-50 border-b border-slate-200 flex-shrink-0">
+        <div class="w-full px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <!-- Breadcrumbs -->
+            <div class="flex items-center gap-2 text-sm text-slate-600 font-poppins">
+                <a href="../index.html" class="inline-flex items-center text-sky-700 hover:text-sky-800 font-semibold"
+                    aria-label="Home">
+                    <span aria-hidden="true">🏠</span>
+                    <span class="ml-2 hidden sm:inline">IB CS Mini Websites</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../index.html#new-curriculum" class="hover:text-sky-700 font-semibold transition-colors">New Curriculum (2027)</a>
+                <span class="text-slate-300">/</span>
+                <span class="text-slate-800 font-semibold">IA Success Guide</span>
+            </div>
         </div>
-        
-        <nav class="flex-1 px-4 space-y-1">
-            <button onclick="window.location.href='../index.html'" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm rounded-r-lg text-stone-600 text-left hover:bg-stone-100 transition-colors">
-                <span class="w-5">🏠</span> Return to Hub
-            </button>
-            <div class="my-2 border-b border-stone-100"></div>
-            <button onclick="navigate('overview')" id="nav-overview" class="nav-item nav-active w-full flex items-center gap-3 px-4 py-3 text-sm rounded-r-lg text-stone-600 text-left">
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <div class="flex-1 flex overflow-hidden">
+        <aside class="w-72 bg-white border-r border-stone-200 flex-shrink-0 flex flex-col h-full">
+            <div class="p-8 pb-4">
+                <h1 class="text-xl font-bold text-stone-900 leading-tight">IB CS Internal Assessment</h1>
+                <p class="text-xs font-bold text-indigo-600 mt-1 uppercase tracking-widest">First Assessment 2027</p>
+            </div>
+            
+            <nav class="flex-1 px-4 space-y-1">
+                <button onclick="navigate('overview')" id="nav-overview" class="nav-item nav-active w-full flex items-center gap-3 px-4 py-3 text-sm rounded-r-lg text-stone-600 text-left mt-2">
                 <span class="w-5">📄</span> Assessment Basics
             </button>
             <button onclick="navigate('ct-process')" id="nav-ct-process" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm rounded-r-lg text-stone-600 text-left">
@@ -277,10 +295,33 @@
                 </div>
             </section>
 
+            <!-- Footer inside main content to scroll with it -->
+            <footer class="mt-16 pt-8 pb-12 border-t border-stone-200">
+                <div class="max-w-4xl mx-auto px-4 text-center text-sm text-stone-500 flex flex-col items-center gap-3 font-poppins">
+                    <div>
+                        © <span id="year"></span> IB CS Mini Websites — Built with ❤️
+                    </div>
+                    <div class="text-xs text-stone-400 flex flex-col md:flex-row items-center gap-2">
+                        <span>Copyright (c) 2026 Stefanos Zisidis. Licensed under <a
+                                href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+                                class="underline hover:text-indigo-600">CC BY 4.0</a>.</span>
+                        <a href="https://github.com/MrZisidis/ib-cs-mini-websites" target="_blank"
+                            class="inline-block text-stone-400 hover:text-stone-600 transition-colors" aria-label="GitHub">
+                            <svg viewBox="0 0 16 16" class="w-4 h-4 fill-current">
+                                <path
+                                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52 -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64 -.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55 .38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </footer>
         </div>
     </main>
+    </div>
 
     <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
         function navigate(tabId) {
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('nav-active'));
             document.getElementById('nav-' + tabId).classList.add('nav-active');
