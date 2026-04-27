@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IB Computer Science IA: 2027 Assessment Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #fafaf9; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 320px; }
+        .nav-active { background-color: #f5f5f4; color: #1c1917; font-weight: 600; border-left: 4px solid #4f46e5; }
+        .nav-item { border-left: 4px solid transparent; transition: all 0.15s ease-in-out; }
+        .tab-content { display: none; animation: fadeIn 0.3s ease-out; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Computational Thinking Flow Styles */
+        .ct-step { position: relative; flex: 1; min-width: 120px; transition: transform 0.2s; }
+        .ct-step:hover { transform: translateY(-2px); }
+        .ct-arrow-head { 
+            width: 0; height: 0; 
+            border-top: 40px solid transparent; 
+            border-bottom: 40px solid transparent; 
+            border-left: 30px solid #4f46e5; 
+            margin-left: -2px;
+        }
+    </style>
+</head>
+<body class="text-stone-800 antialiased h-screen flex overflow-hidden">
+
+    <aside class="w-72 bg-white border-r border-stone-200 flex-shrink-0 flex flex-col h-full">
+        <div class="p-8">
+            <h1 class="text-xl font-bold text-stone-900 leading-tight">IB CS Internal Assessment</h1>
+            <p class="text-xs font-bold text-indigo-600 mt-1 uppercase tracking-widest">First Assessment 2027</p>
+        </div>
+        
+        <nav class="flex-1 px-4 space-y-1">
+            <button onclick="window.location.href='../index.html'" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm rounded-r-lg text-stone-600 text-left hover:bg-stone-100 transition-colors">
+                <span class="w-5">🏠</span> Return to Hub
+            </button>
+            <div class="my-2 border-b border-stone-100"></div>
+            <button onclick="navigate('overview')" id="nav-overview" class="nav-item nav-active w-full flex items-center gap-3 px-4 py-3 text-sm rounded-r-lg text-stone-600 text-left">
+                <span class="w-5">📄</span> Assessment Basics
+            </button>
+            <button onclick="navigate('ct-process')" id="nav-ct-process" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm rounded-r-lg text-stone-600 text-left">
+                <span class="w-5">🧠</span> Thinking Process
+            </button>
+            <button onclick="navigate('criteria')" id="nav-criteria" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm rounded-r-lg text-stone-600 text-left">
+                <span class="w-5">⚖️</span> Marks & Criteria
+            </button>
+            <button onclick="navigate('development')" id="nav-development" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm rounded-r-lg text-stone-600 text-left">
+                <span class="w-5">💻</span> The Solution
+            </button>
+            <button onclick="navigate('timeline')" id="nav-timeline" class="nav-item w-full flex items-center gap-3 px-4 py-3 text-sm rounded-r-lg text-stone-600 text-left">
+                <span class="w-5">📅</span> Implementation
+            </button>
+        </nav>
+
+        <div class="p-6 border-t border-stone-100">
+            <div class="bg-stone-50 rounded-lg p-4 border border-stone-200">
+                <p class="text-[10px] uppercase font-black text-stone-400 tracking-tighter mb-1">Status</p>
+                <p class="text-xs text-stone-600 font-medium">New 2025 Syllabus Guidelines Applied</p>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto bg-stone-50">
+        <div class="max-w-4xl mx-auto p-10 lg:p-16">
+
+            <!-- ASSESSMENT BASICS -->
+            <section id="overview" class="tab-content active">
+                <div class="mb-12">
+                    <h2 class="text-4xl font-bold text-stone-900 mb-6">Assessment Basics</h2>
+                    <p class="text-lg text-stone-600 mb-8 leading-relaxed">
+                        The Internal Assessment (IA) is an individual task focused on the development of a <strong>Computational Solution</strong> to a specified problem. It allows students to demonstrate the practical application of computational thinking skills.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-stone-200">
+                            <h3 class="text-xl font-bold text-stone-800 mb-4">Nature of the Solution</h3>
+                            <p class="text-sm text-stone-600 leading-relaxed mb-4">
+                                The solution must be a product of the student's own work and should address a real-world problem or challenge. It is not merely an exercise in coding, but a demonstration of <strong>problem-solving through computer science</strong>.
+                            </p>
+                            <ul class="text-sm text-stone-600 space-y-2 list-disc pl-5">
+                                <li>Must be a fully functional product.</li>
+                                <li>Should include algorithmic complexity.</li>
+                                <li>Documented through a written report, video, and source code.</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-stone-200">
+                            <h3 class="text-xl font-bold text-stone-800 mb-4">Core Statistics</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center border-b border-stone-100 pb-2">
+                                    <span class="text-sm font-medium text-stone-500">Max Word Count</span>
+                                    <span class="text-sm font-bold text-stone-800">2,000 words</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-stone-100 pb-2">
+                                    <span class="text-sm font-medium text-stone-500">Max Video Length</span>
+                                    <span class="text-sm font-bold text-stone-800">5 minutes</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-stone-100 pb-2">
+                                    <span class="text-sm font-medium text-stone-500">Weighting (SL)</span>
+                                    <span class="text-sm font-bold text-indigo-600">30% of Grade</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-medium text-stone-500">Weighting (HL)</span>
+                                    <span class="text-sm font-bold text-indigo-600">20% of Grade</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-stone-900 mb-6">Submission Requirements</h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-white p-6 rounded-xl border border-stone-200 flex gap-4">
+                            <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600 flex-shrink-0">📄</div>
+                            <div>
+                                <h4 class="font-bold text-stone-800">1. Documentation</h4>
+                                <p class="text-sm text-stone-600 mt-1">Submitted as a <strong>single PDF</strong>. It must contain five separate sections (one for each criterion) and not exceed 2000 words. Word count must be on the cover page.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-stone-200 flex gap-4">
+                            <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600 flex-shrink-0">🎬</div>
+                            <div>
+                                <h4 class="font-bold text-stone-800">2. Video</h4>
+                                <p class="text-sm text-stone-600 mt-1">Maximum 5 minutes (MP4, AVI, or WMV). It must demonstrate <strong>full functionality</strong> and examples of the <strong>testing strategy</strong> used during development.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-stone-200 flex gap-4">
+                            <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600 flex-shrink-0">📂</div>
+                            <div>
+                                <h4 class="font-bold text-stone-800">3. Appendices</h4>
+                                <p class="text-sm text-stone-600 mt-1">Single PDF including <strong>full source code</strong> and resources. Note: While not graded directly, Criterion D marks cannot be awarded without the full source code in the appendix.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- COMPUTATIONAL THINKING PROCESS -->
+            <section id="ct-process" class="tab-content">
+                <h2 class="text-4xl font-bold text-stone-900 mb-6">Computational Thinking Process</h2>
+                <p class="text-lg text-stone-600 mb-10 leading-relaxed">
+                    The process begins with a problem and follows a structured path comprising these six key components:
+                </p>
+
+                <!-- Process Flow Arrow -->
+                <div class="flex items-center mb-16 overflow-x-auto pb-4 gap-1">
+                    <div class="bg-indigo-900 text-white p-4 rounded-l-xl text-center min-w-[120px] flex flex-col justify-center h-20 shadow-md">
+                        <span class="text-[10px] uppercase font-bold opacity-60">Input</span>
+                        <div class="text-xs font-bold leading-tight">Real-world<br>Problem</div>
+                    </div>
+                    
+                    <div class="flex-1 flex gap-1 items-center bg-indigo-600 p-2 h-20 shadow-md">
+                        <div class="ct-step bg-white/20 text-white p-2 text-center text-[10px] font-bold uppercase rounded h-full flex items-center justify-center">Problem<br>Spec</div>
+                        <div class="ct-step bg-white/20 text-white p-2 text-center text-[10px] font-bold uppercase rounded h-full flex items-center justify-center">Decomposition</div>
+                        <div class="ct-step bg-white/20 text-white p-2 text-center text-[10px] font-bold uppercase rounded h-full flex items-center justify-center">Pattern<br>Recognition</div>
+                        <div class="ct-step bg-white/20 text-white p-2 text-center text-[10px] font-bold uppercase rounded h-full flex items-center justify-center">Abstraction</div>
+                        <div class="ct-step bg-white/20 text-white p-2 text-center text-[10px] font-bold uppercase rounded h-full flex items-center justify-center">Algorithmic<br>Thinking</div>
+                        <div class="ct-step bg-white/20 text-white p-2 text-center text-[10px] font-bold uppercase rounded h-full flex items-center justify-center">Testing &<br>Evaluation</div>
+                    </div>
+                    
+                    <div class="ct-arrow-head shadow-md"></div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="bg-white p-5 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-stone-900 text-sm">Problem Specification</h4>
+                        <p class="text-sm text-stone-600 mt-1">Clearly defining and understanding the nature of a problem, the limitations, and its scope for establishing solution goals.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-stone-900 text-sm">Decomposition</h4>
+                        <p class="text-sm text-stone-600 mt-1">Breaking down a complex problem or system into smaller, more manageable parts.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-stone-900 text-sm">Pattern Recognition</h4>
+                        <p class="text-sm text-stone-600 mt-1">Identifying similarities to other problems, or identifying recurring elements in the system, to make predictions and develop algorithms.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-stone-900 text-sm">Abstraction</h4>
+                        <p class="text-sm text-stone-600 mt-1">Focusing on essential features and high-level ideas, whilst removing unnecessary detail, to develop a system overview.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-stone-900 text-sm">Algorithmic Thinking</h4>
+                        <p class="text-sm text-stone-600 mt-1">Developing a step-by-step series of instructions for solving a particular problem.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl border border-stone-200">
+                        <h4 class="font-bold text-stone-900 text-sm">Testing and Evaluation</h4>
+                        <p class="text-sm text-stone-600 mt-1">Assessing a potential solution against the initial expected goals to determine effectiveness or adjustments needed.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CRITERIA & MARKS -->
+            <section id="criteria" class="tab-content">
+                <h2 class="text-4xl font-bold text-stone-900 mb-6">Assessment Criteria</h2>
+                <p class="text-lg text-stone-600 mb-10 leading-relaxed">
+                    Your Internal Assessment is evaluated across five distinct criteria.
+                </p>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 mb-10">
+                    <div class="chart-container">
+                        <canvas id="marksChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="overflow-hidden bg-white border border-stone-200 rounded-2xl shadow-sm">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-indigo-600 text-white uppercase text-[10px] tracking-widest font-black">
+                                <th class="p-5">Criterion</th>
+                                <th class="p-5">Description</th>
+                                <th class="p-5 text-center">Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <tr class="border-b border-stone-100">
+                                <td class="p-6 font-bold text-stone-900">A</td>
+                                <td class="p-6 text-stone-600">Problem scenario, computational context, success criteria.</td>
+                                <td class="p-6 text-center font-bold">4</td>
+                            </tr>
+                            <tr class="border-b border-stone-100">
+                                <td class="p-6 font-bold text-stone-900">B</td>
+                                <td class="p-6 text-stone-600">Decomposing the problem and planning solutions that address the success criteria.</td>
+                                <td class="p-6 text-center font-bold">4</td>
+                            </tr>
+                            <tr class="border-b border-stone-100">
+                                <td class="p-6 font-bold text-indigo-600">C</td>
+                                <td class="p-6 text-stone-600">System overview: system model, algorithms, testing strategy.</td>
+                                <td class="p-6 text-center font-bold">6</td>
+                            </tr>
+                            <tr class="border-b border-stone-100">
+                                <td class="p-6 font-black text-indigo-700">D</td>
+                                <td class="p-6 text-stone-600">Development process, a fully functional product, a supporting video.</td>
+                                <td class="p-6 text-center font-black text-lg">12</td>
+                            </tr>
+                            <tr>
+                                <td class="p-6 font-bold text-stone-900">E</td>
+                                <td class="p-6 text-stone-600">Evaluating the solution and offering recommendations for improvement.</td>
+                                <td class="p-6 text-center font-bold">4</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="bg-stone-900 text-white font-bold">
+                                <td colspan="2" class="p-5 text-right text-xs uppercase">Total</td>
+                                <td class="p-5 text-center text-lg">30</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+
+            <section id="development" class="tab-content">
+                <h2 class="text-4xl font-bold text-stone-900 mb-6">The Computational Solution</h2>
+                <div class="bg-white p-8 rounded-2xl border-l-4 border-indigo-600 shadow-sm">
+                    <h4 class="font-bold text-stone-900 mb-3 text-xl">Complexity & Talent</h4>
+                    <p class="text-stone-600 mb-4 leading-relaxed">Criterion D (12 marks) is where you prove your technical skill. Avoid trivial solutions; instead, focus on implementing advanced computational logic.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-stone-50 rounded-lg text-xs font-bold text-stone-700 uppercase tracking-wide">Complex Data Structures</div>
+                        <div class="p-4 bg-stone-50 rounded-lg text-xs font-bold text-stone-700 uppercase tracking-wide">Advanced Algorithms</div>
+                        <div class="p-4 bg-stone-50 rounded-lg text-xs font-bold text-stone-700 uppercase tracking-wide">Dynamic UI/UX</div>
+                        <div class="p-4 bg-stone-50 rounded-lg text-xs font-bold text-stone-700 uppercase tracking-wide">Input Validation</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="timeline" class="tab-content">
+                <h2 class="text-4xl font-bold text-stone-900 mb-6">Timeline</h2>
+                <div class="relative border-l-2 border-stone-200 ml-4 pl-8 space-y-8">
+                    <div class="relative"><div class="absolute -left-[41px] top-0 bg-stone-900 w-5 h-5 rounded-full border-4 border-stone-50"></div><h4 class="font-bold">Phase 1: Identify & Spec</h4></div>
+                    <div class="relative"><div class="absolute -left-[41px] top-0 bg-indigo-600 w-5 h-5 rounded-full border-4 border-stone-50"></div><h4 class="font-bold">Phase 2: Decomposition & Modeling</h4></div>
+                    <div class="relative"><div class="absolute -left-[41px] top-0 bg-indigo-600 w-5 h-5 rounded-full border-4 border-stone-50"></div><h4 class="font-bold">Phase 3: Algorithmic Development</h4></div>
+                    <div class="relative"><div class="absolute -left-[41px] top-0 bg-stone-900 w-5 h-5 rounded-full border-4 border-stone-50"></div><h4 class="font-bold">Phase 4: Evaluation</h4></div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        function navigate(tabId) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('nav-active'));
+            document.getElementById('nav-' + tabId).classList.add('nav-active');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (tabId === 'criteria' && !window.chartInit) initChart();
+        }
+
+        function initChart() {
+            window.chartInit = true;
+            const ctx = document.getElementById('marksChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['A (4)', 'B (4)', 'C (6)', 'D (12)', 'E (4)'],
+                    datasets: [{
+                        data: [4, 4, 6, 12, 4],
+                        backgroundColor: ['#e7e5e4', '#d6d3d1', '#818cf8', '#4f46e5', '#1c1917'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
