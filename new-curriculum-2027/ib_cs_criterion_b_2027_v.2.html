@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IB CS IA — Criterion B Starter Activity (2027 curriculum)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #ffffff;
+    --bg: #F7F6F3;
+    --surface: #ffffff;
+    --surface-2: #F0EEE9;
+    --border: #E2DEDA;
+    --border-soft: #EAE8E4;
+    --text-primary: #1A1916;
+    --text-secondary: #595550;
+    --text-tertiary: #9B958D;
+    --purple-bg: #EEEDFE;
+    --purple-border: #C5C1F5;
+    --purple-text: #3730A3;
+    --purple-dark: #312E81;
+    --teal-bg: #E1F5EE;
+    --teal-border: #9FE1CB;
+    --teal-text: #085041;
+    --amber-bg: #FEF3C7;
+    --amber-text: #92400E;
+    --red-bg: #FEE2E2;
+    --red-text: #991B1B;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg);
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 2rem 2.25rem 1.75rem;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .header-eyebrow {
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 99px;
+    letter-spacing: 0.01em;
+  }
+  .badge-blue { background: var(--purple-bg); color: var(--purple-dark); border: 1px solid var(--purple-border); }
+  .badge-amber { background: var(--amber-bg); color: var(--amber-text); border: 1px solid #FDE68A; }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .header-sub {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    max-width: 640px;
+  }
+
+  /* ── Callout ── */
+  .callout {
+    background: var(--purple-bg);
+    border: 1px solid var(--purple-border);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+    font-size: 13.5px;
+    color: var(--purple-dark);
+    line-height: 1.65;
+  }
+
+  .callout strong { font-weight: 600; }
+
+  /* ── Section label ── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 0.875rem;
+  }
+
+  /* ── Criteria grid ── */
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 680px) {
+    .criteria-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .crit-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .crit-card.active {
+    border-color: var(--purple-border);
+    box-shadow: 0 0 0 3px rgba(99,94,237,0.1), var(--shadow-sm);
+  }
+
+  .crit-card.next {
+    border-color: var(--teal-border);
+  }
+
+  .crit-header {
+    padding: 10px 12px 8px;
+  }
+
+  .crit-header.active-bg { background: var(--purple-bg); }
+  .crit-header.teal-bg { background: var(--teal-bg); }
+  .crit-header.grey-bg { background: var(--surface-2); }
+
+  .crit-letter {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .purple-text { color: var(--purple-dark); }
+  .teal-text { color: var(--teal-text); }
+  .grey-text { color: var(--text-tertiary); }
+
+  .crit-name {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 1px;
+  }
+
+  .crit-words {
+    font-size: 11px;
+    color: var(--text-tertiary);
+  }
+
+  .crit-body {
+    padding: 10px 12px;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .crit-body p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin-bottom: 6px;
+  }
+
+  .crit-body ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .crit-body li {
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    padding: 2px 0 2px 12px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .crit-body li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--text-tertiary);
+  }
+
+  /* ── Divider ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.75rem 0;
+  }
+
+  /* ── Prompt grid ── */
+  .prompt-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 680px) {
+    .prompt-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 440px) {
+    .prompt-grid { grid-template-columns: 1fr; }
+  }
+
+  .prompt-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .prompt-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-bottom: 4px;
+  }
+
+  .prompt-crit-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 99px;
+  }
+
+  .label-b { background: var(--purple-bg); color: var(--purple-dark); }
+  .label-c { background: var(--teal-bg); color: var(--teal-text); }
+  .label-bc { background: #f0f0ff; color: #4338CA; }
+
+  .prompt-text {
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.55;
+  }
+
+  /* ── Scenarios ── */
+  .tab-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    padding: 6px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-weight: 400;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+
+  .tab:hover { background: var(--surface-2); }
+
+  .tab.active {
+    background: var(--purple-bg);
+    border-color: var(--purple-border);
+    color: var(--purple-dark);
+    font-weight: 500;
+  }
+
+  .scenario {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.375rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .scenario.visible { display: block; }
+
+  .sc-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .sc-desc {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 1.125rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .sc-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 520px) {
+    .sc-cols { grid-template-columns: 1fr; }
+  }
+
+  .sc-col-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .sc-col-badge {
+    font-size: 10px;
+    padding: 1px 7px;
+    border-radius: 99px;
+    font-weight: 500;
+  }
+
+  .sc-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sc-list li {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 4px 0 4px 16px;
+    position: relative;
+    line-height: 1.55;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .sc-list li:last-child { border-bottom: none; }
+
+  .sc-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--text-tertiary);
+    font-size: 11px;
+    top: 6px;
+  }
+
+  .tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 0.875rem;
+  }
+
+  .tag {
+    font-size: 11.5px;
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-weight: 500;
+  }
+
+  .tag-p { background: var(--purple-bg); color: var(--purple-dark); border: 1px solid var(--purple-border); }
+  .tag-t { background: var(--teal-bg); color: var(--teal-text); border: 1px solid var(--teal-border); }
+  .tag-a { background: var(--amber-bg); color: var(--amber-text); border: 1px solid #FDE68A; }
+
+  /* ── Checklist ── */
+  .checklist-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.125rem 1.375rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 8px 0;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-soft);
+    line-height: 1.5;
+  }
+
+  .checklist li:last-child { border-bottom: none; }
+
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid #C9C5BE;
+    border-radius: 5px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+    background: var(--white);
+  }
+
+  .check-box:hover { border-color: #9B96EE; }
+
+  .check-box.checked {
+    background: var(--purple-bg);
+    border-color: var(--purple-border);
+  }
+
+  .check-box.checked::after {
+    content: "✓";
+    font-size: 11px;
+    color: var(--purple-dark);
+    font-weight: 600;
+  }
+
+  .crit-chip {
+    font-size: 10px;
+    padding: 1px 7px;
+    border-radius: 99px;
+    margin-left: 5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .chip-b { background: var(--purple-bg); color: var(--purple-dark); border: 1px solid var(--purple-border); }
+  .chip-c { background: var(--teal-bg); color: var(--teal-text); border: 1px solid var(--teal-border); }
+
+  .checklist-item-text {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+
+  .word-note {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 1rem;
+    padding-top: 0.875rem;
+    border-top: 1px solid var(--border-soft);
+    line-height: 1.6;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .footer-text {
+    font-size: 12.5px;
+    color: var(--text-tertiary);
+  }
+
+  .footer-text strong {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* ── Card wrapper ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.375rem 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--shadow-sm);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-eyebrow">
+      <span class="badge badge-blue">IB CS new curriculum</span>
+      <span class="badge badge-amber">First assessment May 2027</span>
+    </div>
+    <h1>Criterion B — Planning</h1>
+    <p class="header-sub">In the 2027 curriculum, planning and design are assessed separately across two criteria. This activity helps you understand what Criterion B requires and how it connects to Criterion C before you start writing.</p>
+  </div>
+
+  <!-- Callout -->
+  <div class="callout">
+    <strong>Key change from the old curriculum:</strong> There is no longer a "record of tasks" table. Criterion B is now a written planning rationale that maps your design decisions directly to your success criteria. The technical design (diagrams, algorithms, testing) lives in Criterion C. A <strong>3-minute video</strong> is also required. Total written documentation is capped at <strong>2,000 words</strong> across all five criteria — code, code comments, and diagrams are excluded.
+  </div>
+
+  <!-- Criteria overview -->
+  <div class="section-label">The five criteria at a glance</div>
+  <div class="criteria-grid">
+
+    <div class="crit-card">
+      <div class="crit-header grey-bg">
+        <div class="crit-letter grey-text">A</div>
+        <div class="crit-name" style="color:#595550;">Problem specification</div>
+        <div class="crit-words">~300 words</div>
+      </div>
+      <div class="crit-body">
+        <p>Define the problem, justify a computational approach, state measurable success criteria. <em>You should have done this already.</em></p>
+      </div>
+    </div>
+
+    <div class="crit-card active">
+      <div class="crit-header active-bg">
+        <div class="crit-letter purple-text">B</div>
+        <div class="crit-name" style="color:#3730A3;">Planning <span style="font-size:10px; font-weight:400; background:#C7D2FE; color:#3730A3; padding:1px 6px; border-radius:99px; margin-left:4px;">you are here</span></div>
+        <div class="crit-words">~150 words</div>
+      </div>
+      <div class="crit-body">
+        <p>Design your approach and show how it directly addresses every success criterion from A.</p>
+        <ul>
+          <li>Describe the overall design strategy</li>
+          <li>Justify technology and language choices</li>
+          <li>Map each design decision to a success criterion</li>
+          <li>Show awareness of real constraints</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="crit-card next">
+      <div class="crit-header teal-bg">
+        <div class="crit-letter teal-text">C</div>
+        <div class="crit-name" style="color:#085041;">System overview</div>
+        <div class="crit-words">~150 words — coming next</div>
+      </div>
+      <div class="crit-body">
+        <p>Technical blueprint: diagrams, algorithms, testing strategy. Enough detail for a third party to recreate the solution.</p>
+        <ul>
+          <li>System model with all components and UI</li>
+          <li>Algorithms in pseudocode or flowcharts</li>
+          <li>Testing table (normal, boundary, erroneous)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="crit-card">
+      <div class="crit-header grey-bg">
+        <div class="crit-letter grey-text">D</div>
+        <div class="crit-name" style="color:#595550;">Development</div>
+        <div class="crit-words">~1,000 words</div>
+      </div>
+      <div class="crit-body">
+        <p>Justify technical choices, demonstrate OOP / data structures, include code excerpts with commentary.</p>
+      </div>
+    </div>
+
+    <div class="crit-card">
+      <div class="crit-header grey-bg">
+        <div class="crit-letter grey-text">E</div>
+        <div class="crit-name" style="color:#595550;">Evaluation</div>
+        <div class="crit-words">~400 words</div>
+      </div>
+      <div class="crit-body">
+        <p>Assess success criteria, include client feedback, suggest improvements, and complete the <strong>mandatory ethical review</strong> (A4.4).</p>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- Reflection prompts -->
+  <div class="section-label">Reflection prompts — answer these before you write</div>
+  <div class="prompt-grid">
+
+    <div class="prompt-card">
+      <div class="prompt-num">01</div>
+      <span class="prompt-crit-label label-b">Criterion B</span>
+      <div class="prompt-text">For each success criterion in Criterion A, write one sentence explaining <em>how</em> your planned design will meet it.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">02</div>
+      <span class="prompt-crit-label label-b">Criterion B</span>
+      <div class="prompt-text">Why is your chosen programming language or framework the best tool for this specific problem? Name at least one alternative you considered and rejected.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">03</div>
+      <span class="prompt-crit-label label-b">Criterion B</span>
+      <div class="prompt-text">What real constraints (time, hardware access, data availability, client availability) could affect your plan? How will you work around each one?</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">04</div>
+      <span class="prompt-crit-label label-c">Criterion C</span>
+      <div class="prompt-text">Draw a rough system diagram right now — on paper is fine. What are the main components? How does data flow between them?</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">05</div>
+      <span class="prompt-crit-label label-c">Criterion C</span>
+      <div class="prompt-text">Pick the single most complex algorithm in your solution. Write it in plain English steps first, then convert to pseudocode.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-num">06</div>
+      <span class="prompt-crit-label label-bc">B + C</span>
+      <div class="prompt-text">What will your 3-minute video demonstration show? Plan the scenes now — testing footage must appear in the video.</div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- Starter scenarios -->
+  <div class="section-label">Starter scenarios — choose one to practise with</div>
+  <div class="tab-row">
+    <button class="tab active" onclick="showScenario('lib', this)">Library tracker</button>
+    <button class="tab" onclick="showScenario('sport', this)">Sports dashboard</button>
+    <button class="tab" onclick="showScenario('event', this)">Event booking</button>
+  </div>
+
+  <div id="sc-lib" class="scenario visible">
+    <div class="sc-title">Community library book tracker</div>
+    <div class="sc-desc">A small community library records borrowed books in a paper notebook. Books are returned without being crossed off, creating confusion about availability. The librarian wants a simple digital system staff can use on a shared computer.</div>
+    <div class="sc-cols">
+      <div>
+        <div class="sc-col-label">
+          <span class="sc-col-badge label-b">Criterion B</span> Planning points
+        </div>
+        <ul class="sc-list">
+          <li>Python with SQLite — runs without internet on the library's existing hardware</li>
+          <li>Tkinter GUI chosen over a web framework to avoid server setup constraints</li>
+          <li>Addresses SC1 (add / return books) and SC2 (real-time availability view)</li>
+          <li>Constraint: librarian available only on Tuesdays — interview must be planned early</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sc-col-label">
+          <span class="sc-col-badge label-c">Criterion C</span> System overview elements
+        </div>
+        <ul class="sc-list">
+          <li>System diagram: GUI → Controller → SQLite DB</li>
+          <li>Data model: Books (id, title, author, available) + Loans (id, book_id, borrower, date)</li>
+          <li>Algorithm: search by title (SQL SELECT with LIKE clause)</li>
+          <li>Test: searching a title that doesn't exist → "no results found" shown, no crash</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-p">Database</span>
+      <span class="tag tag-t">CRUD app</span>
+      <span class="tag tag-a">Beginner friendly</span>
+    </div>
+  </div>
+
+  <div id="sc-sport" class="scenario">
+    <div class="sc-title">Sports team statistics dashboard</div>
+    <div class="sc-desc">A school football coach tracks player performance in a spreadsheet. Generating weekly parent reports takes two hours and is error-prone. The coach wants automatically calculated statistics and a one-click PDF export.</div>
+    <div class="sc-cols">
+      <div>
+        <div class="sc-col-label">
+          <span class="sc-col-badge label-b">Criterion B</span> Planning points
+        </div>
+        <ul class="sc-list">
+          <li>Python with matplotlib + CSV storage; coach's laptop has no admin rights so no external DB install</li>
+          <li>CLI with file export chosen over GUI to reduce development risk within the time constraint</li>
+          <li>Addresses SC1 (auto-compute averages) and SC3 (exportable PDF report per player)</li>
+          <li>Constraint: match data only available after Saturdays — plan data import accordingly</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sc-col-label">
+          <span class="sc-col-badge label-c">Criterion C</span> System overview elements
+        </div>
+        <ul class="sc-list">
+          <li>System diagram: CSV input → parser → stat engine → chart renderer → PDF output</li>
+          <li>Algorithm: season average (accumulator loop over match records per player)</li>
+          <li>Test: player with zero matches → division-by-zero handled, returns "N/A"</li>
+          <li>Test: CSV with missing columns → error caught with clear message</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-p">Data processing</span>
+      <span class="tag tag-t">Visualisation</span>
+    </div>
+  </div>
+
+  <div id="sc-event" class="scenario">
+    <div class="sc-title">Local theatre seat booking system</div>
+    <div class="sc-desc">A local theatre sells tickets by phone and records reservations on paper. Double-bookings happen regularly and seat availability is impossible to check quickly. Staff on two different computers need access to the same live data.</div>
+    <div class="sc-cols">
+      <div>
+        <div class="sc-col-label">
+          <span class="sc-col-badge label-b">Criterion B</span> Planning points
+        </div>
+        <ul class="sc-list">
+          <li>Python + SQLite with Flask web UI — allows multi-device access on the theatre's local network</li>
+          <li>Relational schema with foreign keys enforces referential integrity at the database level</li>
+          <li>Addresses SC1 (book a seat), SC2 (real-time seat map), SC4 (cancel and release)</li>
+          <li>Constraint: theatre dark on Mondays only — all client testing must happen then</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sc-col-label">
+          <span class="sc-col-badge label-c">Criterion C</span> System overview elements
+        </div>
+        <ul class="sc-list">
+          <li>System diagram: browser → Flask routes → booking logic → SQLite → seat-map renderer</li>
+          <li>Algorithm: availability check before insert (SELECT then INSERT in a transaction)</li>
+          <li>Test: two simultaneous bookings for same seat → second request rejected with clear error</li>
+          <li>Test: booking seat row/number outside valid range → validation error returned</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag tag-p">Database</span>
+      <span class="tag tag-t">Web app</span>
+      <span class="tag tag-a">Intermediate</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Checklist -->
+  <div class="section-label">Criterion B + C self-check</div>
+  <div class="checklist-card">
+    <ul class="checklist" id="checklist">
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')" tabindex="0" role="checkbox" aria-checked="false" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('checked')}"></div>
+        <div class="checklist-item-text">My planning section explains the overall design strategy in my own words<span class="crit-chip chip-b">B</span></div>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')" tabindex="0" role="checkbox" aria-checked="false" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('checked')}"></div>
+        <div class="checklist-item-text">I justify my technology / language choice and name an alternative I considered<span class="crit-chip chip-b">B</span></div>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')" tabindex="0" role="checkbox" aria-checked="false" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('checked')}"></div>
+        <div class="checklist-item-text">Every success criterion from Criterion A is addressed by at least one design decision<span class="crit-chip chip-b">B</span></div>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')" tabindex="0" role="checkbox" aria-checked="false" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('checked')}"></div>
+        <div class="checklist-item-text">I acknowledge real constraints and explain how I plan around them<span class="crit-chip chip-b">B</span></div>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')" tabindex="0" role="checkbox" aria-checked="false" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('checked')}"></div>
+        <div class="checklist-item-text">My system diagram shows all components, data flow, and the user interface<span class="crit-chip chip-c">C</span></div>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')" tabindex="0" role="checkbox" aria-checked="false" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('checked')}"></div>
+        <div class="checklist-item-text">Key algorithms are written in pseudocode or shown as flowcharts — not prose descriptions<span class="crit-chip chip-c">C</span></div>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')" tabindex="0" role="checkbox" aria-checked="false" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('checked')}"></div>
+        <div class="checklist-item-text">My testing table covers normal, boundary, and erroneous inputs for each main feature<span class="crit-chip chip-c">C</span></div>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')" tabindex="0" role="checkbox" aria-checked="false" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('checked')}"></div>
+        <div class="checklist-item-text">All diagrams are large enough to be readable without zooming<span class="crit-chip chip-c">C</span></div>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')" tabindex="0" role="checkbox" aria-checked="false" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('checked')}"></div>
+        <div class="checklist-item-text">I have planned what my 3-minute video demonstration will show<span class="crit-chip chip-b">B</span><span class="crit-chip chip-c" style="margin-left:3px;">C</span></div>
+      </li>
+      <li>
+        <div class="check-box" onclick="this.classList.toggle('checked')" tabindex="0" role="checkbox" aria-checked="false" onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('checked')}"></div>
+        <div class="checklist-item-text">Combined B + C written text stays well under 300 words (diagrams and code are free)<span class="crit-chip chip-b">B</span><span class="crit-chip chip-c" style="margin-left:3px;">C</span></div>
+      </li>
+    </ul>
+    <div class="word-note">The 2,000-word cap covers all five criteria together. Code excerpts, code comments, and diagrams do not count toward the word limit. State the total word count clearly on the first page of your PDF submission.</div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-text"><strong>IB CS Internal Assessment</strong> — new curriculum, first assessment May 2027</div>
+    <div class="footer-text">This is a starter activity — consult your teacher and the official IB subject guide for assessment details.</div>
+  </div>
+
+</div>
+
+<script>
+  function showScenario(id, btn) {
+    document.querySelectorAll('.scenario').forEach(s => s.classList.remove('visible'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('sc-' + id).classList.add('visible');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
