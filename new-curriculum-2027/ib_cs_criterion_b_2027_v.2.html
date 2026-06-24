@@ -544,6 +544,86 @@
     margin-bottom: 1.25rem;
     box-shadow: var(--shadow-sm);
   }
+
+  /* ── Print Button Style ── */
+  .btn-print {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #4f46e5;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+    font-family: 'Inter', sans-serif;
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-print:hover {
+    background: #4338ca;
+    transform: translateY(-1px);
+  }
+  .btn-print:active {
+    transform: translateY(0);
+  }
+
+  /* ── Print Media Styles ── */
+  @media print {
+    .breadcrumbs,
+    .btn-print,
+    .tab-row,
+    footer,
+    .tags {
+      display: none !important;
+    }
+    
+    body {
+      background: #ffffff !important;
+      color: #000000 !important;
+      padding: 0 !important;
+    }
+    
+    .container {
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+    .header {
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 0 1rem 0 !important;
+      margin-bottom: 1.5rem !important;
+      border-bottom: 2px solid #e2deda !important;
+    }
+    
+    .callout {
+      border-color: #cbd5e1 !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
+      page-break-inside: avoid;
+    }
+
+    .prompt-grid {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 12px !important;
+    }
+
+    .prompt-card {
+      page-break-inside: avoid;
+    }
+    
+    .scenario {
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: none !important;
+      page-break-inside: avoid;
+      background: #ffffff !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -565,9 +645,14 @@
 
   <!-- Header -->
   <div class="header">
-    <div class="header-eyebrow">
-      <span class="badge badge-blue">IB CS new curriculum</span>
-      <span class="badge badge-amber">First assessment May 2027</span>
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 1rem;">
+      <div class="header-eyebrow" style="margin-bottom: 0;">
+        <span class="badge badge-blue">IB CS new curriculum</span>
+        <span class="badge badge-amber">First assessment May 2027</span>
+      </div>
+      <button onclick="window.print()" class="btn-print">
+        <span>🖨️</span> Export / Print PDF
+      </button>
     </div>
     <h1>Criterion B — Planning</h1>
     <p class="header-sub">In the 2027 curriculum, planning and design are assessed separately across two criteria. This activity helps you understand what Criterion B requires and how it connects to Criterion C before you start writing.</p>
