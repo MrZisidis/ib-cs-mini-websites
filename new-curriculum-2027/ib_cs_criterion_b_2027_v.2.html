@@ -624,6 +624,44 @@
       background: #ffffff !important;
     }
   }
+
+  /* ── Back to Top Button Styling ── */
+  #back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 50;
+    background-color: #0284c7;
+    color: #ffffff;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 9999px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+    outline: none;
+  }
+  #back-to-top.hidden {
+    display: none !important;
+  }
+  #back-to-top:hover {
+    background-color: #0369a1;
+    transform: translateY(-4px);
+  }
+  #back-to-top:focus {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #0284c7;
+  }
+  #back-to-top svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+  }
 </style>
 </head>
 <body>
@@ -955,6 +993,34 @@
     document.getElementById('sc-' + id).classList.add('visible');
     btn.classList.add('active');
   }
+</script>
+
+<!-- Back to Top Button Component -->
+<button id="back-to-top" class="hidden" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+</button>
+<script>
+    (function() {
+        const backToTopBtn = document.getElementById('back-to-top');
+        
+        // Show button when scrolled down 300px
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('hidden');
+            } else {
+                backToTopBtn.classList.add('hidden');
+            }
+        });
+        // Smooth scroll to top on click
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    })();
 </script>
 </body>
 </html>
