@@ -54,6 +54,35 @@
     margin: 0 auto;
   }
 
+  /* ── Breadcrumbs ── */
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #4b5563;
+    margin-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+  }
+  .breadcrumbs a {
+    display: inline-flex;
+    align-items: center;
+    color: #0369a1;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.15s ease-in-out;
+  }
+  .breadcrumbs a:hover {
+    color: #075985;
+  }
+  .breadcrumbs .separator {
+    color: #cbd5e1;
+  }
+  .breadcrumbs .current {
+    color: #1f2937;
+    font-weight: 600;
+  }
+
   /* ── Header ── */
   .header {
     background: var(--surface);
@@ -519,6 +548,20 @@
 </head>
 <body>
 <div class="container">
+
+  <!-- Breadcrumbs -->
+  <div class="breadcrumbs">
+    <a href="../index.html" aria-label="Home">
+      <span aria-hidden="true">🏠</span>
+      <span style="margin-left: 6px;">IB CS Mini Websites</span>
+    </a>
+    <span class="separator">/</span>
+    <a href="../index.html#new-curriculum">New Curriculum (2027)</a>
+    <span class="separator">/</span>
+    <a href="ib-cs-ia-guide.html">IA Success Guide</a>
+    <span class="separator">/</span>
+    <span class="current">Criterion B Planning</span>
+  </div>
 
   <!-- Header -->
   <div class="header">
