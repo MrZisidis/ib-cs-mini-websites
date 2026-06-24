@@ -167,35 +167,35 @@
                                 </tr>
                             </thead>
                             <tbody class="text-stone-700 divide-y divide-stone-200">
-                                <tr class="hover:bg-stone-50 transition-colors">
+                                <tr class="hover:bg-indigo-50/50 transition-colors cursor-pointer criterion-row" data-criterion="A" onclick="showCriterionDetails('A')">
                                     <td class="p-4 font-bold text-stone-900 whitespace-nowrap">Criterion A</td>
                                     <td class="p-4">Scenario / computational context / success criteria</td>
                                     <td class="p-4 font-medium whitespace-nowrap">300 words</td>
                                 </tr>
-                                <tr class="hover:bg-stone-50 transition-colors">
+                                <tr class="hover:bg-indigo-50/50 transition-colors cursor-pointer criterion-row" data-criterion="B" onclick="showCriterionDetails('B')">
                                     <td class="p-4 font-bold text-stone-900 whitespace-nowrap">Criterion B</td>
                                     <td class="p-4">Decomposition and planning overview (e.g.: Project structure chart, GANTT chart)</td>
                                     <td class="p-4 font-medium whitespace-nowrap">150 words plus diagrams</td>
                                 </tr>
-                                <tr class="hover:bg-stone-50 transition-colors">
+                                <tr class="hover:bg-indigo-50/50 transition-colors cursor-pointer criterion-row" data-criterion="C" onclick="showCriterionDetails('C')">
                                     <td class="p-4 font-bold text-stone-900 whitespace-nowrap">Criterion C</td>
                                     <td class="p-4">System overview (system model, algorithm designs, testing strategy)</td>
                                     <td class="p-4 font-medium whitespace-nowrap">150 words plus diagrams</td>
                                 </tr>
-                                <tr class="hover:bg-stone-50 transition-colors">
+                                <tr class="hover:bg-indigo-50/50 transition-colors cursor-pointer criterion-row" data-criterion="D" onclick="showCriterionDetails('D')">
                                     <td class="p-4 font-bold text-stone-900 whitespace-nowrap align-top" rowspan="2">Criterion D</td>
                                     <td class="p-4 align-top">
                                         <span class="text-indigo-500 font-bold mr-1">Ø</span> Development document (functional product, algorithms implemented and evaluated, testing strategy effectiveness)
                                     </td>
                                     <td class="p-4 font-medium whitespace-nowrap align-top">1000 words</td>
                                 </tr>
-                                <tr class="hover:bg-stone-50 transition-colors">
+                                <tr class="hover:bg-indigo-50/50 transition-colors cursor-pointer criterion-row" data-criterion="D" onclick="showCriterionDetails('D')">
                                     <td class="p-4 align-top">
                                         <span class="text-indigo-500 font-bold mr-1">Ø</span> Demonstration video (functionality, algorithms demonstrated, testing highlights)
                                     </td>
                                     <td class="p-4 font-medium whitespace-nowrap align-top">5 minute video</td>
                                 </tr>
-                                <tr class="hover:bg-stone-50 transition-colors border-t border-stone-200">
+                                <tr class="hover:bg-indigo-50/50 transition-colors cursor-pointer criterion-row border-t border-stone-200" data-criterion="E" onclick="showCriterionDetails('E')">
                                     <td class="p-4 font-bold text-stone-900 whitespace-nowrap">Criterion E</td>
                                     <td class="p-4">Evaluation and recommendations</td>
                                     <td class="p-4 font-medium whitespace-nowrap">400 words</td>
@@ -203,6 +203,40 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- Criterion Details Panel -->
+                    <div id="criterion-details-panel" class="mt-6 p-6 bg-white border border-stone-200 rounded-2xl shadow-sm transition-all duration-300">
+                        <div id="details-placeholder" class="text-center py-8 text-stone-500">
+                            <span class="text-3xl block mb-2 font-poppins">💡</span>
+                            <p class="font-medium">Click on any criterion in the table above to view detailed requirements, deliverables, and guidance.</p>
+                        </div>
+                        <div id="details-content" class="hidden">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <span id="details-badge" class="px-3 py-1 text-xs font-bold uppercase rounded-full bg-indigo-100 text-indigo-800">Criterion A</span>
+                                    <h4 id="details-title" class="text-xl font-bold text-stone-900 mt-2 font-poppins"></h4>
+                                </div>
+                                <span id="details-marks" class="text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg">Marks: 4</span>
+                            </div>
+                            <div class="text-stone-600 text-sm space-y-4">
+                                <div>
+                                    <h5 class="font-bold text-stone-800 mb-1">Focus & Objectives:</h5>
+                                    <p id="details-focus" class="leading-relaxed"></p>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-stone-800 mb-1">Key Deliverables & Guidance:</h5>
+                                    <ul id="details-deliverables" class="list-disc pl-5 space-y-1 leading-relaxed"></ul>
+                                </div>
+                                <div id="details-extra-link-container" class="mt-4 pt-4 border-t border-stone-100 hidden">
+                                    <a id="details-extra-link" href="ib_cs_criterion_b_2027_v.2.html" class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg text-xs font-bold hover:bg-indigo-700 transition-colors shadow-sm">
+                                        <span>Open Criterion B Interactive Starter Activity</span>
+                                        <span>→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </section>
 
@@ -397,6 +431,100 @@
                     plugins: { legend: { position: 'bottom' } }
                 }
             });
+        }
+
+        const criteriaDetails = {
+            'A': {
+                title: 'Planning & Problem Scenario',
+                marks: 4,
+                focus: 'Investigating a real-world scenario, establishing a target user/client, mapping out the current processes, and defining testable Success Criteria.',
+                deliverables: [
+                    'Detailed problem description & target user/client profile.',
+                    'Justification of the computational context (explaining why a programmatic solution is needed).',
+                    '3-5 clear, quantitative/testable Success Criteria used to evaluate the solution later.'
+                ]
+            },
+            'B': {
+                title: 'Decomposition & Planning',
+                marks: 4,
+                focus: 'Breaking down the computational solution into modular, manageable components and scheduling key development activities.',
+                deliverables: [
+                    'Project decomposition diagrams (such as Structure Charts or high-level modular outlines).',
+                    'Detailed development timeline (e.g., GANTT charts, project milestones, and schedules).',
+                    'Explicit verification pathways mapping decomposition components back to Success Criteria.'
+                ],
+                link: true
+            },
+            'C': {
+                title: 'System Overview & Design',
+                marks: 6,
+                focus: 'Drafting system models, architectural designs, data flows, and defining a clear algorithm design and test plan before writing code.',
+                deliverables: [
+                    'System architecture model (UML Class diagrams, Entity Relationship diagrams, data flow representations).',
+                    'Algorithm designs (detailed pseudocode or flowcharts representing critical system logic).',
+                    'Comprehensive test plan defining inputs, test types, test data, and expected outputs.'
+                ]
+            },
+            'D': {
+                title: 'Development & Implementation',
+                marks: 12,
+                focus: 'Writing the source code, demonstrating computational techniques/complexity, documenting development stages, and presenting functionality in a video.',
+                deliverables: [
+                    'A fully functional computational product that successfully resolves the initial success criteria.',
+                    'Detailed development log outlining technical choices, algorithms, and third-party libraries used.',
+                    'Annotated source code (included in the appendix) demonstrating logical complexity and robust input validation.',
+                    'A 5-minute demonstration video highlighting system functionality and testing scenarios.'
+                ]
+            },
+            'E': {
+                title: 'Evaluation & Recommendations',
+                marks: 4,
+                focus: 'Critically assessing the finished product against the initial success criteria and gathering client feedback to suggest improvements.',
+                deliverables: [
+                    'Critical evaluation of each success criterion (fully met, partially met, or not met) backed by evidence.',
+                    'Qualitative and quantitative feedback collected from the actual client or target audience.',
+                    'Specific, actionable recommendations for future enhancements, feature additions, or technical improvements.'
+                ]
+            }
+        };
+
+        function showCriterionDetails(critKey) {
+            // Remove active style from all rows
+            document.querySelectorAll('.criterion-row').forEach(row => {
+                row.classList.remove('bg-indigo-50/70', 'border-l-4', 'border-indigo-600');
+            });
+            
+            // Highlight selected row(s) using data-criterion attribute
+            document.querySelectorAll(`.criterion-row[data-criterion="${critKey}"]`).forEach(row => {
+                row.classList.add('bg-indigo-50/70', 'border-l-4', 'border-indigo-600');
+            });
+
+            const details = criteriaDetails[critKey];
+            if (!details) return;
+
+            document.getElementById('details-placeholder').classList.add('hidden');
+            const content = document.getElementById('details-content');
+            content.classList.remove('hidden');
+
+            document.getElementById('details-badge').textContent = 'Criterion ' + critKey;
+            document.getElementById('details-title').textContent = details.title;
+            document.getElementById('details-marks').textContent = 'Marks: ' + details.marks;
+            document.getElementById('details-focus').textContent = details.focus;
+
+            const deliverablesList = document.getElementById('details-deliverables');
+            deliverablesList.innerHTML = '';
+            details.deliverables.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                deliverablesList.appendChild(li);
+            });
+
+            const linkContainer = document.getElementById('details-extra-link-container');
+            if (details.link) {
+                linkContainer.classList.remove('hidden');
+            } else {
+                linkContainer.classList.add('hidden');
+            }
         }
     </script>
 </body>
