@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative AI Case Study Guide — 2027 Curriculum</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .active-tab {
+            background-color: #059669;
+            color: white;
+        }
+
+        .tab-btn {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .content-hidden {
+            display: none;
+        }
+
+        /* custom styling for grid cards */
+        .term-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .term-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Navigation -->
+    <header class="sticky top-0 bg-slate-50/80 backdrop-blur-lg z-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <!-- Breadcrumbs -->
+            <div class="flex items-center gap-2 text-sm text-slate-600">
+                <a href="../index.html" class="inline-flex items-center text-emerald-700 hover:text-emerald-800 font-semibold"
+                    aria-label="Home">
+                    <span aria-hidden="true">🏠</span>
+                    <span class="ml-2 hidden sm:inline">IB CS Mini Websites</span>
+                </a>
+                <span class="text-slate-300">/</span>
+                <a href="../index.html#new-curriculum" class="hover:text-emerald-700">New Curriculum (2027)</a>
+                <span class="text-slate-300">/</span>
+                <span class="text-slate-800 font-semibold">Case Study 2027</span>
+            </div>
+
+            <!-- In-page section links -->
+            <nav class="hidden lg:flex items-center gap-4">
+                <a href="#intro-header" class="text-slate-600 hover:text-emerald-600 font-semibold text-xs">Overview</a>
+                <a href="#study-tabs" class="text-slate-600 hover:text-emerald-600 font-semibold text-xs">Study Hub</a>
+                <a href="#quiz-section" class="text-slate-600 hover:text-emerald-600 font-semibold text-xs">Self-Quiz</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Header -->
+    <header id="intro-header" class="max-w-7xl mx-auto px-4 py-10 text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold mb-4">
+            <span>Syllabus 2027 Case Study</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-800">Generative AI for Image Creation</h1>
+        <p class="mt-2 text-xl font-medium text-emerald-600">"A Diffuse Vision" — Visionary Studios</p>
+        <p class="mt-4 text-base text-slate-600 max-w-3xl mx-auto">
+            Interactive guide and revision platform covering image generation techniques, generative architectures, evaluation metrics, and critical ethical considerations for standard and higher-level students.
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-3 text-xs">
+            <span class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-medium">Topic: Computer Science Case Study 2027</span>
+            <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full font-medium">SL &amp; HL Covered</span>
+            <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-medium">🔑 HL-only sections explicitly marked</span>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-12">
+
+        <!-- ── Navigation Tabs ── -->
+        <section id="study-tabs" class="scroll-mt-20">
+            <div class="bg-white p-2 rounded-xl shadow-sm border border-slate-200 flex flex-wrap gap-2 justify-center sm:justify-start">
+                <button data-tab="tab-scenario" class="tab-btn px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-emerald-600 active-tab">
+                    1. Scenario &amp; Techniques
+                </button>
+                <button data-tab="tab-architectures" class="tab-btn px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-emerald-600">
+                    2. Core Architectures
+                </button>
+                <button data-tab="tab-evaluation" class="tab-btn px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-emerald-600">
+                    3. Evaluation &amp; Ethics
+                </button>
+                <button data-tab="tab-terminology" class="tab-btn px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-emerald-600">
+                    4. Interactive Terminology
+                </button>
+                <button data-tab="tab-quiz" class="tab-btn px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-emerald-600">
+                    5. Test Your Knowledge
+                </button>
+            </div>
+        </section>
+
+        <!-- ── TAB CONTENT: 1. SCENARIO & TECHNIQUES ── -->
+        <div id="tab-scenario" class="tab-content space-y-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Main Scenario Card -->
+                <div class="md:col-span-2 bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <h2 class="text-2xl font-bold text-slate-800">The Visionary Studios Scenario</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        <strong>Visionary Studios</strong>, a creative design company, is evaluating generative AI models to streamline the production of high-quality images for advertising campaigns, concept art, and digital media.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed">
+                        To remain competitive, they are exploring state-of-the-art architectures like <strong>diffusion models</strong>, <strong>Generative Adversarial Networks (GANs)</strong>, and <strong>hybrid systems</strong>. By incorporating AI, the studio hopes to augment their creative output, reduce illustration times, and provide clients with unique branding assets.
+                    </p>
+                    <div class="p-4 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-lg">
+                        <h4 class="font-bold text-emerald-900 text-sm">Case Study Focus</h4>
+                        <p class="text-xs text-emerald-800 mt-1">
+                            Students must explore how these generation engines work under the hood, how their performance is measured, and how to address copyright, style consistency, and dataset bias concerns.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Core Types Panel -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-slate-700 mb-4 border-b pb-2">Image Generation Types</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <span class="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">Text-to-Image</span>
+                                <p class="text-xs text-slate-500 mt-1">Generates images from descriptive prompts (e.g. DALL·E, Stable Diffusion).</p>
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold px-2 py-0.5 rounded bg-blue-100 text-blue-800">Conditional</span>
+                                <p class="text-xs text-slate-500 mt-1">Generates images guided by inputs like sketch inputs, class labels, or segmentation maps.</p>
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold px-2 py-0.5 rounded bg-indigo-100 text-indigo-800">Unconditional</span>
+                                <p class="text-xs text-slate-500 mt-1">Generates random, novel images based purely on patterns learned during training without any input guides.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deep Dive: Generation Techniques -->
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                <h3 class="text-xl font-bold text-slate-800">Conditional Generation Techniques</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="border border-slate-100 rounded-lg p-5 bg-slate-50/50 space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-sm">A</span>
+                            <h4 class="font-bold text-slate-700">Class-Conditional Models</h4>
+                        </div>
+                        <p class="text-sm text-slate-600">
+                            These models generate specific categories of images based on class labels supplied as metadata. For example, selecting the label "golden retriever" restricts the generation output space to that specific canine breed.
+                        </p>
+                    </div>
+                    <div class="border border-slate-100 rounded-lg p-5 bg-slate-50/50 space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-sm">B</span>
+                            <h4 class="font-bold text-slate-700">Image-to-Image Translation</h4>
+                        </div>
+                        <p class="text-sm text-slate-600">
+                            Transforms one image representation into another. Examples include translating black-and-white photographs to color, or rendering an architectural blueprint sketch into a photorealistic architectural layout.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── TAB CONTENT: 2. CORE ARCHITECTURES ── -->
+        <div id="tab-architectures" class="tab-content content-hidden space-y-8">
+            <!-- Arch Overview & Chart -->
+            <div class="grid md:grid-cols-12 gap-8 items-start">
+                <div class="md:col-span-5 bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <h2 class="text-2xl font-bold text-slate-800">Architectural Comparisons</h2>
+                    <p class="text-sm text-slate-600">
+                        Visionary Studios is evaluating different architectures. Each architecture represents trade-offs in quality, training stability, computation speed, and control options.
+                    </p>
+                    <div class="space-y-2 text-xs">
+                        <p><strong class="text-emerald-700 font-semibold">Diffusion Models:</strong> State-of-the-art realism using iterative denoising, but computationally expensive.</p>
+                        <p><strong class="text-amber-700 font-semibold">GANs (HL):</strong> Sharp outputs through adversarial competition; fast generation but highly unstable to train.</p>
+                        <p><strong class="text-indigo-700 font-semibold">VAEs (HL):</strong> Structured latent space representations; fast and stable but can produce blurry outputs.</p>
+                        <p><strong class="text-purple-700 font-semibold">Flow-based (HL):</strong> Invertible, exact likelihood matching; allows precise tracking and mathematical transparency.</p>
+                    </div>
+                </div>
+                <div class="md:col-span-7 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-semibold text-slate-700 mb-4 text-center">Trade-Off Analysis Matrix</h3>
+                    <div class="relative" style="height: 300px;">
+                        <canvas id="archChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Standard Level: Diffusion Models -->
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                <div class="flex items-center justify-between border-b pb-4">
+                    <h3 class="text-xl font-bold text-slate-800">Diffusion Models &amp; Denoising</h3>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-bold">SL &amp; HL Core</span>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-slate-700">How they work:</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Diffusion models generate images by reversing a physical process called diffusion. They are modeled around the <strong>Denoising Diffusion Probabilistic Model (DDPM)</strong> framework.
+                        </p>
+                        <ol class="list-decimal pl-5 text-sm text-slate-600 space-y-2">
+                            <li><strong>Noise Injection:</strong> During training, random noise is gradually added to a training image until it becomes pure, unstructured noise.</li>
+                            <li><strong>Learning to Denoise:</strong> A neural network—typically a <strong>Convolutional Neural Network (CNN)</strong>—is trained to predict and subtract the added noise at each step.</li>
+                            <li><strong>Image Generation:</strong> To generate a new image, the network starts with pure random noise and iteratively denoises it step-by-step into a highly detailed image.</li>
+                        </ol>
+                    </div>
+                    <div class="p-6 bg-slate-50 border border-slate-100 rounded-lg flex flex-col justify-center space-y-4">
+                        <h5 class="font-bold text-emerald-800 text-sm">Key Highlight: The Iterative Denoising Process</h5>
+                        <p class="text-xs text-slate-600">
+                            Because diffusion models perform hundreds of passes through the CNN to clean the noise step-by-step, they require <strong>significant computational resources</strong>. Optimizing this denoising pipeline is one of the primary technical challenges faced by Visionary Studios.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Higher Level only: GANs & Hybrid Models -->
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 border-l-4 border-indigo-500 space-y-6">
+                <div class="flex items-center justify-between border-b pb-4">
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        Generative Adversarial Networks (GANs)
+                    </h3>
+                    <span class="text-xs bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full font-bold">HL Only</span>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-slate-700">The Adversarial Dynamic</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            GANs consist of two neural networks locked in a competitive, adversarial game:
+                        </p>
+                        <ul class="list-disc pl-5 text-sm text-slate-600 space-y-2">
+                            <li><strong>The Generator:</strong> Takes a random <em>D-dimensional noise vector</em> and transforms it into synthetic candidate images, attempting to make them look authentic.</li>
+                            <li><strong>The Discriminator:</strong> Acts as an evaluator, comparing the generated synthetic images with real images from the dataset to classify them as "real" or "fake".</li>
+                        </ul>
+                        <p class="text-sm text-slate-600">
+                            As training progresses, the generator becomes better at deceiving the discriminator, while the discriminator gets better at detecting fakes. This produces sharp, high-quality images.
+                        </p>
+                    </div>
+                    <div class="space-y-4 bg-indigo-50/50 p-6 border border-indigo-100 rounded-lg">
+                        <h4 class="font-bold text-indigo-900 text-sm">GAN Training Vulnerabilities</h4>
+                        <p class="text-xs text-indigo-800 leading-relaxed">
+                            The adversarial dynamic is delicate. GAN training is prone to:
+                        </p>
+                        <ul class="list-disc pl-4 text-xs text-indigo-800 space-y-2">
+                            <li><strong>Training Instability:</strong> The competition can break down if one network outpaces the other.</li>
+                            <li><strong>Mode Collapse:</strong> The generator discovers a single output trick that fools the discriminator (e.g., generating only one type of cat face) and repeats it, failing to represent the true diversity of the training dataset.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Higher Level only: Hybrid Models -->
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 border-l-4 border-purple-500 space-y-6">
+                <div class="flex items-center justify-between border-b pb-4">
+                    <h3 class="text-xl font-bold text-slate-800">Hybrid Models &amp; Advanced Paradigms</h3>
+                    <span class="text-xs bg-purple-100 text-purple-800 px-3 py-1 rounded-full font-bold">HL Only</span>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-slate-700">Variational Autoencoders (VAEs)</h4>
+                        <p class="text-sm text-slate-600">
+                            VAEs learn to encode input images into a compressed, continuous mathematical representation called a <strong>latent space</strong>. VAEs explore this space to interpolate or manipulate image details, offering great flexibility for creative exploration.
+                        </p>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-slate-700">Flow-Based Models</h4>
+                        <p class="text-sm text-slate-600">
+                            Flow-based models learn an exact mapping between noise and realistic images using invertible mathematical functions. Because this mapping is reversible, they provide complete tracking and mathematical transparency in the generation process.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-lg text-xs text-purple-950 border border-purple-100">
+                    <strong>Hybrid Approach:</strong> Blending VAEs, GANs, flow-based models, and diffusion models allows Visionary Studios to balance the trade-offs—such as using a VAE for fast layout exploration and a diffusion/GAN refiner to finalize high-resolution photorealistic details.
+                </div>
+            </div>
+        </div>
+
+        <!-- ── TAB CONTENT: 3. EVALUATION & ETHICS ── -->
+        <div id="tab-evaluation" class="tab-content content-hidden space-y-8">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Evaluation Criteria -->
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                    <h3 class="text-xl font-bold text-slate-800">Model Evaluation Metrics</h3>
+                    <p class="text-sm text-slate-600">
+                        When Visionary Studios selects an AI model, they must evaluate performance along several key axes:
+                    </p>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-emerald-500 pl-4">
+                            <h4 class="font-bold text-slate-700 text-sm">1. Output Quality &amp; Consistency</h4>
+                            <p class="text-xs text-slate-500 mt-1">
+                                Output quality defines resolution and photorealism. Output consistency includes:
+                            </p>
+                            <ul class="list-disc pl-4 text-xs text-slate-500 mt-1 space-y-1">
+                                <li><strong>Character Consistency:</strong> Generating identical appearances for a character across multiple different poses or scenes (often using embedding-based fine-tuning).</li>
+                                <li><strong>Style Adherence:</strong> Aligning generated imagery to the precise theme and style requested by the prompts.</li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h4 class="font-bold text-slate-700 text-sm">2. Computational Efficiency</h4>
+                            <p class="text-xs text-slate-500 mt-1">Can the company's existing IT infrastructure support model training and deployment without incurring prohibitive cloud computing bills or generation latency?</p>
+                        </div>
+                        <div class="border-l-4 border-indigo-500 pl-4">
+                            <h4 class="font-bold text-slate-700 text-sm">3. Training Stability</h4>
+                            <p class="text-xs text-slate-500 mt-1">Evaluating if models train reliably or are highly volatile (e.g., GANs collapsing or requiring excessive hyperparameter tuning).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ethical and Legal Issues -->
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                    <h3 class="text-xl font-bold text-slate-800">Ethical &amp; Legal Constraints</h3>
+                    <p class="text-sm text-slate-600">
+                        Generative AI presents serious social and legal responsibilities that Visionary Studios must manage:
+                    </p>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-red-50 border border-red-100 rounded-lg space-y-1">
+                            <h4 class="font-bold text-red-950 text-sm">Dataset Curation &amp; IP</h4>
+                            <p class="text-xs text-red-900 leading-relaxed">
+                                Training datasets must be carefully managed to prevent the ingestion of copyrighted artwork. Artists' intellectual property must be protected, and licenses verified to avoid legal liability.
+                            </p>
+                        </div>
+                        <div class="p-4 bg-amber-50 border border-amber-100 rounded-lg space-y-1">
+                            <h4 class="font-bold text-amber-950 text-sm">Bias Mitigation &amp; Fairness</h4>
+                            <p class="text-xs text-amber-900 leading-relaxed">
+                                AI training sets often reflect societal stereotypes. Models must be audited and balanced to prevent exclusionary, stereotyped, or biased representations in generated ad campaigns.
+                            </p>
+                        </div>
+                        <div class="p-4 bg-sky-50 border border-sky-100 rounded-lg space-y-1">
+                            <h4 class="font-bold text-sky-950 text-sm">Transparency &amp; AI Disclosure</h4>
+                            <p class="text-xs text-sky-900 leading-relaxed">
+                                Maintaining client trust is crucial. The studio should establish disclosure protocols, clearly marking AI-generated components and workflows to remain transparent.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── TAB CONTENT: 4. INTERACTIVE TERMINOLOGY ── -->
+        <div id="tab-terminology" class="tab-content content-hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-wrap gap-4 items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800">Syllabus Vocabulary</h2>
+                    <p class="text-sm text-slate-500">Filter terms by course level to test your definitions.</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="filterTerms('all')" id="btn-term-all" class="px-4 py-2 text-xs font-bold rounded-lg bg-emerald-600 text-white">All Terms</button>
+                    <button onclick="filterTerms('sl')" id="btn-term-sl" class="px-4 py-2 text-xs font-bold rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300">SL Core</button>
+                    <button onclick="filterTerms('hl')" id="btn-term-hl" class="px-4 py-2 text-xs font-bold rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300">HL Only</button>
+                </div>
+            </div>
+
+            <!-- Vocabulary Cards Grid -->
+            <div id="vocab-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Terms will be dynamically generated by Javascript -->
+            </div>
+        </div>
+
+        <!-- ── TAB CONTENT: 5. TEST YOUR KNOWLEDGE ── -->
+        <div id="tab-quiz" class="tab-content content-hidden space-y-8">
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md border border-slate-200 space-y-6">
+                <div class="border-b pb-4 text-center">
+                    <h2 class="text-2xl font-bold text-slate-800">Case Study 2027 Practice Quiz</h2>
+                    <p class="text-xs text-slate-500 mt-1">Test your command of the generative AI vocabulary and concepts.</p>
+                </div>
+
+                <div id="quiz-area" class="space-y-6">
+                    <div class="flex justify-between items-center text-xs font-semibold text-slate-500">
+                        <span id="question-index-lbl">Question 1 of 5</span>
+                        <span id="score-lbl" class="text-emerald-600">Score: 0</span>
+                    </div>
+                    <div class="w-full bg-slate-100 rounded-full h-1.5">
+                        <div id="quiz-progress-bar" class="bg-emerald-600 h-1.5 rounded-full transition-all duration-300" style="width: 20%;"></div>
+                    </div>
+                    <h3 id="quiz-question-txt" class="text-lg font-bold text-slate-800">
+                        Which component of a GAN is responsible for transforming a random noise vector into candidate images?
+                    </h3>
+                    <div id="quiz-options-box" class="grid gap-3">
+                        <!-- Options generated dynamically -->
+                    </div>
+                    <div id="quiz-feedback-box" class="p-4 rounded-lg hidden font-semibold text-sm">
+                        Feedback message.
+                    </div>
+                </div>
+
+                <div id="quiz-results-area" class="hidden text-center py-8 space-y-4">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 text-emerald-800 text-3xl font-bold">
+                        🎉
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800">Quiz Completed!</h3>
+                    <p id="quiz-score-summary" class="text-slate-600">You scored 4 out of 5.</p>
+                    <button onclick="restartQuiz()" class="px-6 py-2.5 bg-emerald-600 text-white rounded-lg font-bold hover:bg-emerald-700 transition">
+                        Restart Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-8 flex flex-col items-center">
+        <p class="text-sm text-slate-600 mb-2">&copy; 2026 IB CS Mini Websites — Built with ❤️</p>
+        <div class="text-xs text-slate-500 flex flex-col md:flex-row items-center gap-2">
+            <span>Copyright (c) 2026 Stefanos Zisidis. Licensed under <a
+                    href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+                    class="underline hover:text-emerald-600">CC BY 4.0</a>.</span>
+            <span class="hidden md:inline">•</span>
+            <a href="../index.html" class="text-emerald-600 hover:underline font-semibold">Return to Main Site</a>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button Component -->
+    <button id="back-to-top"
+        class="fixed bottom-6 right-6 z-50 bg-emerald-600 hover:bg-emerald-700 text-white font-bold p-3 rounded-full shadow-lg hidden transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+        aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <script>
+        // ════════════════════════════════════════════════════════
+        // DATA
+        // ════════════════════════════════════════════════════════
+        const VOCAB_TERMS = [
+            { term: 'Bias mitigation', level: 'sl', def: 'Methods used during data curation or generation to minimize biased representation of demographics in AI outputs.' },
+            { term: 'Character consistency', level: 'sl', def: 'The ability of a generative model to maintain a uniform physical appearance for a subject across multiple different images.' },
+            { term: 'Convolutional neural network (CNN)', level: 'sl', def: 'A class of deep neural network most commonly applied to analyze and process visual imagery.' },
+            { term: 'Dataset curation', level: 'sl', def: 'The process of selecting, filtering, and cleaning data to train AI models responsibly (avoiding copyright issues or demographic skew).' },
+            { term: 'Denoising', level: 'sl', def: 'The process of iteratively removing predicted noise from an image to construct clean features.' },
+            { term: 'Denoising diffusion probabilistic model (DDPM)', level: 'sl', def: 'The underlying mathematical framework formalizing the gradual adding and subtracting of noise during training and generation.' },
+            { term: 'Diffusion model', level: 'sl', def: 'A class of generative model that creates images by iteratively denoising random seed noise.' },
+            { term: 'Embedding-based approach', level: 'sl', def: 'Representing features or conditions as dense mathematical vectors to help enforce character consistency or style adherence.' },
+            { term: 'Conditional generation', level: 'sl', def: 'Image generation guided by specific guidance inputs such as sketches, text prompts, or segmentation maps.' },
+            { term: 'Unconditional generation', level: 'sl', def: 'Generating novel images purely from patterns learned in training, without any input guides.' },
+            { term: 'Image-to-image translation', level: 'sl', def: 'Translating one image representation type into another, like black-and-white to color.' },
+            { term: 'Noise injection', level: 'sl', def: 'Adding random gaussian noise to inputs during training or starting generation from a noise vector.' },
+            { term: 'Segmentation map', level: 'sl', def: 'A pixel-mapped guide categorizing segments of an image, used as a conditional guide for AI layout generation.' },
+            { term: 'Text-to-image generation', level: 'sl', def: 'Creating images from natural language text prompts (e.g., Stable Diffusion, DALL·E).' },
+            { term: 'Training stability', level: 'sl', def: 'The reliability and convergence quality of a model during training, avoiding errors like training collapse.' },
+            { term: 'Adversarial dynamic', level: 'hl', def: 'The competitive interaction between two networks where the generator attempts to trick the evaluator (discriminator).' },
+            { term: 'D-dimensional noise vector', level: 'hl', def: 'A vector of random numbers representing a position in low-dimensional space, used as the starting input for a GAN generator.' },
+            { term: 'Generative adversarial network (GAN)', level: 'hl', def: 'A generative AI system consisting of a Generator and a Discriminator competing in an adversarial framework.' },
+            { term: 'Discriminator', level: 'hl', def: 'The classification neural network in a GAN that tries to tell if an input image is real (from the dataset) or fake (from the generator).' },
+            { term: 'Generator', level: 'hl', def: 'The neural network in a GAN that tries to produce authentic-looking synthetic images to deceive the discriminator.' },
+            { term: 'Hybrid model', level: 'hl', def: 'A combined architecture blending strengths of different paradigms (e.g., VAEs, GANs, and diffusion) to optimize speed and quality.' },
+            { term: 'Flow-based model', level: 'hl', def: 'A generative model built on invertible mathematical functions, allowing exact probability calculations and transparent, reversible mappings.' },
+            { term: 'Variational autoencoder (VAE)', level: 'hl', def: 'A model that maps inputs into a continuous probability distribution (latent space) allowing smooth interpolation and generation.' },
+            { term: 'Latent space', level: 'hl', def: 'A compressed mathematical multidimensional coordinate system representing features, where similar items are mapped closer together.' },
+            { term: 'Mode collapse', level: 'hl', def: 'A failure state in GAN training where the generator produces a very narrow set of output varieties rather than representing the whole dataset diversity.' }
+        ];
+
+        const QUIZ_QUESTIONS = [
+            {
+                q: "What type of neural network is typically utilized as the neural denoiser in diffusion models?",
+                options: ["Recurrent Neural Network (RNN)", "Convolutional Neural Network (CNN)", "Multilayer Perceptron (MLP)", "Transformer Encoder"],
+                correct: 1,
+                explanation: "CNNs (Convolutional Neural Networks) are the standard architectural component used to inspect spatial layouts and predict/remove noise at each denoising iteration."
+            },
+            {
+                q: "What is the primary vulnerability faced by GANs during training when the generator repeats only a small subset of training varieties?",
+                options: ["Vanishing Gradient", "Overfitting", "Mode Collapse", "Catastrophic Forgetting"],
+                correct: 2,
+                explanation: "Mode collapse occurs when the generator finds a single output that successfully fools the discriminator, causing it to output that specific image repeatedly rather than diversifying."
+            },
+            {
+                q: "Which generative architecture is built on reversible, invertible mappings between noise and realistic images, ensuring exact probability calculation?",
+                options: ["Variational Autoencoders (VAEs)", "Generative Adversarial Networks (GANs)", "Flow-Based Models", "Diffusion Models"],
+                correct: 2,
+                explanation: "Flow-based models learn exact, invertible mappings without loss, making them unique for exact likelihood computation and generation tracking."
+            },
+            {
+                q: "Which technique involves generating realistic renderings or adding color based on input sketches or black-and-white photos?",
+                options: ["Unconditional image generation", "Image-to-image translation", "Class-conditional generation", "Latent space optimization"],
+                correct: 1,
+                explanation: "Image-to-image translation converts one structural map or sketch type into another, mapping structures between domains."
+            },
+            {
+                q: "In diffusion models, what does DDPM stand for?",
+                options: ["Digital Denoising Probability Method", "Denoising Diffusion Probabilistic Model", "Direct Diffusion Pattern Matrix", "Dynamic Denoising Prediction Model"],
+                correct: 1,
+                explanation: "DDPM stands for Denoising Diffusion Probabilistic Model, which formalizes the mathematical process of adding and subtracting noise."
+            }
+        ];
+
+        // ════════════════════════════════════════════════════════
+        // TABS & INITIALIZATION
+        // ════════════════════════════════════════════════════════
+        document.addEventListener('DOMContentLoaded', () => {
+            initTabs();
+            initChart();
+            renderTerminologyCards('all');
+            initQuiz();
+            initBackToTop();
+        });
+
+        function initTabs() {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Update active styling
+                    tabs.forEach(btn => btn.classList.remove('active-tab', 'bg-emerald-600', 'text-white'));
+                    tab.classList.add('active-tab');
+
+                    // Show content pane
+                    const targetTabId = tab.dataset.tab;
+                    contents.forEach(content => {
+                        if (content.id === targetTabId) {
+                            content.classList.remove('content-hidden');
+                        } else {
+                            content.classList.add('content-hidden');
+                        }
+                    });
+                });
+            });
+        }
+
+        // ════════════════════════════════════════════════════════
+        // CHART
+        // ════════════════════════════════════════════════════════
+        function initChart() {
+            const ctx = document.getElementById('archChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Photorealism/Quality', 'Training Stability', 'Gen Speed / Efficiency', 'Control & Latent Space'],
+                    datasets: [
+                        {
+                            label: 'Diffusion Models',
+                            data: [9.5, 8.5, 2.5, 6.0],
+                            backgroundColor: 'rgba(5, 150, 105, 0.2)',
+                            borderColor: 'rgba(5, 150, 105, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(5, 150, 105, 1)'
+                        },
+                        {
+                            label: 'GANs (HL Only)',
+                            data: [9.0, 3.0, 9.0, 4.0],
+                            backgroundColor: 'rgba(217, 119, 6, 0.2)',
+                            borderColor: 'rgba(217, 119, 6, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(217, 119, 6, 1)'
+                        },
+                        {
+                            label: 'VAEs (HL Only)',
+                            data: [5.0, 9.5, 9.5, 9.0],
+                            backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                            borderColor: 'rgba(79, 70, 229, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(79, 70, 229, 1)'
+                        }
+                    ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { display: true, color: '#e2e8f0' },
+                            grid: { color: '#e2e8f0' },
+                            pointLabels: { color: '#475569', font: { size: 10, weight: 'bold' } },
+                            ticks: { display: false },
+                            min: 0,
+                            max: 10
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { boxWidth: 12, font: { size: 11, weight: '500' }, color: '#334155' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ════════════════════════════════════════════════════════
+        // TERMINOLOGY / VOCABULARY
+        // ════════════════════════════════════════════════════════
+        function renderTerminologyCards(filter) {
+            const grid = document.getElementById('vocab-grid');
+            grid.innerHTML = '';
+
+            const filtered = VOCAB_TERMS.filter(item => {
+                if (filter === 'all') return true;
+                return item.level === filter;
+            });
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'term-card bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between';
+
+                const badge = item.level === 'hl' 
+                    ? '<span class="text-[10px] uppercase font-bold px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded">HL Only</span>'
+                    : '<span class="text-[10px] uppercase font-bold px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded">SL Core</span>';
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-slate-800 text-base">${item.term}</h3>
+                            ${badge}
+                        </div>
+                        <p class="text-sm text-slate-600 leading-relaxed">${item.def}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterTerms(level) {
+            // Update button styles
+            const buttons = ['all', 'sl', 'hl'];
+            buttons.forEach(btn => {
+                const el = document.getElementById(`btn-term-${btn}`);
+                if (btn === level) {
+                    el.className = 'px-4 py-2 text-xs font-bold rounded-lg bg-emerald-600 text-white';
+                } else {
+                    el.className = 'px-4 py-2 text-xs font-bold rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300';
+                }
+            });
+
+            renderTerminologyCards(level);
+        }
+
+        // ════════════════════════════════════════════════════════
+        // INTERACTIVE QUIZ
+        // ════════════════════════════════════════════════════════
+        let curIdx = 0;
+        let score = 0;
+        let answered = false;
+
+        function initQuiz() {
+            curIdx = 0;
+            score = 0;
+            answered = false;
+            document.getElementById('quiz-area').classList.remove('hidden');
+            document.getElementById('quiz-results-area').classList.add('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answered = false;
+            const qData = QUIZ_QUESTIONS[curIdx];
+
+            // Labels
+            document.getElementById('question-index-lbl').textContent = `Question ${curIdx + 1} of ${QUIZ_QUESTIONS.length}`;
+            document.getElementById('score-lbl').textContent = `Score: ${score}`;
+            document.getElementById('quiz-question-txt').textContent = qData.q;
+
+            // Progress bar
+            const percent = ((curIdx + 1) / QUIZ_QUESTIONS.length) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${percent}%`;
+
+            // Feedback box
+            const feedbackBox = document.getElementById('quiz-feedback-box');
+            feedbackBox.classList.add('hidden');
+
+            // Options
+            const optBox = document.getElementById('quiz-options-box');
+            optBox.innerHTML = '';
+            qData.options.forEach((optText, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full p-4 text-left border border-slate-200 rounded-lg hover:bg-slate-50 font-medium transition-all duration-150 text-sm focus:outline-none';
+                btn.innerHTML = `<span class="inline-block w-6 h-6 rounded-full bg-slate-100 text-slate-700 text-center font-bold mr-3 pt-0.5 text-xs">${String.fromCharCode(65 + index)}</span>${optText}`;
+                btn.onclick = () => submitAnswer(index, btn);
+                optBox.appendChild(btn);
+            });
+        }
+
+        function submitAnswer(selIndex, btnElement) {
+            if (answered) return;
+            answered = true;
+
+            const qData = QUIZ_QUESTIONS[curIdx];
+            const isCorrect = selIndex === qData.correct;
+
+            // Highlight chosen
+            if (isCorrect) {
+                score++;
+                btnElement.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+                btnElement.querySelector('span').classList.replace('bg-slate-100', 'bg-emerald-500');
+                btnElement.querySelector('span').classList.add('text-white');
+            } else {
+                btnElement.classList.add('border-red-500', 'bg-red-50', 'text-red-900');
+                btnElement.querySelector('span').classList.replace('bg-slate-100', 'bg-red-500');
+                btnElement.querySelector('span').classList.add('text-white');
+
+                // Show correct one
+                const correctBtn = document.getElementById('quiz-options-box').children[qData.correct];
+                correctBtn.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+                correctBtn.querySelector('span').classList.replace('bg-slate-100', 'bg-emerald-500');
+                correctBtn.querySelector('span').classList.add('text-white');
+            }
+
+            // Disable all buttons
+            Array.from(document.getElementById('quiz-options-box').children).forEach(btn => {
+                btn.disabled = true;
+                if (btn !== btnElement && Array.from(document.getElementById('quiz-options-box').children).indexOf(btn) !== qData.correct) {
+                    btn.classList.add('opacity-60');
+                }
+            });
+
+            // Show explanation
+            const fbBox = document.getElementById('quiz-feedback-box');
+            fbBox.classList.remove('hidden');
+            if (isCorrect) {
+                fbBox.className = 'p-4 rounded-lg font-medium text-sm bg-emerald-100 border border-emerald-200 text-emerald-900';
+                fbBox.innerHTML = `<strong>Correct!</strong> ${qData.explanation}`;
+            } else {
+                fbBox.className = 'p-4 rounded-lg font-medium text-sm bg-red-100 border border-red-200 text-red-900';
+                fbBox.innerHTML = `<strong>Incorrect.</strong> ${qData.explanation}`;
+            }
+
+            // Move next
+            setTimeout(() => {
+                curIdx++;
+                if (curIdx < QUIZ_QUESTIONS.length) {
+                    loadQuestion();
+                } else {
+                    showQuizResults();
+                }
+            }, 3000);
+        }
+
+        // ════════════════════════════════════════════════════════
+        // BACK TO TOP
+        // ════════════════════════════════════════════════════════
+        function initBackToTop() {
+            const btn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    btn.classList.remove('hidden');
+                } else {
+                    btn.classList.add('hidden');
+                }
+            });
+            btn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    </script>
+</body>
+
+</html>
