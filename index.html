@@ -93,84 +93,222 @@
         <div class="absolute -left-16 -bottom-16 w-72 h-72 bg-indigo-600/25 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
         <div class="relative z-10">
-          <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold rounded-full mb-4">
-            <span>📊</span> First Assessment May 2027
-          </div>
-          <h3 class="text-2xl md:text-3xl font-bold mb-4">Understanding IB Computer Science (2027 Specification)</h3>
-          <p class="text-slate-300 max-w-4xl text-base md:text-lg mb-8 leading-relaxed">
-            The 2027 IB Computer Science curriculum emphasizes computational thinking, algorithmic problem-solving, software engineering principles, and synoptic case study evaluation across Standard Level (SL) and Higher Level (HL).
-          </p>
 
+          <!-- Header + SL/HL Toggle -->
+          <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold rounded-full mb-3">
+                <span>&#128202;</span> First Assessment May 2027
+              </div>
+              <h3 class="text-2xl md:text-3xl font-bold">Understanding IB Computer Science (2027 Specification)</h3>
+              <p class="text-slate-300 max-w-3xl text-sm md:text-base mt-2 leading-relaxed">
+                The 2027 IB CS curriculum spans four core topic areas across two papers plus an internal assessment.
+                Paper 2 has two language versions &mdash; Python or Java &mdash; chosen at course start.
+                Toggle between SL and HL below to see how marks, durations, and content differ.
+              </p>
+            </div>
+            <!-- SL / HL Toggle -->
+            <div class="flex items-center gap-1 bg-slate-800 border border-slate-700 rounded-xl p-1 self-start flex-shrink-0"
+                 role="group" aria-label="Switch between SL and HL view">
+              <button id="btn-sl"
+                class="px-5 py-2 rounded-lg text-sm font-bold transition-all duration-200"
+                onclick="ibSetLevel('sl')">SL</button>
+              <button id="btn-hl"
+                class="px-5 py-2 rounded-lg text-sm font-bold transition-all duration-200"
+                onclick="ibSetLevel('hl')">HL</button>
+            </div>
+          </div>
+
+          <!-- HL notice banner -->
+          <div id="hl-notice"
+               class="mb-6 items-center gap-2 text-xs font-semibold text-amber-300
+                      bg-amber-500/10 border border-amber-500/30 rounded-lg px-4 py-2.5"
+               style="display:none;">
+            <span>&#9888;&#65039;</span>
+            Items marked
+            <span class="bg-amber-500/20 border border-amber-500/40 rounded px-1.5 py-0.5 mx-0.5">HL only</span>
+            are <strong>additional</strong> requirements beyond the SL course.
+          </div>
+
+          <!-- 3-column cards -->
           <div class="grid md:grid-cols-3 gap-6">
-            <!-- Paper 1 -->
-            <div class="bg-slate-800/80 border border-slate-700/80 p-6 rounded-xl flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-3xl">📝</span>
-                  <span class="text-xs font-bold px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                    SL 35% | HL 35%
-                  </span>
+
+            <!-- PAPER 1 -->
+            <div class="bg-slate-800/80 border border-slate-700/80 p-6 rounded-xl flex flex-col gap-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-2xl">&#128221;</span>
+                  <h4 class="text-lg font-bold text-white">Paper 1</h4>
                 </div>
-                <h4 class="text-xl font-semibold text-white mb-2">Paper 1: Theoretical Fundamentals & Systems</h4>
-                <p class="text-sm text-slate-300 mb-4 leading-relaxed">
-                  Written theoretical examination evaluating core computer science principles, system architecture, data representation, networks, and system security.
-                </p>
+                <span id="p1-badge" class="text-xs font-bold px-2.5 py-1 rounded border"></span>
               </div>
-              <ul class="text-xs text-slate-400 space-y-2 list-disc pl-4 border-t border-slate-700/60 pt-4">
-                <li>Computer organization & von Neumann architecture</li>
-                <li>Network topology, TCP/IP & cybersecurity</li>
-                <li>Data structures, arrays & ADTs</li>
-                <li>Environmental, ethical & social impacts</li>
-              </ul>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Written exam on core CS fundamentals, networks, databases, machine learning concepts, and the annual
+                <strong>Case Study</strong>. Same four topic units for SL and HL &mdash; marks and duration differ.
+              </p>
+              <div id="p1-stats" class="bg-slate-700/50 rounded-lg px-4 py-3 text-xs space-y-1 font-mono text-slate-200"></div>
+              <div class="border-t border-slate-700/60 pt-3 space-y-1.5 text-xs flex-grow">
+                <p class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] mb-2">Topics (SL &amp; HL)</p>
+                <div class="flex items-center gap-2 text-slate-300"><span class="text-emerald-400">&#10003;</span> A1 Computer fundamentals</div>
+                <div class="flex items-center gap-2 text-slate-300"><span class="text-emerald-400">&#10003;</span> A2 Networks</div>
+                <div class="flex items-center gap-2 text-slate-300"><span class="text-emerald-400">&#10003;</span> A3 Databases</div>
+                <div class="flex items-center gap-2 text-slate-300"><span class="text-emerald-400">&#10003;</span> A4 Machine Learning</div>
+                <div class="flex items-center gap-2 text-slate-300"><span class="text-emerald-400">&#10003;</span> Case Study</div>
+              </div>
             </div>
 
-            <!-- Paper 2 -->
-            <div class="bg-slate-800/80 border border-slate-700/80 p-6 rounded-xl flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-3xl">💻</span>
-                  <span class="text-xs font-bold px-2.5 py-1 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                    SL 35% | HL 45%
-                  </span>
+            <!-- PAPER 2 -->
+            <div class="bg-slate-800/80 border border-slate-700/80 p-6 rounded-xl flex flex-col gap-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-2xl">&#128187;</span>
+                  <h4 class="text-lg font-bold text-white">Paper 2</h4>
                 </div>
-                <h4 class="text-xl font-semibold text-white mb-2">Paper 2: Applied Thinking & Case Study</h4>
-                <p class="text-sm text-slate-300 mb-4 leading-relaxed">
-                  Written exam focused on algorithmic problem-solving, code tracing, programming concepts, and deep analysis of the annual Case Study.
-                </p>
+                <span id="p2-badge" class="text-xs font-bold px-2.5 py-1 rounded border"></span>
               </div>
-              <ul class="text-xs text-slate-400 space-y-2 list-disc pl-4 border-t border-slate-700/60 pt-4">
-                <li>Algorithm design & pseudocode trace tables</li>
-                <li>Object-Oriented Programming (OOP) paradigms</li>
-                <li>Annual Case Study (<em>Generative AI for Image Creation</em>)</li>
-                <li>Software evaluation & algorithmic complexity</li>
-              </ul>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Algorithmic problem-solving and programming. Available in two versions &mdash;
+                <strong>Python</strong> or <strong>Java</strong> &mdash; chosen at course start.
+              </p>
+              <div id="p2-stats" class="bg-slate-700/50 rounded-lg px-4 py-3 text-xs space-y-1 font-mono text-slate-200"></div>
+              <div class="border-t border-slate-700/60 pt-3 space-y-1.5 text-xs flex-grow">
+                <p class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] mb-2">Topics</p>
+                <div class="flex items-center gap-2 text-slate-300"><span class="text-emerald-400">&#10003;</span> B1 Computational thinking</div>
+                <div class="flex items-center gap-2 text-slate-300"><span class="text-emerald-400">&#10003;</span> B2 Programming</div>
+                <div class="flex items-center gap-2 text-slate-300"><span class="text-emerald-400">&#10003;</span> B3 OOP (Object-Oriented Programming)</div>
+                <div class="flex items-center gap-2 text-slate-300"><span class="text-emerald-400">&#10003;</span> B4 ADT (Abstract Data Types)</div>
+                <!-- HL-only row — dimmed in SL view -->
+                <div id="p2-hl-row" class="flex items-center gap-2 text-slate-300 mt-1 transition-all duration-300">
+                  <span class="text-amber-400">+</span>
+                  <span>Additional HL-only question topics</span>
+                  <span class="ml-auto text-[9px] font-bold bg-amber-500/20 border border-amber-500/40 text-amber-300 px-1.5 py-0.5 rounded whitespace-nowrap">HL only</span>
+                </div>
+              </div>
+              <div id="p2-note" class="text-[11px] text-slate-400 leading-relaxed bg-slate-700/30 rounded-lg px-3 py-2"></div>
             </div>
 
-            <!-- Internal Assessment -->
-            <div class="bg-slate-800/80 border border-slate-700/80 p-6 rounded-xl flex flex-col justify-between">
-              <div>
-                <div class="flex items-center justify-between mb-3">
-                  <span class="text-3xl">🛠️</span>
-                  <span class="text-xs font-bold px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                    SL 30% | HL 20%
-                  </span>
+            <!-- INTERNAL ASSESSMENT -->
+            <div class="bg-slate-800/80 border border-slate-700/80 p-6 rounded-xl flex flex-col gap-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-2xl">&#128736;</span>
+                  <h4 class="text-lg font-bold text-white">Internal Assessment</h4>
                 </div>
-                <h4 class="text-xl font-semibold text-white mb-2">Internal Assessment: Computational Solution</h4>
-                <p class="text-sm text-slate-300 mb-4 leading-relaxed">
-                  A 30-hour practical project where students analyze, design, develop, test, and evaluate a fully functional software application for a client.
-                </p>
+                <span id="ia-badge" class="text-xs font-bold px-2.5 py-1 rounded border"></span>
               </div>
-              <ul class="text-xs text-slate-400 space-y-2 list-disc pl-4 border-t border-slate-700/60 pt-4">
-                <li>Criterion A: Problem definition & client needs</li>
-                <li>Criterion B: Detailed system design & test plans</li>
-                <li>Criterion C: Computational development & implementation</li>
-                <li>Criterion D & E: Testing, video demo & evaluation</li>
-              </ul>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Self-selected programming project &amp; documentation for a real client.
+                35 hours class time for both SL and HL; the grade weighting differs.
+              </p>
+              <div id="ia-stats" class="bg-slate-700/50 rounded-lg px-4 py-3 text-xs space-y-1 font-mono text-slate-200"></div>
+              <div class="border-t border-slate-700/60 pt-3 space-y-1.5 text-xs flex-grow">
+                <p class="text-slate-400 font-semibold uppercase tracking-wider text-[10px] mb-2">Criteria (SL &amp; HL)</p>
+                <div class="flex items-center gap-2 text-slate-300"><span class="text-emerald-400">&#10003;</span> Criterion A: Problem definition &amp; client needs</div>
+                <div class="flex items-center gap-2 text-slate-300"><span class="text-emerald-400">&#10003;</span> Criterion B: System design &amp; test planning</div>
+                <div class="flex items-center gap-2 text-slate-300"><span class="text-emerald-400">&#10003;</span> Criterion C: Development &amp; implementation</div>
+                <div class="flex items-center gap-2 text-slate-300"><span class="text-emerald-400">&#10003;</span> Criterion D &amp; E: Testing, demo &amp; evaluation</div>
+              </div>
             </div>
-          </div>
+
+          </div><!-- /grid -->
         </div>
       </div>
     </section>
+
+    <script>
+      // ── Assessment data: sourced from official IB CS 2027 Examinations Overview ──
+      var ibData = {
+        sl: {
+          p1: {
+            grade: '35% of grade',
+            badge: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+            stats: ['1 hr 15 min duration', '50 marks total', '38 marks &#8212; A1 / A2 / A3 / A4 topics', '12 marks &#8212; Case Study'],
+          },
+          p2: {
+            grade: '35% of grade',
+            badge: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
+            stats: ['1 hr 15 min duration', '50 marks total'],
+            note: '\u{1F4A1} One question focuses on algorithmic thinking \u2014 no need to interpret or write code.',
+          },
+          ia: {
+            grade: '30% of grade',
+            badge: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+            stats: ['35 hours class time', 'Self-selected programming project &amp; documentation'],
+          },
+        },
+        hl: {
+          p1: {
+            grade: '40% of grade',
+            badge: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+            stats: ['2 hours duration', '80 marks total', '56 marks &#8212; A1 / A2 / A3 / A4 topics', '24 marks &#8212; Case Study'],
+          },
+          p2: {
+            grade: '40% of grade',
+            badge: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
+            stats: ['2 hours duration', '80 marks total'],
+            note: '\u{1F4A1} Two SL questions are repeated in the HL paper (incl. the algorithmic thinking question). Additional questions focus on HL-only topics.',
+          },
+          ia: {
+            grade: '20% of grade',
+            badge: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+            stats: ['35 hours class time', 'Self-selected programming project &amp; documentation'],
+          },
+        },
+      };
+
+      function ibRenderStats(elId, lines) {
+        document.getElementById(elId).innerHTML = lines
+          .map(function(l) { return '<div class="flex gap-1.5"><span class="text-slate-500 flex-shrink-0">&#8226;</span><span>' + l + '</span></div>'; })
+          .join('');
+      }
+
+      function ibSetLevel(lvl) {
+        var d = ibData[lvl];
+        var isHL = (lvl === 'hl');
+
+        document.getElementById('btn-sl').className =
+          'px-5 py-2 rounded-lg text-sm font-bold transition-all duration-200 ' +
+          (!isHL ? 'bg-emerald-600 text-white shadow' : 'text-slate-400 hover:text-white');
+        document.getElementById('btn-hl').className =
+          'px-5 py-2 rounded-lg text-sm font-bold transition-all duration-200 ' +
+          (isHL ? 'bg-indigo-600 text-white shadow' : 'text-slate-400 hover:text-white');
+
+        document.getElementById('hl-notice').style.display = isHL ? 'flex' : 'none';
+
+        // Paper 1
+        var p1b = document.getElementById('p1-badge');
+        p1b.textContent = d.p1.grade;
+        p1b.className = 'text-xs font-bold px-2.5 py-1 rounded border ' + d.p1.badge;
+        ibRenderStats('p1-stats', d.p1.stats);
+
+        // Paper 2
+        var p2b = document.getElementById('p2-badge');
+        p2b.textContent = d.p2.grade;
+        p2b.className = 'text-xs font-bold px-2.5 py-1 rounded border ' + d.p2.badge;
+        ibRenderStats('p2-stats', d.p2.stats);
+        document.getElementById('p2-note').textContent = d.p2.note;
+
+        // HL-only topics row
+        var hlRow = document.getElementById('p2-hl-row');
+        hlRow.style.opacity = isHL ? '1' : '0.3';
+        hlRow.title = isHL ? '' : 'Not assessed at SL';
+
+        // IA
+        var iab = document.getElementById('ia-badge');
+        iab.textContent = d.ia.grade;
+        iab.className = 'text-xs font-bold px-2.5 py-1 rounded border ' + d.ia.badge;
+        ibRenderStats('ia-stats', d.ia.stats);
+
+        try { sessionStorage.setItem('ibcs-level', lvl); } catch(e) {}
+      }
+
+      // Initialise on page load
+      (function() {
+        var saved = 'sl';
+        try { saved = sessionStorage.getItem('ibcs-level') || 'sl'; } catch(e) {}
+        ibSetLevel(saved);
+      })();
+    </script>
 
     <!-- Current Curriculum Section (2027) -->
     <section id="current-curriculum" class="scroll-mt-24">
