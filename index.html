@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IB CS Mini Websites</title>
+  <title>IB CS Mini Websites • 2027 Curriculum & Assessment Hub</title>
+  <meta name="description" content="Tailored resources, interactive tools, assessment overviews, and revision materials for IB Computer Science (2027 & 2014 curricula)." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      scroll-behavior: smooth;
     }
   </style>
 </head>
 
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
 
-  <!-- Header / Nav (updated to match GCSE style) -->
+  <!-- Header / Nav -->
   <header class="sticky top-0 z-50 bg-slate-50/80 backdrop-blur-lg border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
       <h1 class="text-xl md:text-2xl font-bold">
-        <a href="./" class="inline-flex items-center gap-2 text-slate-900 hover:text-sky-700" aria-label="Home">
+        <a href="./" class="inline-flex items-center gap-2 text-slate-900 hover:text-emerald-600 transition-colors" aria-label="IB CS Home">
           <span aria-hidden="true">🏠</span>
           <span>IB CS Mini Websites</span>
         </a>
@@ -31,15 +31,16 @@
 
       <!-- Right-side nav -->
       <nav class="hidden md:block">
-        <ul class="flex items-center gap-6">
-          <li><a href="https://mrzisidis.github.io/" class="text-slate-600 hover:text-sky-600 font-semibold">CS hub</a></li>
-          <li><a href="#new-curriculum" class="text-slate-600 hover:text-sky-600 font-semibold">New Curriculum (2027)</a></li>
-          <li><a href="#old-curriculum" class="text-slate-600 hover:text-sky-600 font-semibold">Old Curriculum (2014)</a></li>
+        <ul class="flex items-center gap-6 text-sm font-semibold">
+          <li><a href="https://mrzisidis.github.io/" class="text-slate-600 hover:text-emerald-600 transition-colors">CS Hub</a></li>
+          <li><a href="#assessment-overview" class="text-slate-600 hover:text-emerald-600 transition-colors">Assessment Overview</a></li>
+          <li><a href="#current-curriculum" class="text-slate-600 hover:text-emerald-600 transition-colors">2027 Curriculum</a></li>
+          <li><a href="#old-curriculum" class="text-slate-600 hover:text-emerald-600 transition-colors">Legacy (2014)</a></li>
           <li>
             <a href="https://github.com/MrZisidis/ib-cs-mini-websites"
-              class="inline-flex items-center text-slate-600 hover:text-sky-600 font-semibold"
+              class="inline-flex items-center text-slate-600 hover:text-emerald-600 transition-colors"
               aria-label="View repository on GitHub" rel="noopener noreferrer" target="_blank">
-              <svg class="w-4 h-4 mr-2 fill-current" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <svg class="w-4 h-4 mr-1.5 fill-current" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
                 <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
                   0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
                   -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64
@@ -56,235 +57,396 @@
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section class="bg-white border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-      <h2 class="text-4xl md:text-5xl font-bold text-slate-900">Welcome to IB Computer Science 🚀</h2>
-      <p class="mt-4 text-lg text-slate-600">
-        Explore classroom-ready activities and interactive resources for both the 2014 and 2027 Curricula.
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold rounded-full mb-4">
+        <span>🌍</span> International Baccalaureate® Diploma Programme
+      </div>
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-900 leading-tight">
+        IB Computer Science Hub 🚀
+      </h2>
+      <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+        Interactive learning tools, assessment guides, and classroom-ready resources built for IB Computer Science.
       </p>
-      <div class="mt-8 flex justify-center gap-4">
-        <a href="#new-curriculum"
-          class="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-lg transition">
-          New Curriculum (2027)
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="#current-curriculum"
+          class="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-lg transition shadow-md">
+          Explore 2027 Curriculum
         </a>
-        <a href="#old-curriculum"
-          class="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white font-bold px-6 py-3 rounded-lg transition">
-          Old Curriculum (2014)
+        <a href="#assessment-overview"
+          class="inline-flex items-center bg-slate-800 hover:bg-slate-900 text-white font-bold px-6 py-3 rounded-lg transition shadow-md">
+          Assessment Overview
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Main Content Areas -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow space-y-16">
 
-    <!-- New Curriculum Section -->
-    <section id="new-curriculum" class="scroll-mt-24">
-      <div class="flex items-center gap-4 mb-8">
-        <h3 class="text-3xl font-bold text-slate-900">New Curriculum <span class="text-base font-normal text-slate-500">(First assessment 2027)</span></h3>
-        <span class="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded">Current Focus</span>
+    <!-- Assessment Overview Section (New IB CS 2027) -->
+    <section id="assessment-overview" class="scroll-mt-24">
+      <div class="bg-slate-900 text-white rounded-2xl p-6 md:p-10 shadow-xl overflow-hidden relative">
+        <!-- Decorative Ambient Glows -->
+        <div class="absolute -right-16 -top-16 w-72 h-72 bg-emerald-600/25 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+        <div class="absolute -left-16 -bottom-16 w-72 h-72 bg-indigo-600/25 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+
+        <div class="relative z-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold rounded-full mb-4">
+            <span>📊</span> First Assessment May 2027
+          </div>
+          <h3 class="text-2xl md:text-3xl font-bold mb-4">Understanding IB Computer Science (2027 Specification)</h3>
+          <p class="text-slate-300 max-w-4xl text-base md:text-lg mb-8 leading-relaxed">
+            The 2027 IB Computer Science curriculum emphasizes computational thinking, algorithmic problem-solving, software engineering principles, and synoptic case study evaluation across Standard Level (SL) and Higher Level (HL).
+          </p>
+
+          <div class="grid md:grid-cols-3 gap-6">
+            <!-- Paper 1 -->
+            <div class="bg-slate-800/80 border border-slate-700/80 p-6 rounded-xl flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-3xl">📝</span>
+                  <span class="text-xs font-bold px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    SL 35% | HL 35%
+                  </span>
+                </div>
+                <h4 class="text-xl font-semibold text-white mb-2">Paper 1: Theoretical Fundamentals & Systems</h4>
+                <p class="text-sm text-slate-300 mb-4 leading-relaxed">
+                  Written theoretical examination evaluating core computer science principles, system architecture, data representation, networks, and system security.
+                </p>
+              </div>
+              <ul class="text-xs text-slate-400 space-y-2 list-disc pl-4 border-t border-slate-700/60 pt-4">
+                <li>Computer organization & von Neumann architecture</li>
+                <li>Network topology, TCP/IP & cybersecurity</li>
+                <li>Data structures, arrays & ADTs</li>
+                <li>Environmental, ethical & social impacts</li>
+              </ul>
+            </div>
+
+            <!-- Paper 2 -->
+            <div class="bg-slate-800/80 border border-slate-700/80 p-6 rounded-xl flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-3xl">💻</span>
+                  <span class="text-xs font-bold px-2.5 py-1 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                    SL 35% | HL 45%
+                  </span>
+                </div>
+                <h4 class="text-xl font-semibold text-white mb-2">Paper 2: Applied Thinking & Case Study</h4>
+                <p class="text-sm text-slate-300 mb-4 leading-relaxed">
+                  Written exam focused on algorithmic problem-solving, code tracing, programming concepts, and deep analysis of the annual Case Study.
+                </p>
+              </div>
+              <ul class="text-xs text-slate-400 space-y-2 list-disc pl-4 border-t border-slate-700/60 pt-4">
+                <li>Algorithm design & pseudocode trace tables</li>
+                <li>Object-Oriented Programming (OOP) paradigms</li>
+                <li>Annual Case Study (<em>Generative AI for Image Creation</em>)</li>
+                <li>Software evaluation & algorithmic complexity</li>
+              </ul>
+            </div>
+
+            <!-- Internal Assessment -->
+            <div class="bg-slate-800/80 border border-slate-700/80 p-6 rounded-xl flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-3xl">🛠️</span>
+                  <span class="text-xs font-bold px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                    SL 30% | HL 20%
+                  </span>
+                </div>
+                <h4 class="text-xl font-semibold text-white mb-2">Internal Assessment: Computational Solution</h4>
+                <p class="text-sm text-slate-300 mb-4 leading-relaxed">
+                  A 30-hour practical project where students analyze, design, develop, test, and evaluate a fully functional software application for a client.
+                </p>
+              </div>
+              <ul class="text-xs text-slate-400 space-y-2 list-disc pl-4 border-t border-slate-700/60 pt-4">
+                <li>Criterion A: Problem definition & client needs</li>
+                <li>Criterion B: Detailed system design & test plans</li>
+                <li>Criterion C: Computational development & implementation</li>
+                <li>Criterion D & E: Testing, video demo & evaluation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-      
+    </section>
+
+    <!-- Current Curriculum Section (2027) -->
+    <section id="current-curriculum" class="scroll-mt-24">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+        <div>
+          <div class="flex items-center gap-3">
+            <h3 class="text-3xl font-bold text-slate-900">Current Curriculum</h3>
+            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+              First Assessment 2027
+            </span>
+          </div>
+          <p class="mt-1 text-slate-600">
+            Main interactive tools and study guides aligned with the current IB Computer Science syllabus.
+          </p>
+        </div>
+      </div>
+
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Card: Python Playground -->
-        <article data-href="new-curriculum-2027/python_playground.html" 
-          class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-emerald-300">
-          <h4 class="text-xl font-bold text-slate-900 flex items-center">
-            Python Playground 🐍
-            <span class="ml-2 inline-block text-xs font-bold px-2 py-1 rounded-full bg-emerald-500 text-white"
-              aria-hidden="true">NEW</span>
-          </h4>
-          <p class="mt-2 text-slate-600">
-            Interactive Python environment directly in your browser. Write code or load examples from the repo.
+        <article data-href="new-curriculum-2027/python_playground.html"
+          class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-emerald-400">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+              Python Playground 🐍
+            </h4>
+            <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500 text-white">INTERACTIVE</span>
+          </div>
+          <p class="mt-2 text-slate-600 text-sm leading-relaxed">
+            Interactive Python environment running directly in your browser powered by Pyodide. Write code, test algorithms, or load repo samples.
           </p>
-          <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
-            <li>In-browser Python execution (Pyodide)</li>
-            <li>Load files from GitHub repo</li>
-            <li>Export and copy functionality</li>
+          <ul class="mt-4 text-xs text-slate-600 space-y-1.5 list-disc pl-4">
+            <li>In-browser Python execution (Pyodide engine)</li>
+            <li>Directly load code samples from GitHub</li>
+            <li>Code exporter & instant copy functionality</li>
           </ul>
-          <div class="mt-6 mt-auto">
+          <div class="mt-6 pt-4 border-t border-slate-100 mt-auto">
             <a href="new-curriculum-2027/python_playground.html"
-              class="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-md transition">
-              Open Playground
+              class="w-full inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-lg transition text-sm">
+              Open Python Playground
             </a>
           </div>
         </article>
 
         <!-- Card: IB CS IA Guide -->
-        <article data-href="new-curriculum-2027/ib-cs-ia-guide.html" 
-          class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-indigo-300">
-          <h4 class="text-xl font-bold text-slate-900 flex items-center">
-            IB CS IA Success Guide
-            <span class="ml-2 inline-block text-xs font-bold px-2 py-1 rounded-full bg-indigo-500 text-white"
-              aria-hidden="true">NEW</span>
-          </h4>
-          <p class="mt-2 text-slate-600">
-            A comprehensive guide to the new 2027 IB Computer Science Internal Assessment, focusing on the Computational Solution.
+        <article data-href="new-curriculum-2027/ib-cs-ia-guide.html"
+          class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-indigo-400">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+              IB CS IA Success Guide 📘
+            </h4>
+            <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-indigo-500 text-white">2027 IA</span>
+          </div>
+          <p class="mt-2 text-slate-600 text-sm leading-relaxed">
+            Comprehensive guide to the 2027 IB Computer Science Internal Assessment, focusing on the Computational Solution.
           </p>
-          <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
-            <li>Assessment basics & criteria</li>
-            <li>Computational thinking process</li>
-            <li>Implementation timeline</li>
+          <ul class="mt-4 text-xs text-slate-600 space-y-1.5 list-disc pl-4">
+            <li>Assessment basics & criteria breakdown (A–E)</li>
+            <li>Computational thinking workflow & phases</li>
+            <li>Implementation timeline & scaffolding tips</li>
           </ul>
-          <div class="mt-6 mt-auto">
+          <div class="mt-6 pt-4 border-t border-slate-100 mt-auto">
             <a href="new-curriculum-2027/ib-cs-ia-guide.html"
-              class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-md transition">
-              Open IA Guide
+              class="w-full inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg transition text-sm">
+              Open IA Success Guide
             </a>
           </div>
         </article>
 
         <!-- Card: IB CS Case Study 2027 Guide -->
         <article data-href="new-curriculum-2027/IB_CS_CaseStudy_2027_StudyGuide.html"
-          class="relative bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-violet-300">
-          <h4 class="text-xl font-bold text-slate-900 flex items-center">
-            IB CS Case Study 2027 Guide
-            <span class="ml-2 inline-block text-xs font-bold px-2 py-1 rounded-full bg-violet-500 text-white"
-              aria-hidden="true">NEW</span>
-          </h4>
-          <p class="mt-2 text-slate-600">
-            Interactive study guide for the 2027 IB CS Case Study: <em>Generative AI for Image Creation</em> — "A Diffuse Vision" by Visionary Studios.
+          class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-violet-400">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+              Case Study 2027 Guide 🤖
+            </h4>
+            <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-violet-500 text-white">CASE STUDY</span>
+          </div>
+          <p class="mt-2 text-slate-600 text-sm leading-relaxed">
+            Interactive study guide for the 2027 Case Study: <em>Generative AI for Image Creation</em> — "A Diffuse Vision" by Visionary Studios.
           </p>
-          <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
+          <ul class="mt-4 text-xs text-slate-600 space-y-1.5 list-disc pl-4">
             <li>Scenario breakdown & core architectures (SL & HL)</li>
             <li>Evaluation metrics, ethics & legal constraints</li>
             <li>Interactive terminology glossary & practice quiz</li>
           </ul>
-          <div class="mt-6 mt-auto">
+          <div class="mt-6 pt-4 border-t border-slate-100 mt-auto">
             <a href="new-curriculum-2027/IB_CS_CaseStudy_2027_StudyGuide.html"
-              class="inline-flex items-center bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold px-5 py-2.5 rounded-md transition">
+              class="w-full inline-flex items-center justify-center bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold px-5 py-2.5 rounded-lg transition text-sm">
               Open Case Study Guide
+            </a>
+          </div>
+        </article>
+
+        <!-- Card: Criterion B Design Guide -->
+        <article data-href="new-curriculum-2027/ib_cs_criterion_b_2027_v.2.html"
+          class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-teal-400">
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+              IA Criterion B Activity ✏️
+            </h4>
+            <span class="text-xs font-bold px-2 py-0.5 rounded-full bg-teal-600 text-white">WORKOUT</span>
+          </div>
+          <p class="mt-2 text-slate-600 text-sm leading-relaxed">
+            Interactive design starter activity for mastering Criterion B: System Overview, Record of Tasks, System Architecture, and Test Plans.
+          </p>
+          <ul class="mt-4 text-xs text-slate-600 space-y-1.5 list-disc pl-4">
+            <li>System flowcharts & data structure design</li>
+            <li>Record of Tasks table generation</li>
+            <li>Testing strategy & test case design templates</li>
+          </ul>
+          <div class="mt-6 pt-4 border-t border-slate-100 mt-auto">
+            <a href="new-curriculum-2027/ib_cs_criterion_b_2027_v.2.html"
+              class="w-full inline-flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white font-bold px-5 py-2.5 rounded-lg transition text-sm">
+              Open Criterion B Activity
             </a>
           </div>
         </article>
       </div>
     </section>
 
-    <hr class="border-slate-200" />
-
-    <!-- Old Curriculum Section -->
+    <!-- Legacy / Old Curriculum Section (Expandable Accordion) -->
     <section id="old-curriculum" class="scroll-mt-24">
-      <div class="flex items-center gap-4 mb-8">
-        <h3 class="text-3xl font-bold text-slate-900">Old Curriculum <span class="text-base font-normal text-slate-500">(Last assessment 2026)</span></h3>
-        <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded">Legacy</span>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Card 1: Case Study 2026 Guide -->
-        <article data-href="old-curriculum-2014/IB_CS_CaseStudy_2026_StudyGuide.html"
-          class="relative bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-fuchsia-300">
-          <h4 class="text-xl font-bold text-slate-900 flex items-center">IB CS Case Study 2026 Guide</h4>
-          <p class="mt-2 text-slate-600">
-            Structured study guide for the 2026 IB Computer Science case study: concepts, terminology, applied analysis &
-            exam-style practice.
-          </p>
-          <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
-            <li>Key scenario domains & vocabulary</li>
-            <li>Stakeholder / system perspectives</li>
-            <li>Practice prompts with guided scaffolds</li>
-          </ul>
-          <div class="mt-6 mt-auto">
-            <a href="old-curriculum-2014/IB_CS_CaseStudy_2026_StudyGuide.html"
-              class="inline-flex items-center bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-700 hover:to-purple-700 text-white font-bold px-5 py-2.5 rounded-md transition">
-              Open Case Study Guide
-            </a>
-          </div>
-        </article>
-
-        <!-- Card 2: Consolidated Trees Lessons 1 & 2 -->
-        <article data-href="old-curriculum-2014/ib-cs-trees_1.html"
-          class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-teal-300">
-          <h4 class="text-xl font-bold text-slate-900">IB CS HL: Trees — Lessons 1 & 2</h4>
-          <p class="mt-2 text-slate-600">
-            Build foundational and advanced understanding of tree and BST concepts, then apply them through activities and
-            reasoning tasks.
-          </p>
-          
-          <div class="space-y-4 mt-4">
-            <div class="border-l-2 border-teal-500 pl-4">
-                <h5 class="font-bold text-slate-800">Lesson 1: Intro & Terminology</h5>
-                <a href="old-curriculum-2014/ib-cs-trees_1.html" class="text-sm font-semibold text-teal-600 hover:underline">Open Lesson 1 &rarr;</a>
+      <details class="group bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden transition-all duration-300">
+        <summary class="p-6 md:p-8 cursor-pointer flex items-center justify-between font-bold text-slate-900 bg-slate-100/70 hover:bg-slate-100 select-none border-b border-transparent group-open:border-slate-200 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-2xl flex-shrink-0">
+              📜
             </div>
-             <div class="border-l-2 border-sky-500 pl-4">
-                <h5 class="font-bold text-slate-800">Lesson 2: BST Properties</h5>
-                <a href="old-curriculum-2014/ib-cs-trees_2.html" class="text-sm font-semibold text-sky-600 hover:underline">Open Lesson 2 &rarr;</a>
+            <div>
+              <div class="flex items-center gap-3">
+                <h3 class="text-2xl font-bold text-slate-900">Old Curriculum Archives</h3>
+                <span class="bg-amber-100 text-amber-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                  2014 – 2026 Specification
+                </span>
+              </div>
+              <p class="mt-1 text-sm text-slate-600 font-normal">
+                Click to expand 4 legacy resources including the 2026 Case Study, Grade Boundary Explorer, Data Structure lessons, and MedTechPro hospital simulation.
+              </p>
             </div>
           </div>
-        </article>
-
-        <!-- Card: IB CS Grade Boundaries -->
-        <article data-href="old-curriculum-2014/ib-cs-grade-boundaries.html"
-          class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-emerald-300">
-          <h4 class="text-xl font-bold text-slate-900 flex items-center gap-2">
-            IB CS Grade Boundaries 📊
-          </h4>
-          <p class="mt-2 text-slate-600">
-            Interactive explorer for IB Computer Science grade boundaries (Old Curriculum 2014–2026). Visualise trends, look up any session, and check what grade your score corresponds to.
-          </p>
-          <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
-            <li>SL &amp; HL boundary tables (May 2014 – May 2021)</li>
-            <li>Grade 7 trend chart — toggle to view all grades</li>
-            <li>Interactive grade calculator (enter component scores)</li>
-          </ul>
-          <div class="mt-6 mt-auto">
-            <a href="old-curriculum-2014/ib-cs-grade-boundaries.html"
-              class="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-md transition">
-              Explore Grade Boundaries
-            </a>
+          <div class="ml-4 flex items-center justify-center w-8 h-8 rounded-full bg-slate-200/70 group-hover:bg-slate-200 transition-colors flex-shrink-0">
+            <svg class="w-5 h-5 text-slate-600 group-open:rotate-180 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </div>
-        </article>
+        </summary>
 
-        <!-- Card 3: MedTechPro Hospital & CyberHealth Dashboard -->
-        <article data-href="old-curriculum-2014/medtechpro.html"
-          class="bg-white p-6 rounded-lg shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-blue-300">
-          <h4 class="text-xl font-bold text-slate-900">MedTechPro Hospital &mdash; Case Study</h4>
-          <p class="mt-2 text-slate-600">
-            Explore a realistic hospital website and security engagement dashboard for hands-on cybersecurity and OSINT
-            practice.
-          </p>
-          <ul class="mt-4 text-sm text-slate-600 list-disc pl-5 space-y-1">
-            <li>Realistic hospital website with security clues</li>
-            <li>PTES penetration testing framework</li>
-            <li>Interactive threat modeling & reporting</li>
-          </ul>
-          <div class="mt-6 flex flex-col gap-2 mt-auto">
-            <a href="old-curriculum-2014/medtechpro.html"
-              class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-4 py-2 rounded-md transition"
-              aria-label="Open MedTechPro Hospital">
-              MedTechPro Hospital
-            </a>
-            <a href="old-curriculum-2014/MTPH-cyberhealth-dashboard.html"
-              class="inline-flex items-center bg-teal-600 hover:bg-teal-700 text-white font-semibold text-sm px-4 py-2 rounded-md transition"
-              aria-label="Open CyberHealth Dashboard">
-              CyberHealth Dashboard
-            </a>
+        <!-- Expanded Content -->
+        <div class="p-6 md:p-8 bg-slate-50/50">
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Card 1: Case Study 2026 Guide -->
+            <article data-href="old-curriculum-2014/IB_CS_CaseStudy_2026_StudyGuide.html"
+              class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-fuchsia-300">
+              <h4 class="text-xl font-bold text-slate-900 flex items-center justify-between">
+                <span>Case Study 2026 Guide</span>
+                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">2014 Spec</span>
+              </h4>
+              <p class="mt-2 text-slate-600 text-sm">
+                Structured study guide for the 2026 IB Computer Science case study: concepts, terminology, applied analysis & exam-style practice.
+              </p>
+              <ul class="mt-4 text-xs text-slate-600 space-y-1 list-disc pl-4">
+                <li>Key scenario domains & vocabulary</li>
+                <li>Stakeholder / system perspectives</li>
+                <li>Practice prompts with guided scaffolds</li>
+              </ul>
+              <div class="mt-6 pt-4 border-t border-slate-100 mt-auto">
+                <a href="old-curriculum-2014/IB_CS_CaseStudy_2026_StudyGuide.html"
+                  class="w-full inline-flex items-center justify-center bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-700 hover:to-purple-700 text-white font-bold px-5 py-2.5 rounded-lg transition text-sm">
+                  Open 2026 Case Study Guide
+                </a>
+              </div>
+            </article>
+
+            <!-- Card 2: Grade Boundaries -->
+            <article data-href="old-curriculum-2014/ib-cs-grade-boundaries.html"
+              class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-emerald-300">
+              <h4 class="text-xl font-bold text-slate-900 flex items-center justify-between">
+                <span>Grade Boundaries Explorer 📊</span>
+                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">2014–2026</span>
+              </h4>
+              <p class="mt-2 text-slate-600 text-sm">
+                Interactive explorer for IB Computer Science grade boundaries (Old Curriculum 2014–2026). Visualise trends, look up exam sessions, and estimate grades.
+              </p>
+              <ul class="mt-4 text-xs text-slate-600 space-y-1 list-disc pl-4">
+                <li>SL & HL boundary tables (May 2014 – May 2021)</li>
+                <li>Grade 7 trend chart & session lookups</li>
+                <li>Interactive grade calculator tool</li>
+              </ul>
+              <div class="mt-6 pt-4 border-t border-slate-100 mt-auto">
+                <a href="old-curriculum-2014/ib-cs-grade-boundaries.html"
+                  class="w-full inline-flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-lg transition text-sm">
+                  Explore Grade Boundaries
+                </a>
+              </div>
+            </article>
+
+            <!-- Card 3: Trees Lessons 1 & 2 -->
+            <article data-href="old-curriculum-2014/ib-cs-trees_1.html"
+              class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-teal-300">
+              <h4 class="text-xl font-bold text-slate-900 flex items-center justify-between">
+                <span>Trees — Lessons 1 & 2</span>
+                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">HL Topic</span>
+              </h4>
+              <p class="mt-2 text-slate-600 text-sm">
+                Foundational and advanced binary tree and BST concepts, tree traversals, and interactive reasoning tasks.
+              </p>
+              <div class="space-y-3 mt-4">
+                <div class="border-l-2 border-teal-500 pl-3">
+                  <h5 class="font-bold text-xs text-slate-800">Lesson 1: Intro & Terminology</h5>
+                  <a href="old-curriculum-2014/ib-cs-trees_1.html" class="text-xs font-semibold text-teal-600 hover:underline">Open Lesson 1 &rarr;</a>
+                </div>
+                <div class="border-l-2 border-sky-500 pl-3">
+                  <h5 class="font-bold text-xs text-slate-800">Lesson 2: BST Properties</h5>
+                  <a href="old-curriculum-2014/ib-cs-trees_2.html" class="text-xs font-semibold text-sky-600 hover:underline">Open Lesson 2 &rarr;</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Card 4: MedTechPro Hospital Case Study -->
+            <article data-href="old-curriculum-2014/medtechpro.html"
+              class="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-blue-300">
+              <h4 class="text-xl font-bold text-slate-900 flex items-center justify-between">
+                <span>MedTechPro Hospital Case Study</span>
+                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">SIMULATION</span>
+              </h4>
+              <p class="mt-2 text-slate-600 text-sm">
+                Explore a realistic hospital website and security engagement dashboard for hands-on cybersecurity and OSINT practice.
+              </p>
+              <ul class="mt-4 text-xs text-slate-600 space-y-1 list-disc pl-4">
+                <li>Realistic hospital website with embedded security clues</li>
+                <li>PTES penetration testing framework</li>
+                <li>Interactive threat modeling & reporting</li>
+              </ul>
+              <div class="mt-6 pt-4 border-t border-slate-100 flex flex-col gap-2 mt-auto">
+                <a href="old-curriculum-2014/medtechpro.html"
+                  class="w-full inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs px-4 py-2 rounded-md transition">
+                  MedTechPro Hospital Site
+                </a>
+                <a href="old-curriculum-2014/MTPH-cyberhealth-dashboard.html"
+                  class="w-full inline-flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs px-4 py-2 rounded-md transition">
+                  CyberHealth Security Dashboard
+                </a>
+              </div>
+            </article>
           </div>
-        </article>
-      </div>
+        </div>
+      </details>
     </section>
 
-
-    <!-- Tips -->
-    <section class="mt-12 bg-sky-50 border-l-4 border-sky-500 p-6 rounded-r-lg">
-      <h5 class="text-lg font-bold mb-2">Tips</h5>
-      <p class="text-slate-700">
-        The 2014 Curriculum resources are finalising as we move towards the 2027 Syllabus. Use the new playground for practicing Python skills relevant to both!
+    <!-- Helpful Tips Section -->
+    <section class="bg-emerald-50/70 border-l-4 border-emerald-500 p-6 rounded-r-xl">
+      <h5 class="text-lg font-bold text-emerald-950 mb-2">💡 Quick Tip for IB CS Students</h5>
+      <p class="text-slate-700 text-sm leading-relaxed">
+        The Python Playground can be used for honing algorithmic thinking and writing clean Python code relevant to both the 2027 specification and past paper problem solving.
       </p>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="text-center py-8 text-slate-500 border-t border-slate-200">
-    <p>&copy; 2026 IB CS Mini Websites — Built with ❤️</p>
-    <p class="text-sm mt-1">Copyright (c) 2026 Stefanos Zisidis. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" class="hover:underline text-slate-600">CC BY 4.0</a>.</p>
+  <footer class="bg-white border-t border-slate-200 py-8 text-center text-slate-500 text-sm mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-2">
+      <p>&copy; <span id="year"></span> IB CS Mini Websites — Built with ❤️</p>
+      <p class="text-xs text-slate-500">
+        Copyright (c) 2026 Stefanos Zisidis. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer" class="hover:underline text-slate-600">CC BY 4.0</a>.
+      </p>
+    </div>
   </footer>
 
   <script>
+    // Set dynamic current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
     // Handle card clicks
     document.querySelectorAll('article[data-href]').forEach(card => {
       card.addEventListener('click', (e) => {
-        // Don't trigger if clicking an anchor or button
+        // Don't trigger if clicking an anchor or button inside the card
         if (e.target.closest('a') || e.target.closest('button')) return;
         
         const url = card.getAttribute('data-href');
@@ -297,7 +459,7 @@
 
   <!-- Back to Top Button Component -->
   <button id="back-to-top"
-      class="fixed bottom-6 right-6 z-50 bg-sky-600 hover:bg-sky-700 text-white font-bold p-3 rounded-full shadow-lg hidden transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+      class="fixed bottom-6 right-6 z-50 bg-emerald-600 hover:bg-emerald-700 text-white font-bold p-3 rounded-full shadow-lg hidden transition hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
       aria-label="Back to top">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
@@ -307,7 +469,6 @@
       (function() {
           const backToTopBtn = document.getElementById('back-to-top');
           
-          // Show button when scrolled down 300px
           window.addEventListener('scroll', () => {
               if (window.scrollY > 300) {
                   backToTopBtn.classList.remove('hidden');
@@ -315,7 +476,7 @@
                   backToTopBtn.classList.add('hidden');
               }
           });
-          // Smooth scroll to top on click
+
           backToTopBtn.addEventListener('click', () => {
               window.scrollTo({
                   top: 0,
